@@ -1,6 +1,7 @@
 ---
 const links = [
   { href: "#work", label: "Work" },
+  { href: "#sound", label: "Sound" },
   { href: "#writing", label: "Writing" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
@@ -27,9 +28,16 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 20;
-    backdrop-filter: blur(10px);
-    background: rgba(243, 245, 247, 0.78);
-    border-bottom: 1px solid var(--line);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      background 280ms var(--ease),
+      border-color 280ms var(--ease);
+  }
+
+  .site-header.is-scrolled {
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    border-bottom-color: var(--line);
   }
 
   .site-header__inner {
@@ -50,7 +58,9 @@ const links = [
 
   .site-header__nav {
     display: flex;
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1rem 1.25rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.08em;
@@ -65,3 +75,14 @@ const links = [
     text-decoration: underline;
   }
 </style>
+
+<script>
+  const header = document.querySelector(".site-header");
+  if (header) {
+    const sync = () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    };
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+  }
+</script>

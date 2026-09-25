@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+
+const { essay } = site;
+const title = `${essay.title} — ${site.name}`;
+const description = essay.dek;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="essay-top">
+    <div class="page-shell essay-top__inner">
+      <a class="essay-top__back" href="/#writing">← Writing</a>
+      <a class="essay-top__home" href="/">{site.name}</a>
+    </div>
+  </header>
+
+  <main id="main" class="essay">
+    <article class="page-shell essay__article">
+      <p class="essay__meta">{essay.date} · On this site</p>
+      <h1 class="essay__title">{essay.title}</h1>
+      <p class="essay__dek">{essay.dek}</p>
+      <div class="essay__body">
+        {essay.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <p class="essay__more">
+        More in
+        <a href={site.writing.href} target="_blank" rel="noopener noreferrer"
+          >{site.writing.title}</a
+        >
+        on Substack.
+      </p>
+    </article>
+  </main>
+
+  <footer class="essay-footer">
+    <div class="page-shell essay-footer__inner">
+      <a href="/#contact">Get in touch</a>
+      <a href="/">Back to home</a>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .essay-top {
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+  }
+
+  .essay-top__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .essay-top a {
+    text-decoration: none;
+  }
+
+  .essay-top a:hover {
+    text-decoration: underline;
+  }
+
+  .essay {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  .essay__article {
+    max-width: 40rem;
+  }
+
+  .essay__meta {
+    margin: 0 0 var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .essay__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .essay__dek {
+    margin: var(--space-md) 0 0;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+
+  .essay__body {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--line);
+  }
+
+  .essay__body p {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .essay__more {
+    margin: var(--space-lg) 0 0;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  .essay-footer {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-md);
+  }
+
+  .essay-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .essay-footer a {
+    text-decoration: none;
+  }
+
+  .essay-footer a:hover {
+    text-decoration: underline;
+  }
+</style>

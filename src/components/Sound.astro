@@ -1,35 +1,35 @@
 ---
-import { work } from "../data/site";
+import { sound } from "../data/site";
 ---
 
-<section class="section work" id="work" aria-labelledby="work-title">
+<section class="section sound" id="sound" aria-labelledby="sound-title">
   <div class="page-shell">
-    <p class="section__label">Selected work</p>
-    <h2 class="section__title" id="work-title">Infrastructure &amp; interventions</h2>
+    <p class="section__label">Sound &amp; oddities</p>
+    <h2 class="section__title" id="sound-title">Listening as research</h2>
     <p class="section__lead">
-      Verification, open tooling, talks, and a lab — practices that treat AI as a
-      social system, not only a technical one.
+      Instruments, performance, and field recording — the part of the practice that
+      does not fit on a conference badge.
     </p>
 
-    <ul class="work-list">
+    <ul class="sound-list">
       {
-        work.map((item) => (
-          <li class="work-item">
-            <div class="work-item__meta">
-              <span class="work-item__year">{item.year}</span>
-              <span class="work-item__role">{item.role}</span>
+        sound.map((item) => (
+          <li class="sound-item">
+            <div class="sound-item__meta">
+              <span class="sound-item__year">{item.year}</span>
+              <span class="sound-item__role">{item.role}</span>
             </div>
-            <div class="work-item__body">
+            <div>
               {item.href ? (
-                <h3 class="work-item__title">
+                <h3 class="sound-item__title">
                   <a href={item.href} target="_blank" rel="noopener noreferrer">
                     {item.title}
                   </a>
                 </h3>
               ) : (
-                <h3 class="work-item__title">{item.title}</h3>
+                <h3 class="sound-item__title">{item.title}</h3>
               )}
-              <p class="work-item__summary">{item.summary}</p>
+              <p class="sound-item__summary">{item.summary}</p>
             </div>
           </li>
         ))
@@ -39,13 +39,15 @@ import { work } from "../data/site";
 </section>
 
 <style>
-  .work-list {
+  .sound-list {
     list-style: none;
     margin: var(--space-lg) 0 0;
     padding: 0;
+    display: grid;
+    gap: 0;
   }
 
-  .work-item {
+  .sound-item {
     display: grid;
     grid-template-columns: minmax(7rem, 11rem) 1fr;
     gap: var(--space-md);
@@ -53,11 +55,11 @@ import { work } from "../data/site";
     border-top: 1px solid var(--line);
   }
 
-  .work-item:last-child {
+  .sound-item:last-child {
     border-bottom: 1px solid var(--line);
   }
 
-  .work-item__meta {
+  .sound-item__meta {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -67,11 +69,11 @@ import { work } from "../data/site";
     color: var(--ink-muted);
   }
 
-  .work-item__year {
+  .sound-item__year {
     color: var(--accent);
   }
 
-  .work-item__title {
+  .sound-item__title {
     margin: 0 0 0.4rem;
     font-family: var(--font-display);
     font-size: clamp(1.25rem, 2vw, 1.55rem);
@@ -80,7 +82,7 @@ import { work } from "../data/site";
     line-height: 1.2;
   }
 
-  .work-item__title a {
+  .sound-item__title a {
     text-decoration: none;
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0 100%;
@@ -89,24 +91,24 @@ import { work } from "../data/site";
     transition: background-size 280ms var(--ease), color 200ms var(--ease);
   }
 
-  .work-item__title a:hover {
+  .sound-item__title a:hover {
     color: var(--accent);
     background-size: 100% 1px;
   }
 
-  .work-item__summary {
+  .sound-item__summary {
     margin: 0;
     max-width: 42rem;
     color: var(--ink-muted);
   }
 
   @media (max-width: 700px) {
-    .work-item {
+    .sound-item {
       grid-template-columns: 1fr;
       gap: 0.65rem;
     }
 
-    .work-item__meta {
+    .sound-item__meta {
       flex-direction: row;
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
