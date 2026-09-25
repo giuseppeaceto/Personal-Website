@@ -1,48 +1,75 @@
 ---
-import { site } from "../data/site";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-name">
-  <div class="hero__field" aria-hidden="true">
-    <div class="hero__base"></div>
-    <div class="hero__daylight"></div>
-    <div class="hero__depth"></div>
-    <div class="hero__veil"></div>
-    <div class="hero__grain"></div>
+  <div class="hero__plate" aria-hidden="true">
+    <div class="hero__fallback"></div>
+    <canvas class="hero__canvas" data-hero-canvas></canvas>
   </div>
 
-  <div class="page-shell hero__content">
-    <p class="hero__meta">Designer · Philosopher · AI Ethicist</p>
+  <div class="page-shell hero__opening">
     <h1 id="hero-name" class="hero__name">{site.name}</h1>
     <p class="hero__tagline">{site.tagline}</p>
-    <div class="hero__actions">
-      <a class="hero__cta" href="#work">Selected work</a>
-      <a class="hero__link" href="#sound">Sound &amp; oddities</a>
+    <div class="hero__meta">
+      <p class="hero__roles">{ui.hero.meta}</p>
+      <p class="hero__index">
+        <a href="#work">{ui.hero.indexWork}</a>
+        <span aria-hidden="true">·</span>
+        <a href="#sound">{ui.hero.indexSound}</a>
+      </p>
     </div>
   </div>
 </section>
 
+<script>
+  import { initHeroField } from "../scripts/hero-field";
+
+  const canvas = document.querySelector<HTMLCanvasElement>("[data-hero-canvas]");
+  const plate = canvas?.closest(".hero__plate");
+
+  if (canvas && plate) {
+    const handle = initHeroField(canvas);
+    if (handle) {
+      plate.classList.add("is-webgl");
+    }
+  }
+</script>
+
 <style>
   .hero {
     position: relative;
-    min-height: min(100vh, 56rem);
-    display: grid;
-    align-items: end;
+  }
+
+  /* Field as a plate — not a marketing backdrop behind copy */
+  .hero__plate {
+    position: relative;
+    height: clamp(14rem, 38vh, 22rem);
     overflow: hidden;
     isolation: isolate;
+    animation: fade-in 1.1s var(--ease) both;
   }
 
-  .hero__field {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    animation: fade-in 1s var(--ease) both;
-  }
-
-  .hero__base {
+  .hero__fallback {
     position: absolute;
     inset: 0;
     background:
+      radial-gradient(
+        ellipse 65% 55% at 84% 10%,
+        color-mix(in srgb, var(--accent) 22%, #9aabb4) 0%,
+        color-mix(in srgb, var(--accent) 8%, transparent) 48%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 58% 72% at 16% 18%,
+        rgba(255, 253, 249, 0.95) 0%,
+        rgba(255, 248, 240, 0.45) 38%,
+        transparent 70%
+      ),
       linear-gradient(
         152deg,
         #c5ccd2 0%,
@@ -52,163 +79,103 @@ import { site } from "../data/site";
       );
   }
 
-  .hero__daylight {
-    position: absolute;
-    inset: -8% -5% 20% -10%;
-    background:
-      radial-gradient(
-        ellipse 58% 72% at 16% 18%,
-        rgba(255, 253, 249, 0.95) 0%,
-        rgba(255, 248, 240, 0.45) 38%,
-        transparent 70%
-      );
-    animation: daylight-shift 16s var(--ease) infinite alternate;
-  }
-
-  .hero__depth {
+  .hero__canvas {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(
-        ellipse 65% 55% at 84% 10%,
-        color-mix(in srgb, var(--accent) 22%, #9aabb4) 0%,
-        color-mix(in srgb, var(--accent) 8%, transparent) 48%,
-        transparent 72%
-      );
-    animation: depth-shift 18s var(--ease) infinite alternate;
-  }
-
-  .hero__veil {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(
-        180deg,
-        transparent 28%,
-        color-mix(in srgb, var(--paper) 40%, transparent) 58%,
-        color-mix(in srgb, var(--paper) 92%, var(--bg)) 78%,
-        var(--bg) 100%
-      ),
-      linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--paper) 55%, transparent) 0%,
-        transparent 40%
-      );
-  }
-
-  .hero__grain {
-    position: absolute;
-    inset: 0;
-    opacity: 0.42;
-    mix-blend-mode: multiply;
-    background-image: var(--grain);
-    background-size: 140px 140px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
     pointer-events: none;
+    transition: opacity 0.9s var(--ease);
   }
 
-  .hero__content {
-    padding-block: var(--space-2xl) var(--space-xl);
+  .hero__plate.is-webgl .hero__canvas {
+    opacity: 1;
   }
 
-  .hero__meta {
-    margin: 0 0 var(--space-sm);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    animation: rise-in 0.9s var(--ease) 0.1s both;
+  .hero__plate.is-webgl .hero__fallback {
+    opacity: 0;
+  }
+
+  .hero__opening {
+    padding-block: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--line);
   }
 
   .hero__name {
     margin: 0;
-    max-width: 12ch;
     font-family: var(--font-display);
-    font-size: clamp(3.2rem, 10vw, 6.5rem);
+    font-size: clamp(2.4rem, 5.5vw, 3.75rem);
     font-weight: 500;
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    animation: rise-in 1s var(--ease) 0.2s both;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    animation: rise-in 0.9s var(--ease) 0.08s both;
   }
 
   .hero__tagline {
     margin: var(--space-md) 0 0;
-    max-width: 26rem;
+    max-width: 28rem;
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+    font-size: clamp(1.35rem, 2.6vw, 1.75rem);
     font-weight: 500;
     line-height: 1.3;
     letter-spacing: -0.02em;
-    color: var(--ink);
-    animation: rise-in 1s var(--ease) 0.35s both;
+    animation: rise-in 0.9s var(--ease) 0.2s both;
   }
 
-  .hero__actions {
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line);
+    animation: rise-in 0.9s var(--ease) 0.32s both;
+  }
+
+  .hero__roles {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: var(--ink-muted);
+  }
+
+  .hero__index {
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 1.5rem;
-    margin-top: var(--space-lg);
-    animation: rise-in 1s var(--ease) 0.45s both;
+    gap: 0.5rem 0.65rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
   }
 
-  .hero__cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.75rem 1.15rem;
-    background: var(--ink);
-    color: var(--paper);
+  .hero__index a {
     text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    color: var(--ink);
   }
 
-  .hero__cta:hover {
-    background: var(--accent);
-    color: #f7f5f2;
+  .hero__index a:hover {
+    color: var(--accent);
   }
 
-  .hero__link {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  @keyframes daylight-shift {
-    from {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-    to {
-      transform: translate3d(1.5%, 1%, 0);
-      opacity: 0.92;
-    }
-  }
-
-  @keyframes depth-shift {
-    from {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-    to {
-      transform: translate3d(-1.2%, 0.8%, 0);
-      opacity: 0.9;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .hero {
-      min-height: 100svh;
-      align-items: end;
-    }
+  .hero__index span {
+    color: var(--ink-muted);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__daylight,
-    .hero__depth {
+    .hero__plate {
+      animation: none;
+    }
+
+    .hero__name,
+    .hero__tagline,
+    .hero__meta {
       animation: none;
     }
   }

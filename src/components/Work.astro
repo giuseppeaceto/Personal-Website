@@ -1,15 +1,16 @@
 ---
-import { work } from "../data/site";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const { work } = getSite(locale);
+const ui = getUi(locale);
 ---
 
 <section class="section work" id="work" aria-labelledby="work-title">
   <div class="page-shell">
-    <p class="section__label">Selected work</p>
-    <h2 class="section__title" id="work-title">Infrastructure &amp; interventions</h2>
-    <p class="section__lead">
-      Verification, open tooling, talks, and a lab — practices that treat AI as a
-      social system, not only a technical one.
-    </p>
+    <p class="section__label">{ui.work.label}</p>
+    <h2 class="section__title" id="work-title">{ui.work.title}</h2>
+    <p class="section__lead">{ui.work.lead}</p>
 
     <ul class="work-list">
       {

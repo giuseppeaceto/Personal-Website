@@ -5,18 +5,22 @@ import "@fontsource/ibm-plex-sans/500.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../styles/global.css";
-import { site } from "../data/site";
+import { getSite, getUi, resolveLocale } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
 const { title = site.title, description = site.description } = Astro.props;
+const htmlLang = locale === "it" ? "it" : "en";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,12 +29,17 @@ const { title = site.title, description = site.description } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === "it" ? "it_IT" : "en_US"} />
+    <meta
+      property="og:locale:alternate"
+      content={locale === "it" ? "en_US" : "it_IT"}
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{ui.skipToContent}</a>
     <slot />
   </body>
 </html>

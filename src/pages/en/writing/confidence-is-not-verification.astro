@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 import {
   getSite,
   getUi,
   homePath,
   resolveLocale,
   sectionHref,
-} from "../../i18n";
+} from "../../../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
 const site = getSite(locale);

@@ -1,15 +1,16 @@
 ---
-import { sound } from "../data/site";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const { sound } = getSite(locale);
+const ui = getUi(locale);
 ---
 
 <section class="section sound" id="sound" aria-labelledby="sound-title">
   <div class="page-shell">
-    <p class="section__label">Sound &amp; oddities</p>
-    <h2 class="section__title" id="sound-title">Listening as research</h2>
-    <p class="section__lead">
-      Instruments, performance, and field recording — the part of the practice that
-      does not fit on a conference badge.
-    </p>
+    <p class="section__label">{ui.sound.label}</p>
+    <h2 class="section__title" id="sound-title">{ui.sound.title}</h2>
+    <p class="section__lead">{ui.sound.lead}</p>
 
     <ul class="sound-list">
       {

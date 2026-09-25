@@ -1,13 +1,16 @@
 ---
-import { site } from "../data/site";
+import { essayPath, getSite, getUi, resolveLocale } from "../i18n";
 
-const { writing, essay } = site;
+const locale = resolveLocale(Astro.currentLocale);
+const { writing, essay } = getSite(locale);
+const ui = getUi(locale);
 const excerpt = essay.body.slice(0, 2);
+const essayHref = essayPath(locale, essay.slug);
 ---
 
 <section class="section writing" id="writing" aria-labelledby="writing-title">
   <div class="page-shell">
-    <p class="section__label">Writing</p>
+    <p class="section__label">{ui.writing.label}</p>
     <div class="writing__intro">
       <div>
         <h2 class="section__title" id="writing-title">{writing.title}</h2>
@@ -17,20 +20,20 @@ const excerpt = essay.body.slice(0, 2);
         class="writing__cta"
         href={writing.href}
         target="_blank"
-        rel="noopener noreferrer">Read &amp; subscribe</a
+        rel="noopener noreferrer">{ui.writing.readSubscribe}</a
       >
     </div>
 
     <article class="writing__essay">
-      <p class="writing__essay-label">On this site</p>
+      <p class="writing__essay-label">{ui.writing.onThisSite}</p>
       <h3 class="writing__essay-title">
-        <a href={essay.href}>{essay.title}</a>
+        <a href={essayHref}>{essay.title}</a>
       </h3>
       <p class="writing__essay-dek">{essay.dek}</p>
       <div class="writing__excerpt">
         {excerpt.map((paragraph) => <p>{paragraph}</p>)}
       </div>
-      <a class="writing__continue" href={essay.href}>Continue reading</a>
+      <a class="writing__continue" href={essayHref}>{ui.writing.continueReading}</a>
     </article>
 
     <ul class="writing__list">

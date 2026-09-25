@@ -1,15 +1,16 @@
 ---
-import { site } from "../data/site";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
 ---
 
 <section class="section contact" id="contact" aria-labelledby="contact-title">
   <div class="page-shell">
-    <p class="section__label">Contact</p>
-    <h2 class="section__title" id="contact-title">Work with me</h2>
-    <p class="section__lead">
-      Talks, workshops, research collaborations, and design work — if you want
-      responsibility designed in, not rehearsed afterward.
-    </p>
+    <p class="section__label">{ui.contact.label}</p>
+    <h2 class="section__title" id="contact-title">{ui.contact.title}</h2>
+    <p class="section__lead">{ui.contact.lead}</p>
 
     <div class="contact__panel">
       <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
@@ -24,7 +25,7 @@ import { site } from "../data/site";
           <a
             href={site.links.toolkit}
             target="_blank"
-            rel="noopener noreferrer">Toolkit (PDF)</a
+            rel="noopener noreferrer">{ui.contact.toolkit}</a
           >
         </li>
         <li>
@@ -65,7 +66,7 @@ import { site } from "../data/site";
     <p>© {new Date().getFullYear()} {site.name}</p>
     <p>
       <a href="https://github.com/giuseppeaceto/Personal-Website"
-        >Source (AGPL-3.0)</a
+        >{ui.contact.source}</a
       >
     </p>
   </div>
