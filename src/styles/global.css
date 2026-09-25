@@ -8,6 +8,8 @@
   --accent-soft: rgba(10, 92, 92, 0.1);
   --line: rgba(26, 28, 31, 0.12);
   --surface: rgba(255, 255, 255, 0.4);
+  --surface-solid: color-mix(in srgb, var(--paper) 88%, white);
+  --radius: 0.7rem;
   --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 
   --font-display: "Source Serif 4 Variable", "Source Serif 4", "Iowan Old Style",

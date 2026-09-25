@@ -15,6 +15,10 @@ export type UiCopy = {
     meta: string;
     indexWork: string;
     indexSound: string;
+    scroll: string;
+    moreWork: string;
+    moreSound: string;
+    moreWriting: string;
   };
   work: {
     label: string;
@@ -70,19 +74,23 @@ export const ui: Record<Locale, UiCopy> = {
       contact: "Contatti",
     },
     hero: {
-      meta: "Designer, filosofo, AI ethicist",
+      meta: "Designer, filosofo, attivista",
       indexWork: "Lavoro",
       indexSound: "Suono",
+      moreWork: "Vedi tutti",
+      moreSound: "Vedi tutti",
+      moreWriting: "Leggi",
+      scroll: "Scorri",
     },
     work: {
       label: "Lavori selezionati",
-      title: "Infrastrutture e interventi",
-      lead: "Verifica, tool aperti, talk e un lab — pratiche che trattano l'AI come sistema sociale, non solo tecnico.",
+      title: "Le condizioni del pensiero",
+      lead: "Un laboratorio, software libero, strumenti aperti, un'infrastruttura. La tecnologia entra quando è lei a dare forma a ciò che si può conoscere, immaginare e mettere in discussione.",
     },
     sound: {
-      label: "Suono e stranezze",
-      title: "L'ascolto come ricerca",
-      lead: "Strumenti, performance e field recording — la parte della pratica che non sta su un badge da conferenza.",
+      label: "Suono",
+      title: "Chi tiene il tempo",
+      lead: "Strumenti, performance, field recording. Il suono è un'altra forma di conoscenza: ascolto, ritmo, la capacità di stare in una situazione senza ridurla a un messaggio.",
     },
     writing: {
       label: "Scrittura",
@@ -95,15 +103,15 @@ export const ui: Record<Locale, UiCopy> = {
     },
     contact: {
       label: "Contatti",
-      title: "Lavoriamo insieme",
-      lead: "Talk, workshop, collaborazioni di ricerca e design — se vuoi la responsabilità progettata dentro, non provata dopo.",
+      title: "Far crescere delle capacità",
+      lead: "Conferenze, workshop, ricerca e design. Con laboratori, istituzioni e comunità che mettono al centro conoscenza, creatività e pensiero critico.",
       toolkit: "Toolkit (PDF)",
       source: "Codice sorgente (AGPL-3.0)",
     },
     essay: {
       back: "← Scrittura",
       onThisSite: "Su questo sito",
-      morePrefix: "Altro su",
+      morePrefix: "Altri testi in",
       moreSuffix: "su Substack.",
       getInTouch: "Scrivimi",
       backHome: "Torna alla home",
@@ -126,19 +134,23 @@ export const ui: Record<Locale, UiCopy> = {
       contact: "Contact",
     },
     hero: {
-      meta: "Designer, philosopher, AI ethicist",
+      meta: "Designer, philosopher, activist",
       indexWork: "Work",
       indexSound: "Sound",
+      moreWork: "See all",
+      moreSound: "See all",
+      moreWriting: "Read",
+      scroll: "Scroll",
     },
     work: {
       label: "Selected work",
-      title: "Infrastructure & interventions",
-      lead: "Verification, open tooling, talks, and a lab — practices that treat AI as a social system, not only a technical one.",
+      title: "Conditions for thought",
+      lead: "A laboratory, free software, open tools, an infrastructure. Technology enters when it is what gives shape to what people can know, imagine, and question.",
     },
     sound: {
-      label: "Sound & oddities",
-      title: "Listening as research",
-      lead: "Instruments, performance, and field recording — the part of the practice that does not fit on a conference badge.",
+      label: "Sound",
+      title: "Who keeps time",
+      lead: "Instruments, performance, field recording. Sound is another form of knowledge: listening, rhythm, the capacity to stay with a situation without reducing it to a message.",
     },
     writing: {
       label: "Writing",
@@ -151,15 +163,15 @@ export const ui: Record<Locale, UiCopy> = {
     },
     contact: {
       label: "Contact",
-      title: "Work with me",
-      lead: "Talks, workshops, research collaborations, and design work — if you want responsibility designed in, not rehearsed afterward.",
+      title: "Growing human capacities",
+      lead: "Talks, workshops, research, and design. With laboratories, institutions, and communities that put knowledge, creativity, and critical thought at the center.",
       toolkit: "Toolkit (PDF)",
       source: "Source (AGPL-3.0)",
     },
     essay: {
       back: "← Writing",
       onThisSite: "On this site",
-      morePrefix: "More in",
+      morePrefix: "More writing in",
       moreSuffix: "on Substack.",
       getInTouch: "Get in touch",
       backHome: "Back to home",
