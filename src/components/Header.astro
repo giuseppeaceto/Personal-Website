@@ -1,0 +1,67 @@
+---
+const links = [
+  { href: "#work", label: "Work" },
+  { href: "#writing", label: "Writing" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="site-header">
+  <div class="page-shell site-header__inner">
+    <a class="site-header__brand" href="#top" aria-label="Giuseppe Aceto — home">
+      G. Aceto
+    </a>
+    <nav class="site-header__nav" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background: rgba(243, 245, 247, 0.78);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    min-height: 3.5rem;
+  }
+
+  .site-header__brand {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .site-header__nav {
+    display: flex;
+    gap: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .site-header__nav a {
+    text-decoration: none;
+  }
+
+  .site-header__nav a:hover {
+    text-decoration: underline;
+  }
+</style>

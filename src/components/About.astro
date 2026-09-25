@@ -1,0 +1,69 @@
+---
+---
+
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="page-shell about__grid">
+    <div>
+      <p class="section__label">About</p>
+      <h2 class="section__title" id="about-title">Systems meet stories</h2>
+    </div>
+    <div class="about__copy">
+      <p>
+        I work where technology, ethics, and imagination overlap — as a designer
+        and philosopher focused on AI fairness, transparency, data ethics, and
+        societal impact.
+      </p>
+      <p>
+        At CERN I developed open resources and workshops on ethical futures; with
+        Relatronica I run an experimental lab that uses speculative and critical
+        design to open public debate on human–machine relations.
+      </p>
+      <p>
+        Sound is part of the same inquiry: instruments, production, and field
+        recording as ways to probe how humans and machines listen to — and shape
+        — each other.
+      </p>
+      <p>
+        Free software is not a side note: open, auditable systems are a
+        precondition for accountable AI. I collaborate with research labs,
+        cultural institutions, and communities that want responsibility designed
+        in — not bolted on.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.85fr) 1.15fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .about__copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 40rem;
+  }
+
+  .about__copy p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 1.08rem;
+  }
+
+  .about__copy p:first-of-type {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 800px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+  }
+</style>

@@ -1,0 +1,148 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="page-shell">
+    <p class="section__label">Contact</p>
+    <h2 class="section__title" id="contact-title">Work with me</h2>
+    <p class="section__lead">
+      Talks, workshops, research collaborations, and design engagements on
+      responsible AI and speculative futures.
+    </p>
+
+    <div class="contact__panel">
+      <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
+      <p class="contact__location">{site.location}</p>
+      <ul class="contact__links">
+        <li>
+          <a href={site.links.github} target="_blank" rel="noopener noreferrer"
+            >GitHub</a
+          >
+        </li>
+        <li>
+          <a
+            href={site.links.toolkit}
+            target="_blank"
+            rel="noopener noreferrer">Toolkit (PDF)</a
+          >
+        </li>
+        <li>
+          <a
+            href={site.links.relatronica}
+            target="_blank"
+            rel="noopener noreferrer">Relatronica</a
+          >
+        </li>
+        <li>
+          <a
+            href={site.links.soundcloud}
+            target="_blank"
+            rel="noopener noreferrer">SoundCloud</a
+          >
+        </li>
+        <li>
+          <a
+            href={site.links.substack}
+            target="_blank"
+            rel="noopener noreferrer">Substack</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="page-shell site-footer__inner">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+    <p>
+      <a href="https://github.com/giuseppeaceto/Personal-Website"
+        >Source (AGPL-3.0)</a
+      >
+    </p>
+  </div>
+</footer>
+
+<style>
+  .contact__panel {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line);
+  }
+
+  .contact__email {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 280ms var(--ease), color 200ms var(--ease);
+  }
+
+  .contact__email:hover {
+    color: var(--accent);
+    background-size: 100% 1px;
+  }
+
+  .contact__location {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    list-style: none;
+    margin: var(--space-md) 0 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .contact__links a {
+    text-decoration: none;
+  }
+
+  .contact__links a:hover {
+    text-decoration: underline;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-md);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  .site-footer a {
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+</style>
