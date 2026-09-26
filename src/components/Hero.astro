@@ -1,11 +1,15 @@
 ---
-import { formatSchoolYears, getSchoolYearsClock } from "../data/school-years";
+import {
+  formatSchoolYears,
+  getSchoolYearsClock,
+  schoolYearsSince,
+} from "../data/school-years";
 import { getUi, resolveLocale } from "../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
 const ui = getUi(locale);
-const clock = getSchoolYearsClock();
-const initialCount = formatSchoolYears(clock.perSecond, locale);
+const clock = getSchoolYearsClock(locale);
+const initialCount = formatSchoolYears(schoolYearsSince(Date.now(), clock.perSecond), locale);
 ---
 
 <section class="hero" id="top">
@@ -20,14 +24,38 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
           class="hero__note"
           data-school-clock
           data-per-second={clock.perSecond}
+          data-epoch={clock.epochMs}
           data-locale={locale}
         >
+          <p class="hero__prose">
+            {ui.hero.every}{" "}
+            <a
+              class="hero__money"
+              href={clock.militarySourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={ui.hero.militarySourceTitle}
+            >{clock.militaryLabel}</a>{" "}
+            {ui.hero.militaryTail}{" "}
+            {ui.hero.enough ? <>{ui.hero.enough}{" "}</> : null}
+            <a
+              class="hero__money"
+              href={clock.schoolSourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={ui.hero.schoolSourceTitle}
+            >{clock.schoolLabel}</a>{" "}
+            {ui.hero.enoughTail}
+          </p>
+          <p class="hero__since">{ui.hero.since} {clock.referenceDate}</p>
           <p class="hero__value">
-            <span class="hero__live" aria-hidden="true"></span>
-            <span data-school-value>{initialCount}</span>
+            <span class="hero__count">
+              <span class="hero__live" aria-hidden="true"></span>
+              <span data-school-value>{initialCount}</span>
+            </span>
+            <span class="hero__unit">{ui.hero.counterUnit}</span>
           </p>
           <figcaption>
-            <p class="hero__caption">{ui.hero.note}</p>
             <p class="hero__sources">
               <a
                 class="hero__source"
@@ -71,16 +99,24 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
   const schoolClock = document.querySelector<HTMLElement>("[data-school-clock]");
   const value = schoolClock?.querySelector<HTMLElement>("[data-school-value]");
   const perSecond = Number(schoolClock?.dataset.perSecond);
+  const epoch = Number(schoolClock?.dataset.epoch);
 
-  if (schoolClock && value && Number.isFinite(perSecond) && perSecond > 0) {
+  if (
+    schoolClock &&
+    value &&
+    Number.isFinite(perSecond) &&
+    perSecond > 0 &&
+    Number.isFinite(epoch)
+  ) {
     const clockLocale = schoolClock.dataset.locale === "en" ? "en" : "it";
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const started = performance.now();
     let shown = "";
     let pulses = 0;
 
-    const paint = (amount: number) => {
-      const next = formatSchoolYears(amount, clockLocale);
+    const paint = () => {
+      const elapsedSeconds = Math.max(0, Date.now() - epoch) / 1000;
+      const next = formatSchoolYears(perSecond * elapsedSeconds, clockLocale);
       if (next === shown) return;
       shown = next;
       value.textContent = next;
@@ -88,17 +124,15 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
 
     if (reduceMotion) {
       const render = () => {
-        const seconds = Math.floor((performance.now() - started) / 1000) + 1;
-        paint(perSecond * seconds);
+        paint();
         field?.pulse();
       };
       render();
       window.setInterval(render, 1000);
     } else {
       const frame = (now: number) => {
-        const seconds = (now - started) / 1000 + 1;
-        paint(perSecond * seconds);
-        const due = Math.floor(seconds);
+        paint();
+        const due = Math.floor((now - started) / 1000);
         if (due > pulses) {
           pulses = due;
           field?.pulse();
@@ -131,7 +165,7 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     position: relative;
     overflow: hidden;
     width: 100%;
-    min-height: clamp(18rem, 42svh, 26rem);
+    min-height: clamp(22rem, 56svh, 34rem);
     border-radius: var(--hero-radius);
     isolation: isolate;
     clip-path: inset(0 round var(--hero-radius));
@@ -199,7 +233,7 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     z-index: 2;
     right: 1.05rem;
     bottom: 1.05rem;
-    max-width: min(15.5rem, calc(100% - 2.1rem));
+    max-width: min(23rem, calc(100% - 2.1rem));
     margin: 0;
     padding: 0.6rem 0.7rem 0.5rem;
     border: 1px solid color-mix(in srgb, white 62%, var(--line));
@@ -213,12 +247,45 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     animation: rise-in 0.9s var(--ease) 0.28s both;
   }
 
+  .hero__prose,
+  .hero__since,
   .hero__value,
-  .hero__caption {
+  .hero__unit {
     margin: 0;
   }
 
+  .hero__prose {
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+
+  .hero__money {
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .hero__money:hover {
+    color: var(--accent);
+  }
+
+  .hero__since {
+    margin-top: 0.55rem;
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: var(--ink-muted);
+  }
+
   .hero__value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    margin-top: 0.28rem;
+  }
+
+  .hero__count {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -229,6 +296,13 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     line-height: 1;
     letter-spacing: -0.03em;
     white-space: nowrap;
+  }
+
+  .hero__unit {
+    padding-left: 0.72rem;
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: var(--ink-muted);
   }
 
   .hero__live {
@@ -254,15 +328,8 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     }
   }
 
-  .hero__caption {
-    margin-top: 0.32rem;
-    font-size: 0.8rem;
-    line-height: 1.3;
-    white-space: pre-line;
-  }
-
   .hero__sources {
-    margin: 0.4rem 0 0;
+    margin: 0.55rem 0 0;
   }
 
   .hero__source {
@@ -294,7 +361,7 @@ const initialCount = formatSchoolYears(clock.perSecond, locale);
     .hero__note {
       right: 0.75rem;
       bottom: 0.75rem;
-      max-width: min(15.5rem, calc(100% - 1.5rem));
+      max-width: min(23rem, calc(100% - 1.5rem));
       padding: 0.55rem 0.65rem 0.45rem;
     }
   }

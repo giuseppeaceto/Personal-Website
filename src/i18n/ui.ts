@@ -12,7 +12,12 @@ export type UiCopy = {
   };
   hero: {
     meta: string;
-    note: string;
+    every: string;
+    militaryTail: string;
+    enough: string;
+    enoughTail: string;
+    since: string;
+    counterUnit: string;
     schoolSource: string;
     schoolSourceTitle: string;
     militarySource: string;
@@ -67,13 +72,18 @@ export const ui: Record<Locale, UiCopy> = {
     },
     hero: {
       meta: "Design, filosofia, attivismo",
-      note: "Bambini in un paese povero.\nDa quando sei qui, la spesa militare mondiale avrebbe già pagato un anno di scuola per ciascuno.",
-      schoolSource: "55 $",
+      every: "Ogni minuto, nel mondo:",
+      militaryTail: "di spesa militare.",
+      enough: "Bastano",
+      enoughTail: "per un anno di scuola.",
+      since: "Dal",
+      counterUnit: "anni di scuola",
+      schoolSource: "UNESCO",
       schoolSourceTitle:
-        "Spesa pubblica per la scuola di un bambino in un paese a basso reddito, 2022. UNESCO e Banca Mondiale.",
+        "Spesa pubblica per la scuola di un bambino in un paese a basso reddito: 55 dollari, 2022. UNESCO e Banca Mondiale.",
       militarySource: "SIPRI",
       militarySourceTitle:
-        "Spesa militare mondiale nel 2025: 2.887 miliardi di dollari. SIPRI.",
+        "Spesa militare mondiale nel 2025: 2.887 miliardi di dollari. Il contatore applica quel ritmo dal 1° gennaio 2025. SIPRI.",
     },
     intro: {
       label: "Chi sono",
@@ -122,12 +132,18 @@ export const ui: Record<Locale, UiCopy> = {
     },
     hero: {
       meta: "Design, philosophy, activism",
-      note: "Children in a poor country.\nSince you arrived, world military spending would already have paid for a year of school for each of them.",
-      schoolSource: "$55",
+      every: "Every minute, worldwide:",
+      militaryTail: "in military spending.",
+      enough: "",
+      enoughTail: "is enough for a year of school.",
+      since: "Since",
+      counterUnit: "years of school",
+      schoolSource: "UNESCO",
       schoolSourceTitle:
-        "Public spending on one child's schooling in a low-income country, 2022. UNESCO and the World Bank.",
+        "Public spending on one child's schooling in a low-income country: $55, 2022. UNESCO and the World Bank.",
       militarySource: "SIPRI",
-      militarySourceTitle: "World military spending in 2025: $2.887 trillion. SIPRI.",
+      militarySourceTitle:
+        "World military spending in 2025: $2.887 trillion. The counter runs at that rate from 1 January 2025. SIPRI.",
     },
     intro: {
       label: "About",
