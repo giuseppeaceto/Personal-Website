@@ -27,7 +27,7 @@ const {
   article,
 } = Astro.props;
 
-const siteOrigin = Astro.site ?? new URL("https://www.giuseppeaceto.com");
+const siteOrigin = Astro.site ?? new URL("https://www.giuseppeaceto.org");
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
 const itURL = new URL(localizedPath(Astro.url.pathname, "it"), siteOrigin);
 const enURL = new URL(localizedPath(Astro.url.pathname, "en"), siteOrigin);
@@ -39,6 +39,7 @@ const jobTitle =
 
 const sameAs = [
   site.links.github,
+  site.links.mastodon,
   site.links.relatronica,
   site.links.weltform,
   site.links.substack,
@@ -54,7 +55,6 @@ const personSchema = {
   "@id": personId,
   name: site.name,
   url: new URL("/", siteOrigin).href,
-  email: site.email,
   jobTitle,
   description: site.description,
   homeLocation: {

@@ -13,12 +13,18 @@ const ui = getUi(locale);
     <p class="section__lead">{ui.contact.lead}</p>
 
     <div class="contact__panel">
-      <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
       <p class="contact__location">{site.location}</p>
       <ul class="contact__links">
         <li>
           <a href={site.links.github} target="_blank" rel="noopener noreferrer"
             >GitHub</a
+          >
+        </li>
+        <li>
+          <a
+            href={site.links.mastodon}
+            target="_blank"
+            rel="me noopener noreferrer">Mastodon</a
           >
         </li>
         <li>
@@ -79,26 +85,8 @@ const ui = getUi(locale);
     border-top: 1px solid var(--line);
   }
 
-  .contact__email {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-    letter-spacing: -0.02em;
-    text-decoration: none;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px;
-    transition: background-size 280ms var(--ease), color 200ms var(--ease);
-  }
-
-  .contact__email:hover {
-    color: var(--accent);
-    background-size: 100% 1px;
-  }
-
   .contact__location {
-    margin: 0.75rem 0 0;
+    margin: 0;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     letter-spacing: 0.06em;

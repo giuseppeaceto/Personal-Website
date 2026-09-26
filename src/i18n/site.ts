@@ -13,11 +13,11 @@ export type SiteContent = {
   name: string;
   title: string;
   description: string;
-  email: string;
   location: string;
   tagline: string;
   links: {
     github: string;
+    mastodon: string;
     relatronica: string;
     weltform: string;
     soundcloud: string;
@@ -50,6 +50,7 @@ export type SiteContent = {
 
 const sharedLinks = {
   github: "https://github.com/giuseppeaceto",
+  mastodon: "https://mastodon.social/@giuseppeaceto",
   relatronica: "https://relatronica.com",
   weltform: "https://www.weltform.com",
   soundcloud: "https://soundcloud.com/giuseppe-aceto",
@@ -67,7 +68,6 @@ const sites: Record<Locale, SiteContent> = {
     title: "Giuseppe Aceto — Designer e filosofo",
     description:
       "Giuseppe Aceto, designer e filosofo tra Milano e Zurigo. Con Welt Form e Relatronica lavora a strumenti, laboratori e scrittura perché conoscenza, creatività e pensiero critico restino capacità vive.",
-    email: "iam.giuseppeaceto@gmail.com",
     location: "Milano / Zurigo",
     tagline: "Progetto perché resti possibile sapere, creare e pensare.",
     links: sharedLinks,
@@ -173,7 +173,6 @@ const sites: Record<Locale, SiteContent> = {
     title: "Giuseppe Aceto — Designer and philosopher",
     description:
       "Giuseppe Aceto, designer and philosopher between Milan and Zurich. With Welt Form and Relatronica he builds tools, laboratories, and writing so that knowledge, creativity, and critical thought stay living capacities.",
-    email: "iam.giuseppeaceto@gmail.com",
     location: "Milan / Zurich",
     tagline: "I design so that knowing, making, and thinking stay possible.",
     links: sharedLinks,

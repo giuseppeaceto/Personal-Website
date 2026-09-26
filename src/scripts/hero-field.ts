@@ -1,4 +1,4 @@
-import { Mesh, Program, Renderer, Triangle, Vec2 } from "ogl";
+import { Mesh, Program, Renderer, Triangle, Vec2, Vec4 } from "ogl";
 
 const vertex = /* glsl */ `
 attribute vec2 uv;
@@ -24,6 +24,7 @@ uniform vec2 uResolution;
 uniform vec2 uPointer;
 uniform float uPointerStrength;
 uniform float uReduce;
+uniform vec4 uNote;
 
 varying vec2 vUv;
 
@@ -132,11 +133,46 @@ void main() {
 
   // Undecided fog first — refusal eats what can be claimed
   col = mix(col, mix(paper, mist, 0.35), undecided * 0.55);
+
+  // A few traces, each on its own breath of a few seconds.
+  // Some sit in the mist, some on the lines.
+  float backMark = 0.0;
+  float foreMark = 0.0;
+  vec2 markAspect = vec2(uResolution.x / max(uResolution.y, 1.0), 1.0);
+  float span = 4.6;
+  for (int i = 0; i < 7; i++) {
+    float n = float(i);
+    float shifted = uTime / span + n / 7.0;
+    float phase = fract(shifted);
+    float generation = floor(shifted);
+    float life = smoothstep(0.0, 0.28, phase) * (1.0 - smoothstep(0.68, 1.0, phase));
+    life *= 1.0 - uReduce;
+    vec2 pos = vec2(
+      hash(vec2(generation + n * 1.7, 2.3)),
+      hash(vec2(n + 5.1, generation + 1.7))
+    );
+    pos = pos * 0.86 + 0.07;
+    float inNote = step(uNote.x, pos.x) * step(pos.x, uNote.z)
+      * step(uNote.y, pos.y) * step(pos.y, uNote.w);
+    float depth = hash(vec2(generation + 8.0, n + 3.0));
+    float back = step(depth, 0.5);
+    float radius = mix(0.012, 0.028, back);
+    radius *= 0.75 + 0.4 * hash(vec2(n + 2.0, generation));
+    float falloff = mix(0.32, 1.05, back);
+    vec2 delta = (uv - pos) * markAspect;
+    float blob = exp(-dot(delta, delta) / max(radius * radius * falloff, 0.0001));
+    blob *= (1.0 - inNote) * life;
+    backMark = max(backMark, blob * back);
+    foreMark = max(foreMark, blob * (1.0 - back));
+  }
+  col = mix(col, mix(accentSoft, ink, 0.55), backMark * 0.38);
+
   float claimLines = contours * (1.0 - undecided * 0.9);
 
   // Draw topography in ink/accent
   col = mix(col, mix(ink, accent, 0.55), claimLines * 0.82);
   col = mix(col, accent, thick * (1.0 - undecided) * 0.22);
+  col = mix(col, ink, foreMark * 0.9);
 
   // Listening probe clarifies local contours
   col = mix(col, mix(col, accent, 0.25), listen * 0.35);
@@ -154,6 +190,7 @@ void main() {
 
 export type HeroFieldHandle = {
   destroy: () => void;
+  pulse: () => void;
 };
 
 export function initHeroField(canvas: HTMLCanvasElement): HeroFieldHandle | null {
@@ -203,16 +240,42 @@ export function initHeroField(canvas: HTMLCanvasElement): HeroFieldHandle | null
       uPointer: { value: pointer },
       uPointerStrength: { value: 0 },
       uReduce: { value: reduceMotion ? 1 : 0 },
+      uNote: { value: new Vec4(-1, -1, -1, -1) },
     },
   });
 
   const mesh = new Mesh(gl, { geometry, program });
+
+  const note = canvas.closest(".hero")?.querySelector<HTMLElement>(".hero__note");
+
+  const measureNote = () => {
+    const noteBox = program.uniforms.uNote.value as Vec4;
+    if (!note) {
+      noteBox.set(-1, -1, -1, -1);
+      return;
+    }
+    const canvasRect = canvas.getBoundingClientRect();
+    const noteRect = note.getBoundingClientRect();
+    const pad = 10;
+    const width = Math.max(canvasRect.width, 1);
+    const height = Math.max(canvasRect.height, 1);
+    // Shader uv.y is 0 at the bottom of the plate.
+    const top = 1 - (noteRect.top - pad - canvasRect.top) / height;
+    const bottom = 1 - (noteRect.bottom + pad - canvasRect.top) / height;
+    noteBox.set(
+      (noteRect.left - pad - canvasRect.left) / width,
+      bottom,
+      (noteRect.right + pad - canvasRect.left) / width,
+      top,
+    );
+  };
 
   const resize = () => {
     const w = Math.max(canvas.clientWidth, 1);
     const h = Math.max(canvas.clientHeight, 1);
     renderer.setSize(w, h);
     program.uniforms.uResolution.value.set(w * renderer.dpr, h * renderer.dpr);
+    measureNote();
   };
 
   const onPointerMove = (event: PointerEvent) => {
@@ -235,6 +298,10 @@ export function initHeroField(canvas: HTMLCanvasElement): HeroFieldHandle | null
   const ro = new ResizeObserver(resize);
   ro.observe(canvas.parentElement || canvas);
   resize();
+
+  const pulse = () => {
+    measureNote();
+  };
 
   let raf = 0;
   let start = performance.now();
@@ -278,6 +345,7 @@ export function initHeroField(canvas: HTMLCanvasElement): HeroFieldHandle | null
   raf = requestAnimationFrame(frame);
 
   return {
+    pulse,
     destroy() {
       running = false;
       cancelAnimationFrame(raf);
