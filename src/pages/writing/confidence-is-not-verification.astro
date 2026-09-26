@@ -16,7 +16,12 @@ const title = `${essay.title} — ${site.name}`;
 const description = essay.dek;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  article={{ headline: essay.title, datePublished: essay.date }}
+>
   <header class="essay-top">
     <div class="page-shell essay-top__inner">
       <a class="essay-top__back" href={sectionHref(locale, "writing")}

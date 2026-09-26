@@ -5,18 +5,101 @@ import "@fontsource/ibm-plex-sans/500.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../styles/global.css";
-import { getSite, getUi, resolveLocale } from "../i18n";
+import { getSite, getUi, localizedPath, resolveLocale } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
+  ogType?: "website" | "article";
+  article?: {
+    headline: string;
+    datePublished: string;
+  };
 }
 
 const locale = resolveLocale(Astro.currentLocale);
 const site = getSite(locale);
 const ui = getUi(locale);
-const { title = site.title, description = site.description } = Astro.props;
+const {
+  title = site.title,
+  description = site.description,
+  ogType = "website",
+  article,
+} = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL("https://www.giuseppeaceto.com");
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
+const itURL = new URL(localizedPath(Astro.url.pathname, "it"), siteOrigin);
+const enURL = new URL(localizedPath(Astro.url.pathname, "en"), siteOrigin);
+const ogImageURL = new URL("/og.png", siteOrigin);
+const personId = new URL("/#person", siteOrigin).href;
 const htmlLang = locale === "it" ? "it" : "en";
+const jobTitle =
+  locale === "it" ? "Designer e filosofo" : "Designer and philosopher";
+
+const sameAs = [
+  site.links.github,
+  site.links.relatronica,
+  site.links.weltform,
+  site.links.substack,
+  site.links.soundcloud,
+  site.links.sfscon,
+  site.links.behance,
+  site.links.cern,
+];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": personId,
+  name: site.name,
+  url: new URL("/", siteOrigin).href,
+  email: site.email,
+  jobTitle,
+  description: site.description,
+  homeLocation: {
+    "@type": "Place",
+    name: site.location,
+  },
+  sameAs,
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: new URL("/", siteOrigin).href,
+  inLanguage: ["it", "en"],
+  author: { "@id": personId },
+};
+
+const articleSchema = article
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: article.headline,
+      description,
+      datePublished: article.datePublished,
+      inLanguage: locale,
+      author: { "@id": personId },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalURL.href,
+      },
+      image: ogImageURL.href,
+      isPartOf: {
+        "@type": "WebSite",
+        name: site.name,
+        url: new URL("/", siteOrigin).href,
+      },
+    }
+  : null;
+
+const schemas = [
+  personSchema,
+  websiteSchema,
+  ...(articleSchema ? [articleSchema] : []),
+];
 ---
 
 <!doctype html>
@@ -24,19 +107,45 @@ const htmlLang = locale === "it" ? "it" : "en";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="it" href={itURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={itURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={locale === "it" ? "it_IT" : "en_US"} />
     <meta
       property="og:locale:alternate"
       content={locale === "it" ? "en_US" : "it_IT"}
     />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={site.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={site.name} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <title>{title}</title>
+
+    {
+      schemas.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
   </head>
   <body>
     <a class="skip-link" href="#main">{ui.skipToContent}</a>

@@ -6,26 +6,15 @@ export type UiCopy = {
   brandAria: string;
   nav: {
     work: string;
-    sound: string;
     writing: string;
     about: string;
     contact: string;
   };
   hero: {
     meta: string;
-    indexWork: string;
-    indexSound: string;
     scroll: string;
-    moreWork: string;
-    moreSound: string;
-    moreWriting: string;
   };
   work: {
-    label: string;
-    title: string;
-    lead: string;
-  };
-  sound: {
     label: string;
     title: string;
     lead: string;
@@ -68,18 +57,12 @@ export const ui: Record<Locale, UiCopy> = {
     brandAria: "Giuseppe Aceto — home",
     nav: {
       work: "Lavoro",
-      sound: "Suono",
       writing: "Scrittura",
       about: "Info",
       contact: "Contatti",
     },
     hero: {
       meta: "Designer, filosofo, attivista",
-      indexWork: "Lavoro",
-      indexSound: "Suono",
-      moreWork: "Vedi tutti",
-      moreSound: "Vedi tutti",
-      moreWriting: "Leggi",
       scroll: "Scorri",
     },
     work: {
@@ -87,15 +70,10 @@ export const ui: Record<Locale, UiCopy> = {
       title: "Le condizioni del pensiero",
       lead: "Un laboratorio, software libero, strumenti aperti, un'infrastruttura. La tecnologia entra quando è lei a dare forma a ciò che si può conoscere, immaginare e mettere in discussione.",
     },
-    sound: {
-      label: "Suono",
-      title: "Chi tiene il tempo",
-      lead: "Strumenti, performance, field recording. Il suono è un'altra forma di conoscenza: ascolto, ritmo, la capacità di stare in una situazione senza ridurla a un messaggio.",
-    },
     writing: {
       label: "Scrittura",
       readSubscribe: "Leggi e iscriviti",
-      onThisSite: "Su questo sito",
+      onThisSite: "Note",
       continueReading: "Continua a leggere",
     },
     about: {
@@ -110,7 +88,7 @@ export const ui: Record<Locale, UiCopy> = {
     },
     essay: {
       back: "← Scrittura",
-      onThisSite: "Su questo sito",
+      onThisSite: "Note",
       morePrefix: "Altri testi in",
       moreSuffix: "su Substack.",
       getInTouch: "Scrivimi",
@@ -128,18 +106,12 @@ export const ui: Record<Locale, UiCopy> = {
     brandAria: "Giuseppe Aceto — home",
     nav: {
       work: "Work",
-      sound: "Sound",
       writing: "Writing",
       about: "About",
       contact: "Contact",
     },
     hero: {
       meta: "Designer, philosopher, activist",
-      indexWork: "Work",
-      indexSound: "Sound",
-      moreWork: "See all",
-      moreSound: "See all",
-      moreWriting: "Read",
       scroll: "Scroll",
     },
     work: {
@@ -147,15 +119,10 @@ export const ui: Record<Locale, UiCopy> = {
       title: "Conditions for thought",
       lead: "A laboratory, free software, open tools, an infrastructure. Technology enters when it is what gives shape to what people can know, imagine, and question.",
     },
-    sound: {
-      label: "Sound",
-      title: "Who keeps time",
-      lead: "Instruments, performance, field recording. Sound is another form of knowledge: listening, rhythm, the capacity to stay with a situation without reducing it to a message.",
-    },
     writing: {
       label: "Writing",
       readSubscribe: "Read & subscribe",
-      onThisSite: "On this site",
+      onThisSite: "Notes",
       continueReading: "Continue reading",
     },
     about: {
@@ -170,7 +137,7 @@ export const ui: Record<Locale, UiCopy> = {
     },
     essay: {
       back: "← Writing",
-      onThisSite: "On this site",
+      onThisSite: "Notes",
       morePrefix: "More writing in",
       moreSuffix: "on Substack.",
       getInTouch: "Get in touch",

@@ -68,10 +68,11 @@ const essayHref = essayPath(locale, essay.slug);
   .writing__cta {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.15rem;
-    background: var(--ink);
-    color: var(--paper);
-    text-decoration: none;
+    padding: 0.15rem 0;
+    background: transparent;
+    color: var(--ink-muted);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
     font-family: var(--font-mono);
     font-size: 0.78rem;
     letter-spacing: 0.06em;
@@ -80,8 +81,7 @@ const essayHref = essayPath(locale, essay.slug);
   }
 
   .writing__cta:hover {
-    background: var(--accent);
-    color: var(--paper);
+    color: var(--accent);
   }
 
   .writing__essay {
