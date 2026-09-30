@@ -71,7 +71,7 @@ export const ui: Record<Locale, UiCopy> = {
       contact: "Contatti",
     },
     hero: {
-      meta: "Design, filosofia, attivismo",
+      meta: "Design e ricerca per la tecnologia critica",
       every: "Ogni minuto, nel mondo:",
       militaryTail: "di spesa militare.",
       enough: "Bastano",
@@ -131,7 +131,7 @@ export const ui: Record<Locale, UiCopy> = {
       contact: "Contact",
     },
     hero: {
-      meta: "Design, philosophy, activism",
+      meta: "Design and research for critical technology",
       every: "Every minute, worldwide:",
       militaryTail: "in military spending.",
       enough: "",

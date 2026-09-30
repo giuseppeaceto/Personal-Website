@@ -1,6 +1,6 @@
 # Giuseppe Aceto — Personal Website
 
-Personal site for Giuseppe Aceto: designer, philosopher, and AI ethicist.
+Personal site for Giuseppe Aceto: verification systems, design, and research for critical technology.
 
 Built with [Astro](https://astro.build). Licensed under [AGPL-3.0](./LICENSE).
 
