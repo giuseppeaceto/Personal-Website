@@ -65,11 +65,11 @@ const sharedLinks = {
 const sites: Record<Locale, SiteContent> = {
   it: {
     name: "Giuseppe Aceto",
-    title: "Giuseppe Aceto — Sistemi di verifica e design",
+    title: "Giuseppe Aceto — Design come responsabilità",
     description:
-      "Giuseppe Aceto, design e ricerca per la tecnologia critica tra Milano e Zurigo. Con Welt Form e Relatronica lavora a strumenti, laboratori e scrittura perché conoscenza, creatività e pensiero critico restino capacità vive.",
+      "Giuseppe Aceto pratica il design come responsabilità: design critico e pratiche aperte perché conoscenza, creatività e pensiero restino praticabili. Con Welt Form e Relatronica costruisce strumenti, laboratori e scrittura.",
     location: "Milano / Zurigo",
-    tagline: "Progetto perché resti possibile sapere, creare e pensare.",
+    tagline: "Perché conoscenza, creatività e pensiero restino praticabili.",
     links: sharedLinks,
     about: {
       title: "Capacità da tenere vive",
@@ -170,11 +170,11 @@ const sites: Record<Locale, SiteContent> = {
   },
   en: {
     name: "Giuseppe Aceto",
-    title: "Giuseppe Aceto — Verification systems and design",
+    title: "Giuseppe Aceto — Design as responsibility",
     description:
-      "Giuseppe Aceto, design and research for critical technology between Milan and Zurich. With Welt Form and Relatronica he builds tools, laboratories, and writing so that knowledge, creativity, and critical thought stay living capacities.",
+      "Giuseppe Aceto practices design as responsibility: critical design and open practices so knowledge, creativity, and thought stay practicable. With Welt Form and Relatronica he builds tools, laboratories, and writing.",
     location: "Milan / Zurich",
-    tagline: "I design so that knowing, making, and thinking stay possible.",
+    tagline: "So knowledge, creativity, and thought stay practicable.",
     links: sharedLinks,
     about: {
       title: "Capacities worth keeping alive",

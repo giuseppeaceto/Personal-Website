@@ -1,6 +1,6 @@
 # Giuseppe Aceto — Personal Website
 
-Personal site for Giuseppe Aceto: verification systems, design, and research for critical technology.
+Personal site for Giuseppe Aceto: design as responsibility — tools, laboratories, and writing.
 
 Built with [Astro](https://astro.build). Licensed under [AGPL-3.0](./LICENSE).
 
