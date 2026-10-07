@@ -1,0 +1,105 @@
+---
+import { affinities } from "../data/affinities";
+import { getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const ui = getUi(locale);
+---
+
+<section class="section home-affinities" aria-labelledby="home-affinities-title">
+  <div class="page-shell">
+    <p class="home-affinities__label" id="home-affinities-title">
+      {ui.home.affinitiesLabel}
+    </p>
+    <ul class="home-affinities__list">
+      {
+        affinities.map((item) => (
+          <li>
+            <a
+              class="home-affinities__link"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={item.name}
+            >
+              <img
+                class="home-affinities__logo"
+                src={item.src}
+                alt={item.name}
+                width="160"
+                height="40"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .home-affinities {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-xl);
+    border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  }
+
+  .home-affinities__label {
+    margin: 0 0 var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .home-affinities__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(0.25rem, 0.9vw, 0.85rem);
+  }
+
+  .home-affinities__list > li {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .home-affinities__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    opacity: 0.42;
+    transition: opacity 180ms var(--ease);
+  }
+
+  .home-affinities__link:hover,
+  .home-affinities__link:focus-visible {
+    opacity: 0.9;
+  }
+
+  .home-affinities__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 0.2rem;
+  }
+
+  .home-affinities__logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: clamp(0.95rem, 2.1vw, 1.65rem);
+    object-fit: contain;
+    /* monochrome ink, regardless of source fill */
+    filter: brightness(0) saturate(100%);
+    opacity: 0.85;
+  }
+</style>

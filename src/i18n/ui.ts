@@ -21,6 +21,7 @@ export type UiCopy = {
     contactCard: string;
     allWork: string;
     readAbout: string;
+    affinitiesLabel: string;
   };
   approach: {
     label: string;
@@ -110,6 +111,7 @@ export const ui: Record<Locale, UiCopy> = {
       contactCard: "Talk, workshop, ricerca, consulenza.",
       allWork: "Tutti i lavori",
       readAbout: "Leggi tutto",
+      affinitiesLabel: "Affinità",
     },
     approach: {
       label: "Approccio",
@@ -220,6 +222,7 @@ export const ui: Record<Locale, UiCopy> = {
       contactCard: "Talks, workshops, research, consulting.",
       allWork: "All work",
       readAbout: "Read more",
+      affinitiesLabel: "Affinities",
     },
     approach: {
       label: "Approach",
