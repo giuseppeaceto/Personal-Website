@@ -8,14 +8,19 @@ export type EssayBlock =
 
 export type Essay = {
   slug: string;
-  /** ISO 8601 date */
+  /** ISO 8601 date published */
   date: string;
+  /** ISO 8601 last meaningful update; defaults to date */
+  updated?: string;
   title: string;
   dek: string;
   body: readonly EssayBlock[];
   /** Canonical Substack URL when mirrored */
   substackHref?: string;
 };
+
+/** Site mirror date for Substack pieces brought on-domain */
+export const ESSAYS_MIRROR_UPDATED = "2026-10-07";
 
 const essaysItBase: readonly Essay[] = [
   {

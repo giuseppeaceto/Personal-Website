@@ -10,7 +10,12 @@ const site = getSite(locale);
 const title = `${site.about.title} — ${site.name}`;
 ---
 
-<SiteLayout title={title} description={site.description}>
+<SiteLayout
+  title={title}
+  description={site.about.description}
+  ogType="profile"
+  profilePage
+>
   <Intro />
   <Tradition />
   <Contact showHeader={false} />

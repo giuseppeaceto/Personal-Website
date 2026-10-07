@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
+  ESSAYS_MIRROR_UPDATED,
   getEssay,
   getSite,
   getUi,
@@ -26,6 +27,9 @@ if (!essay) {
 const { writing } = site;
 const title = `${essay.title} — ${site.name}`;
 const writingHref = pagePath(locale, "writing");
+const dateModified =
+  essay.updated ??
+  (essay.substackHref ? ESSAYS_MIRROR_UPDATED : essay.date);
 const dateLabel = new Date(essay.date).toLocaleDateString(
   locale === "it" ? "it-IT" : "en-US",
   { year: "numeric", month: "short", day: "numeric" },
@@ -36,7 +40,17 @@ const dateLabel = new Date(essay.date).toLocaleDateString(
   title={title}
   description={essay.dek}
   ogType="article"
-  article={{ headline: essay.title, datePublished: essay.date }}
+  ogImageAlt={essay.title}
+  article={{
+    headline: essay.title,
+    datePublished: essay.date,
+    dateModified,
+  }}
+  breadcrumbs={[
+    { name: site.name, href: homePath(locale) },
+    { name: ui.pages.writingTitle, href: writingHref },
+    { name: essay.title, href: Astro.url.pathname },
+  ]}
 >
   <header class="essay-top">
     <div class="page-shell essay-top__inner">

@@ -28,6 +28,8 @@ export type SiteContent = {
   };
   about: {
     title: string;
+    /** Unique meta description for /about (not the site-wide blurb) */
+    description: string;
     lead: RichParagraph;
     paragraphs: readonly RichParagraph[];
   };
@@ -77,6 +79,8 @@ const sites: Record<Locale, SiteContent> = {
     links: sharedLinks,
     about: {
       title: "Capacità da tenere vive",
+      description:
+        "Chi è Giuseppe Aceto: design critico, Relatronica, Welt Form e la Toolbox for Ethical Futures al CERN. Radici nel design radicale italiano.",
       lead: rich(
         txt("Il design critico usa oggetti e scenari per discutere tecnologia e consumo. "),
         lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),
@@ -232,6 +236,8 @@ const sites: Record<Locale, SiteContent> = {
     links: sharedLinks,
     about: {
       title: "Capacities worth keeping alive",
+      description:
+        "About Giuseppe Aceto: critical design, Relatronica, Welt Form, and the Toolbox for Ethical Futures at CERN. Roots in Italian radical design.",
       lead: rich(
         txt("Critical design uses objects and scenarios to discuss technology and consumption. "),
         lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),

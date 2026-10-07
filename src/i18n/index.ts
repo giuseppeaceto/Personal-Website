@@ -1,6 +1,7 @@
 export { defaultLocale, isLocale, locales, resolveLocale, type Locale } from "./locales";
 export { getUi, type UiCopy } from "./ui";
 export {
+  ESSAYS_MIRROR_UPDATED,
   getEssay,
   getEssaySlugs,
   getEssays,

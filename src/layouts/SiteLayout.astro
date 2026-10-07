@@ -7,13 +7,25 @@ interface Props {
   title?: string;
   description?: string;
   mainClass?: string;
+  ogType?: "website" | "article" | "profile";
+  profilePage?: boolean;
 }
 
-const { title, description, mainClass = "site-main site-main--page" } =
-  Astro.props;
+const {
+  title,
+  description,
+  mainClass = "site-main site-main--page",
+  ogType,
+  profilePage,
+} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType={ogType}
+  profilePage={profilePage}
+>
   <Header />
   <main id="main" class={mainClass}>
     <slot />
@@ -30,5 +42,4 @@ const { title, description, mainClass = "site-main site-main--page" } =
   .site-main--page > .page-header {
     padding-top: var(--space-lg);
   }
-
 </style>
