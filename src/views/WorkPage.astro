@@ -1,0 +1,20 @@
+---
+import PageHeader from "../components/PageHeader.astro";
+import Work from "../components/Work.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+const title = `${ui.pages.workTitle} — ${site.name}`;
+---
+
+<SiteLayout title={title} description={ui.work.lead}>
+  <PageHeader
+    label={ui.work.label}
+    title={ui.work.title}
+    lead={ui.work.lead}
+  />
+  <Work showHeader={false} />
+</SiteLayout>

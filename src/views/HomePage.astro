@@ -1,0 +1,14 @@
+---
+import Hero from "../components/Hero.astro";
+import HomeTeasers from "../components/HomeTeasers.astro";
+import Intro from "../components/Intro.astro";
+import Work from "../components/Work.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout mainClass="site-main">
+  <Hero />
+  <Intro variant="brief" />
+  <Work limit={3} showAllLink />
+  <HomeTeasers />
+</SiteLayout>

@@ -1,20 +1,40 @@
 ---
-import { getSite, getUi, resolveLocale } from "../i18n";
+import { getSite, getUi, pagePath, resolveLocale } from "../i18n";
+
+interface Props {
+  limit?: number;
+  showHeader?: boolean;
+  showAllLink?: boolean;
+}
 
 const locale = resolveLocale(Astro.currentLocale);
 const { work } = getSite(locale);
 const ui = getUi(locale);
+const { limit, showHeader = true, showAllLink = false } = Astro.props;
+const items = limit ? work.slice(0, limit) : work;
 ---
 
 <section class="section work" id="work" aria-labelledby="work-title">
   <div class="page-shell">
-    <p class="section__label">{ui.work.label}</p>
-    <h2 class="section__title" id="work-title">{ui.work.title}</h2>
-    <p class="section__lead">{ui.work.lead}</p>
+    {
+      showHeader ? (
+        <>
+          <p class="section__label">{ui.work.label}</p>
+          <h2 class="section__title" id="work-title">
+            {ui.work.title}
+          </h2>
+          <p class="section__lead">{ui.work.lead}</p>
+        </>
+      ) : (
+        <h2 class="sr-only" id="work-title">
+          {ui.work.title}
+        </h2>
+      )
+    }
 
     <ul class="work-list">
       {
-        work.map((item) => (
+        items.map((item) => (
           <li class="work-item">
             <div class="work-item__meta">
               <span class="work-item__year">{item.year}</span>
@@ -37,14 +57,25 @@ const ui = getUi(locale);
         ))
       }
     </ul>
+    {
+      showAllLink ? (
+        <p class="work__all">
+          <a href={pagePath(locale, "work")}>{ui.home.allWork}</a>
+        </p>
+      ) : null
+    }
   </div>
 </section>
 
 <style>
   .work-list {
     list-style: none;
-    margin: var(--space-lg) 0 0;
+    margin: var(--space-md) 0 0;
     padding: 0;
+  }
+
+  .work:has(.section__title) .work-list {
+    margin-top: var(--space-lg);
   }
 
   .work-item {
@@ -106,6 +137,22 @@ const ui = getUi(locale);
     margin: 0;
     max-width: 42rem;
     color: var(--ink-muted);
+  }
+
+  .work__all {
+    margin: var(--space-md) 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .work__all a {
+    text-decoration: none;
+  }
+
+  .work__all a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 700px) {

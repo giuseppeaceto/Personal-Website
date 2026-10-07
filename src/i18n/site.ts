@@ -1,4 +1,5 @@
 import type { Locale } from "./locales";
+import { lnk, rich, txt, type RichParagraph } from "./rich-text";
 
 export type WorkItem = {
   year: string;
@@ -20,7 +21,6 @@ export type SiteContent = {
     mastodon: string;
     relatronica: string;
     weltform: string;
-    soundcloud: string;
     substack: string;
     toolkit: string;
     sfscon: string;
@@ -29,8 +29,21 @@ export type SiteContent = {
   };
   about: {
     title: string;
-    lead: string;
-    paragraphs: readonly string[];
+    lead: RichParagraph;
+    paragraphs: readonly RichParagraph[];
+  };
+  tradition: {
+    label: string;
+    title: string;
+    lead: RichParagraph;
+    paragraphs: readonly RichParagraph[];
+    figure: {
+      title: string;
+      note: string;
+      alt: string;
+      sourceLabel: string;
+      sourceHref: string;
+    };
   };
   writing: {
     title: string;
@@ -53,7 +66,6 @@ const sharedLinks = {
   mastodon: "https://mastodon.social/@giuseppeaceto",
   relatronica: "https://relatronica.com",
   weltform: "https://www.weltform.com",
-  soundcloud: "https://soundcloud.com/giuseppe-aceto",
   substack: "https://giuseppeaceto.substack.com",
   toolkit:
     "https://cds.cern.ch/record/2930771/files/CERN-OPEN-2025-003.pdf",
@@ -65,21 +77,100 @@ const sharedLinks = {
 const sites: Record<Locale, SiteContent> = {
   it: {
     name: "Giuseppe Aceto",
-    title: "Giuseppe Aceto — Design come responsabilità",
+    title: "Giuseppe Aceto — Design critico",
     description:
-      "Giuseppe Aceto pratica il design come responsabilità: design critico e pratiche aperte perché conoscenza, creatività e pensiero restino praticabili. Con Welt Form e Relatronica costruisce strumenti, laboratori e scrittura.",
+      "Giuseppe Aceto — design critico e speculativo. Fondatore di Relatronica e Welt Form; autore della Toolbox for Ethical Futures al CERN.",
     location: "Milano / Zurigo",
-    tagline: "Perché conoscenza, creatività e pensiero restino praticabili.",
+    tagline: "Oggetti, scenari e software per discutere la tecnologia.",
     links: sharedLinks,
     about: {
       title: "Capacità da tenere vive",
-      lead: "Il centro è lo sviluppo umano: conoscenza, creatività, pensiero critico. Li tratto come capacità da esercitare, non come valori da dichiarare. La tecnologia è il terreno su cui, oggi, quelle capacità vengono disegnate.",
+      lead: rich(
+        txt("Il design critico usa oggetti e scenari per discutere tecnologia e consumo. "),
+        lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),
+        txt(" ne gettarono le basi al "),
+        lnk("Royal College of Art", "https://www.rca.ac.uk/"),
+        txt(", negli anni Novanta; in Italia la stessa tensione ha radici più antiche nel "),
+        lnk("design radicale", "/about/#tradition"),
+        txt("."),
+      ),
       paragraphs: [
-        "Al CERN ho pubblicato strumenti aperti per pensare la tecnologia in modo critico. Relatronica è un laboratorio di design speculativo. Welt Form è il progetto di infrastruttura sulla verifica, lì dove un sistema automatico rischia di chiudere una domanda prima che una persona possa farla.",
-        "Il suono resta nella pratica quando serve: strumenti, performance, ascolto. Un modo di conoscere che passa dal corpo, non solo dal linguaggio.",
-        "Il software libero è la condizione pratica. Ciò che non si può leggere non si può capire, e ciò che non si può capire non si può fare proprio. Lavoro con laboratori, istituzioni e comunità che vogliono queste capacità dentro il progetto, fin dall'inizio.",
-        "Lavoro in tre modalità: consulenza e design per chi vuole portare verifica e apertura dentro un prodotto o un servizio; ricerca e workshop con istituzioni e laboratori; interventi pubblici — talk, testi, strumenti — per allargare la conversazione oltre gli addetti ai lavori.",
+        rich(
+          txt("Al CERN ho pubblicato la "),
+          lnk("Toolbox for Ethical Futures", sharedLinks.cern),
+          txt(", esercizi aperti per il pensiero critico sulla tecnologia in gruppo. "),
+          lnk("Relatronica", sharedLinks.relatronica),
+          txt(" è un laboratorio di design speculativo in Svizzera. "),
+          lnk("Welt Form", sharedLinks.weltform),
+          txt(" è infrastruttura per verificare output automatici prima che diventino decisioni."),
+        ),
+        rich(
+          lnk("Hans Jonas", "https://it.wikipedia.org/wiki/Hans_Jonas"),
+          txt(" parlava di «heuristic fear» nel "),
+          lnk("Il principio responsabilità", "https://en.wikipedia.org/wiki/The_Imperative_of_Responsibility"),
+          txt(": immaginare conseguenze mentre si può ancora agire. "),
+          lnk("Foucault", "https://plato.stanford.edu/entries/foucault/"),
+          txt(", delle "),
+          lnk("tecnologie del sé", "https://plato.stanford.edu/entries/foucault/#TechSelf"),
+          txt(": ogni dispositivo forma anche un soggetto. Quando progetto, parto da lì."),
+        ),
+        rich(
+          txt("Il "),
+          lnk("software libero", "https://www.gnu.org/philosophy/free-sw.it.html"),
+          txt(" rende leggibile ciò che altrimenti resterebbe una scatola nera. Collaboro con laboratori, istituzioni e comunità che vogliono portare verifica e speculazione dentro prodotti e servizi."),
+        ),
+        rich(
+          txt("Consulenza e design, ricerca e workshop con istituzioni, talk e testi pubblici."),
+        ),
       ],
+    },
+    tradition: {
+      label: "Radici",
+      title: "Design radicale in Italia",
+      lead: rich(
+        txt("Prima del «critical design» anglosassone, Firenze negli anni Sessanta e Settanta: gruppi che usavano il progetto per criticare consumo, città e "),
+        lnk("scuola del design", "https://it.wikipedia.org/wiki/Design_radical"),
+        txt("."),
+      ),
+      paragraphs: [
+        rich(
+          lnk("Superstudio", "https://it.wikipedia.org/wiki/Superstudio"),
+          txt(" e "),
+          lnk("Archizoom", "https://it.wikipedia.org/wiki/Archizoom"),
+          txt(" disegnavano città senza fine e cataloghi di oggetti assurdi: non per produrli, ma per mostrare dove porta la logica del mercato. Con "),
+          lnk("No-Stop City", "https://it.wikipedia.org/wiki/No-Stop_City"),
+          txt(", Archizoom immagina un territorio urbano continuo, senza centro né confine."),
+        ),
+        rich(
+          lnk("Ugo La Pietra", "https://it.wikipedia.org/wiki/Ugo_La_Pietra"),
+          txt(", con "),
+          lnk("La dissociazione come modo d'azione", "https://www.domusweb.it/it/news/gallery/2020/04/15/ugo-la-pietra-la-dissociazione-come-modo-d-azione.html"),
+          txt(" (1976), descrive l'individuo in bilico tra casa e metropoli controllata. "),
+          lnk("Enzo Mari", "https://it.wikipedia.org/wiki/Enzo_Mari"),
+          txt(", con "),
+          lnk("Proposta per un'autoprogettazione", "https://it.wikipedia.org/wiki/Autoprogettazione"),
+          txt(" (1974), sposta il progetto nelle mani di chi lo usa: istruzioni stampate, non sedie in serie."),
+        ),
+        rich(
+          lnk("Global Tools", "https://it.wikipedia.org/wiki/Global_Tools"),
+          txt(" (1973–1975) prova a trasformare il design in laboratorio condiviso — tra "),
+          lnk("Branzi", "https://it.wikipedia.org/wiki/Andrea_Branzi"),
+          txt(", "),
+          lnk("Mendini", "https://it.wikipedia.org/wiki/Alessandro_Mendini"),
+          txt(", "),
+          lnk("Ettore Sottsass", "https://it.wikipedia.org/wiki/Ettore_Sottsass"),
+          txt(" e altri. "),
+          lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),
+          txt(" hanno citato spesso quella stagione come antenata del loro lavoro al RCA. A me serve oggi per leggere piattaforme, AI e infrastrutture con la stessa lucidità."),
+        ),
+      ],
+      figure: {
+        title: "Il Monumento Continuo",
+        note: "Fotomontaggio, 1969: una griglia bianca infinita invade la valle. Superstudio immagina l'architettura come totalità — critica dell'omologazione, non progetto da costruire.",
+        alt: "Superstudio, Il Monumento Continuo: una struttura a griglia bianca emerge dalle nuvole in una valle di montagna, con un piccolo edificio in primo piano.",
+        sourceLabel: "Superstudio · Continuous Monument, 1969",
+        sourceHref: "https://www.moma.org/collection/works/142978",
+      },
     },
     writing: {
       title: "Debug dei Desideri",
@@ -93,7 +184,7 @@ const sites: Record<Locale, SiteContent> = {
         },
         {
           title: "Make people addicted",
-          note: "La dipendenza è un progetto, non un incidente.",
+          note: "La dipendenza si progetta, come l'interfaccia.",
         },
       ],
     },
@@ -118,7 +209,7 @@ const sites: Record<Locale, SiteContent> = {
         role: "Fondatore · Infrastruttura",
         fact: "Progetto di infrastruttura per verificare ciò che le macchine producono prima che diventi decisione.",
         summary:
-          "Non un singolo strumento: Dubitor apre la contestazione su decisioni e giustificazioni; altre linee (Vektor, Roundel, Probe) stressano stime, stabilità e futuri degli agenti.",
+          "Un ecosistema: Dubitor per contestare decisioni e giustificazioni; Vektor, Roundel e Probe su stime, stabilità e agenti.",
         href: "https://www.weltform.com/it",
       },
       {
@@ -127,7 +218,7 @@ const sites: Record<Locale, SiteContent> = {
         role: "Autore · CERN OPEN",
         fact: "Documento aperto pubblicato al CERN nel 2025: un PDF di esercizi e casi pratici per allenare, in gruppo, il pensiero critico sulla tecnologia, pensato per essere ripreso e adattato.",
         summary:
-          "Esercizi e provocazioni per pensare la tecnologia insieme, in pubblico. Un documento aperto del CERN: un allenamento del pensiero critico, da prendere e da rifare.",
+          "Esercizi per pensare la tecnologia insieme. PDF aperto del CERN, pensato per essere ripreso in aula e in laboratorio.",
         href: "https://cds.cern.ch/record/2930771",
       },
       {
@@ -145,46 +236,106 @@ const sites: Record<Locale, SiteContent> = {
         role: "Fondatore · Design speculativo",
         fact: "Laboratorio di design speculativo fondato in Svizzera nel 2024 da designer e ricercatori incontratisi al CERN; tra gli esiti pubblici, 404human, Segno e Substrato.",
         summary:
-          "Immaginazione e critica, in pubblico, tra discipline che il lavoro di prodotto tiene separate: un luogo per capire cosa la tecnologia fa alle capacità umane.",
+          "Design speculativo in Svizzera, tra ricerca e pratica pubblica. 404human, Segno, Substrato e altri esperimenti sul rapporto tra tecnologia e persone.",
         href: "https://relatronica.com",
-      },
-      {
-        year: "in corso",
-        title: "Topographic Granulator",
-        role: "Strumento · Sintesi",
-        fact: "Strumento di sintesi granulare per trattare dati territoriali come materiale sonoro.",
-        summary:
-          "Uno strumento granulare che tratta il territorio come materia di sintesi. Un modo di conoscere un luogo attraverso il suono, costruendo lo strumento con cui lo si fa.",
-        href: "https://github.com/giuseppeaceto/Topographic-Granulator",
-      },
-      {
-        year: "2019",
-        title: "Enfant Prodige / Vector",
-        role: "Performance · Suono e AI",
-        fact: "Performance dal vivo del 2019: un dialogo in tempo reale tra danza, computer e intelligenza artificiale, con musica e sound design di Giuseppe Aceto.",
-        summary:
-          "Danza, computazione e intelligenza artificiale, dal vivo. Ciò che un corpo sa e ciò che un calcolo produce, nello stesso tempo.",
-        href: "https://www.behance.net/gallery/87454449/Vector",
       },
     ],
   },
   en: {
     name: "Giuseppe Aceto",
-    title: "Giuseppe Aceto — Design as responsibility",
+    title: "Giuseppe Aceto — Critical design",
     description:
-      "Giuseppe Aceto practices design as responsibility: critical design and open practices so knowledge, creativity, and thought stay practicable. With Welt Form and Relatronica he builds tools, laboratories, and writing.",
+      "Giuseppe Aceto — critical and speculative design. Founder of Relatronica and Welt Form; author of the Toolbox for Ethical Futures at CERN.",
     location: "Milan / Zurich",
-    tagline: "So knowledge, creativity, and thought stay practicable.",
+    tagline: "Objects, scenarios, and software for discussing technology.",
     links: sharedLinks,
     about: {
       title: "Capacities worth keeping alive",
-      lead: "The center is human development: knowledge, creativity, critical thought. I treat them as capacities to practice, not values to declare. Technology is the ground on which, today, those capacities are designed.",
+      lead: rich(
+        txt("Critical design uses objects and scenarios to discuss technology and consumption. "),
+        lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),
+        txt(" laid the groundwork at the "),
+        lnk("Royal College of Art", "https://www.rca.ac.uk/"),
+        txt(" in the 1990s; in Italy the same tension has older roots in "),
+        lnk("radical design", "/en/about/#tradition"),
+        txt("."),
+      ),
       paragraphs: [
-        "At CERN I published open tools for thinking critically about technology. Relatronica is a laboratory for speculative design. Welt Form is the infrastructure project on verification, where an automated system risks closing a question before a person can ask it.",
-        "Sound stays in the practice when it is useful: instruments, performance, listening. A way of knowing that passes through the body, not only through language.",
-        "Free software is the practical condition. What you cannot read, you cannot understand, and what you cannot understand, you cannot make your own. I work with laboratories, institutions, and communities that want these capacities inside the work from the beginning.",
-        "I work in three modes: consulting and design for those who want verification and openness inside a product or a service; research and workshops with institutions and laboratories; public interventions — talks, texts, tools — to widen the conversation beyond specialists.",
+        rich(
+          txt("At CERN I published the "),
+          lnk("Toolbox for Ethical Futures", sharedLinks.cern),
+          txt(", open exercises for critical thought about technology in a group. "),
+          lnk("Relatronica", sharedLinks.relatronica),
+          txt(" is a speculative-design laboratory in Switzerland. "),
+          lnk("Welt Form", sharedLinks.weltform),
+          txt(" is infrastructure for verifying automated outputs before they become decisions."),
+        ),
+        rich(
+          lnk("Hans Jonas", "https://en.wikipedia.org/wiki/Hans_Jonas"),
+          txt(" wrote about \"heuristic fear\" in "),
+          lnk("The Imperative of Responsibility", "https://en.wikipedia.org/wiki/The_Imperative_of_Responsibility"),
+          txt(": imagining consequences while you can still act. "),
+          lnk("Foucault", "https://plato.stanford.edu/entries/foucault/"),
+          txt(", on "),
+          lnk("technologies of the self", "https://plato.stanford.edu/entries/foucault/#TechSelf"),
+          txt(": every device also shapes a subject. That is where I start when I design."),
+        ),
+        rich(
+          lnk("Free software", "https://www.gnu.org/philosophy/free-sw.html"),
+          txt(" makes readable what would otherwise stay a black box. I work with laboratories, institutions, and communities that want verification and speculation inside products and services."),
+        ),
+        rich(
+          txt("Consulting and design, research and workshops with institutions, public talks and writing."),
+        ),
       ],
+    },
+    tradition: {
+      label: "Roots",
+      title: "Radical design in Italy",
+      lead: rich(
+        txt("Before English-language critical design, Florence in the 1960s and 1970s: groups using design to criticise consumption, the city, and "),
+        lnk("design education", "https://en.wikipedia.org/wiki/Radical_design"),
+        txt(" itself."),
+      ),
+      paragraphs: [
+        rich(
+          lnk("Superstudio", "https://en.wikipedia.org/wiki/Superstudio"),
+          txt(" and "),
+          lnk("Archizoom", "https://en.wikipedia.org/wiki/Archizoom"),
+          txt(" drew endless cities and catalogues of absurd objects — not to manufacture them, but to show where market logic leads. With "),
+          lnk("No-Stop City", "https://en.wikipedia.org/wiki/No-Stop_City"),
+          txt(", Archizoom imagined urban territory as a continuous field, without centre or edge."),
+        ),
+        rich(
+          lnk("Ugo La Pietra", "https://en.wikipedia.org/wiki/Ugo_La_Pietra"),
+          txt(", in "),
+          lnk("Dissociation as a mode of action", "https://www.domusweb.it/en/news/gallery/2020/04/15/ugo-la-pietra-la-dissociazione-come-modo-d-azione.html"),
+          txt(" (1976), described individuals caught between home and a controlled metropolis. "),
+          lnk("Enzo Mari", "https://en.wikipedia.org/wiki/Enzo_Mari"),
+          txt(", in "),
+          lnk("Autoprogettazione", "https://en.wikipedia.org/wiki/Enzo_Mari#Autoprogettazione"),
+          txt(" (1974), moved design into the user's hands: printed instructions, not chairs off a production line."),
+        ),
+        rich(
+          lnk("Global Tools", "https://en.wikipedia.org/wiki/Global_Tools"),
+          txt(" (1973–1975) tried to turn design into a shared laboratory — among "),
+          lnk("Branzi", "https://en.wikipedia.org/wiki/Andrea_Branzi"),
+          txt(", "),
+          lnk("Mendini", "https://en.wikipedia.org/wiki/Alessandro_Mendini"),
+          txt(", "),
+          lnk("Ettore Sottsass", "https://en.wikipedia.org/wiki/Ettore_Sottsass"),
+          txt(", and others. "),
+          lnk("Dunne & Raby", "http://www.dunneandraby.co.uk/"),
+          txt(" often cited that period as an ancestor of their work at the RCA. I use it today to read platforms, AI, and infrastructure with the same clarity."),
+        ),
+      ],
+      figure: {
+        title: "The Continuous Monument",
+        note: "Photomontage, 1969: an endless white grid invades the valley. Superstudio imagines architecture as totality — a critique of homogenisation, not a building to erect.",
+        alt: "Superstudio, The Continuous Monument: a white gridded structure rises from clouds in a mountain valley, with a small building in the foreground.",
+        sourceLabel: "Superstudio · Continuous Monument, 1969",
+        sourceHref: "https://www.moma.org/collection/works/142978",
+      },
     },
     writing: {
       title: "Debug dei Desideri",
@@ -198,7 +349,7 @@ const sites: Record<Locale, SiteContent> = {
         },
         {
           title: "Make people addicted",
-          note: "Addiction is a design, not an accident.",
+          note: "Addiction is designed in, like the interface.",
         },
       ],
     },
@@ -223,7 +374,7 @@ const sites: Record<Locale, SiteContent> = {
         role: "Founder · Infrastructure",
         fact: "An infrastructure project for verifying what machines produce before it becomes a decision.",
         summary:
-          "Not a single tool: Dubitor opens contestation on decisions and justifications; other lines (Vektor, Roundel, Probe) stress estimates, stability, and agent futures.",
+          "An ecosystem: Dubitor for contesting decisions and justifications; Vektor, Roundel, and Probe on estimates, stability, and agents.",
         href: "https://www.weltform.com/en",
       },
       {
@@ -232,7 +383,7 @@ const sites: Record<Locale, SiteContent> = {
         role: "Author · CERN OPEN",
         fact: "An open document published at CERN in 2025: a PDF of exercises and practical cases for training critical thought about technology in a group, meant to be taken up and adapted.",
         summary:
-          "Exercises and provocations for thinking about technology together, in public. An open CERN document: practice for critical thought, to be taken and remade.",
+          "Exercises for thinking about technology together. An open CERN PDF, meant to be picked up in classrooms and labs.",
         href: "https://cds.cern.ch/record/2930771",
       },
       {
@@ -250,26 +401,8 @@ const sites: Record<Locale, SiteContent> = {
         role: "Founder · Speculative design",
         fact: "A speculative-design laboratory founded in Switzerland in 2024 by designers and researchers who met at CERN; public outcomes include 404human, Segno, and Substrato.",
         summary:
-          "Imagination and critique, in public, across disciplines that product work keeps apart: a place to understand what technology does to human capacities.",
+          "Speculative design in Switzerland, between research and public practice. 404human, Segno, Substrato, and other experiments on technology and people.",
         href: "https://relatronica.com",
-      },
-      {
-        year: "ongoing",
-        title: "Topographic Granulator",
-        role: "Instrument · Synthesis",
-        fact: "A granular synthesis instrument for treating territorial data as sound material.",
-        summary:
-          "A granular instrument that treats terrain as material for synthesis. A way of knowing a place through sound, by building the instrument that makes it possible.",
-        href: "https://github.com/giuseppeaceto/Topographic-Granulator",
-      },
-      {
-        year: "2019",
-        title: "Enfant Prodige / Vector",
-        role: "Performance · Sound & AI",
-        fact: "A live performance from 2019: a real-time dialogue between dance, computer, and artificial intelligence, with music and sound design by Giuseppe Aceto.",
-        summary:
-          "Dance, computation, and artificial intelligence, live. What a body knows and what a calculation produces, in the same time.",
-        href: "https://www.behance.net/gallery/87454449/Vector",
       },
     ],
   },
@@ -289,8 +422,19 @@ export function homePath(locale: Locale): string {
   return locale === "it" ? "/" : "/en/";
 }
 
-export function sectionHref(locale: Locale, hash: string): string {
-  return locale === "it" ? `/#${hash}` : `/en/#${hash}`;
+export type SitePage = "about" | "approach" | "work" | "writing" | "contact";
+
+const pageSegments: Record<SitePage, string> = {
+  about: "/about",
+  approach: "/approach",
+  work: "/work",
+  writing: "/writing",
+  contact: "/contact",
+};
+
+export function pagePath(locale: Locale, page: SitePage): string {
+  const segment = pageSegments[page];
+  return locale === "en" ? `/en${segment}/` : `${segment}/`;
 }
 
 export function localizedPath(pathname: string, target: Locale): string {

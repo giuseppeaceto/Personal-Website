@@ -1,0 +1,17 @@
+---
+import Contact from "../components/Contact.astro";
+import Intro from "../components/Intro.astro";
+import Tradition from "../components/Tradition.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const title = `${site.about.title} — ${site.name}`;
+---
+
+<SiteLayout title={title} description={site.description}>
+  <Intro />
+  <Tradition />
+  <Contact showHeader={false} />
+</SiteLayout>

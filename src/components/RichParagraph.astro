@@ -1,0 +1,43 @@
+---
+import type { RichParagraph as RichParagraphType } from "../i18n/rich-text";
+
+interface Props {
+  parts: RichParagraphType;
+  class?: string;
+}
+
+const { parts, class: className } = Astro.props;
+---
+
+<p class:list={["rich-paragraph", className]}>
+  {
+    parts.map((part) =>
+      part.type === "text" ? (
+        part.value
+      ) : (
+        <a
+          href={part.href}
+          {...(/^https?:\/\//.test(part.href)
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+        >
+          {part.label}
+        </a>
+      ),
+    )
+  }
+</p>
+
+<style>
+  .rich-paragraph :global(a) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+
+  .rich-paragraph :global(a:hover) {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+</style>

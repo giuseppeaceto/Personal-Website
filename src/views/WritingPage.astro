@@ -1,0 +1,20 @@
+---
+import PageHeader from "../components/PageHeader.astro";
+import Writing from "../components/Writing.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+const title = `${ui.pages.writingTitle} — ${site.name}`;
+---
+
+<SiteLayout title={title} description={site.writing.summary}>
+  <PageHeader
+    label={ui.writing.label}
+    title={ui.pages.writingTitle}
+    lead={site.writing.summary}
+  />
+  <Writing showHeader={false} showIntro={false} />
+</SiteLayout>

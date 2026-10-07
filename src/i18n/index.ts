@@ -5,7 +5,8 @@ export {
   getSite,
   homePath,
   localizedPath,
-  sectionHref,
+  pagePath,
+  type SitePage,
   type SiteContent,
   type WorkItem,
 } from "./site";

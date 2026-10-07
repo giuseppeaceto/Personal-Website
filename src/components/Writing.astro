@@ -1,28 +1,67 @@
 ---
 import { essayPath, getSite, getUi, resolveLocale } from "../i18n";
 
+interface Props {
+  showHeader?: boolean;
+  showIntro?: boolean;
+}
+
 const locale = resolveLocale(Astro.currentLocale);
 const { writing, essay } = getSite(locale);
 const ui = getUi(locale);
+const { showHeader = true, showIntro = true } = Astro.props;
 const excerpt = essay.body.slice(0, 2);
 const essayHref = essayPath(locale, essay.slug);
 ---
 
 <section class="section writing" id="writing" aria-labelledby="writing-title">
   <div class="page-shell">
-    <p class="section__label">{ui.writing.label}</p>
-    <div class="writing__intro">
-      <div>
-        <h2 class="section__title" id="writing-title">{writing.title}</h2>
-        <p class="section__lead">{writing.summary}</p>
-      </div>
-      <a
-        class="writing__cta"
-        href={writing.href}
-        target="_blank"
-        rel="noopener noreferrer">{ui.writing.readSubscribe}</a
-      >
-    </div>
+    {
+      showHeader ? (
+        <>
+          <p class="section__label">{ui.writing.label}</p>
+          <div class="writing__intro">
+            <div>
+              <h2 class="section__title" id="writing-title">
+                {writing.title}
+              </h2>
+              {showIntro ? (
+                <p class="section__lead">{writing.summary}</p>
+              ) : null}
+            </div>
+            <a
+              class="writing__cta"
+              href={writing.href}
+              target="_blank"
+              rel="noopener noreferrer">{ui.writing.readSubscribe}</a
+            >
+          </div>
+        </>
+      ) : (
+        <>
+          <h2 class="sr-only" id="writing-title">
+            {writing.title}
+          </h2>
+          <div
+            class:list={[
+              "writing__intro",
+              "writing__intro--compact",
+              !showIntro && "writing__intro--cta-only",
+            ]}
+          >
+            {showIntro ? (
+              <p class="section__lead">{writing.summary}</p>
+            ) : null}
+            <a
+              class="writing__cta"
+              href={writing.href}
+              target="_blank"
+              rel="noopener noreferrer">{ui.writing.readSubscribe}</a
+            >
+          </div>
+        </>
+      )
+    }
 
     <article class="writing__essay">
       <p class="writing__essay-label">{ui.writing.onThisSite}</p>
@@ -52,6 +91,10 @@ const essayHref = essayPath(locale, essay.slug);
 </section>
 
 <style>
+  .writing {
+    padding-bottom: var(--space-xl);
+  }
+
   .writing__intro {
     display: flex;
     flex-wrap: wrap;
@@ -59,6 +102,15 @@ const essayHref = essayPath(locale, essay.slug);
     justify-content: space-between;
     gap: var(--space-md);
     margin-bottom: var(--space-lg);
+  }
+
+  .writing__intro--compact {
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .writing__intro--cta-only {
+    justify-content: flex-end;
   }
 
   .writing__intro .section__title {

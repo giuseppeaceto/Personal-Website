@@ -1,10 +1,18 @@
 ---
-import { getSite, getUi, resolveLocale } from "../i18n";
+import RichParagraph from "./RichParagraph.astro";
+import { getSite, getUi, pagePath, resolveLocale } from "../i18n";
+
+interface Props {
+  variant?: "full" | "brief";
+}
 
 const locale = resolveLocale(Astro.currentLocale);
 const site = getSite(locale);
 const { about } = site;
 const ui = getUi(locale);
+const { variant = "full" } = Astro.props;
+const paragraphs =
+  variant === "brief" ? about.paragraphs.slice(0, 2) : about.paragraphs;
 ---
 
 <section class="section intro" id="about" aria-labelledby="intro-name">
@@ -16,8 +24,17 @@ const ui = getUi(locale);
       <p class="intro__tagline">{site.tagline}</p>
     </div>
     <div class="intro__copy">
-      <p class="intro__lead">{about.lead}</p>
-      {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <RichParagraph parts={about.lead} class="intro__lead" />
+      {paragraphs.map((paragraph) => (
+        <RichParagraph parts={paragraph} />
+      ))}
+      {
+        variant === "brief" ? (
+          <p class="intro__more">
+            <a href={pagePath(locale, "about")}>{ui.home.readAbout}</a>
+          </p>
+        ) : null
+      }
     </div>
   </div>
 </section>
@@ -73,17 +90,33 @@ const ui = getUi(locale);
     animation: rise-in 0.85s var(--ease) 0.08s both;
   }
 
-  .intro__copy p {
+  .intro__copy :global(.rich-paragraph) {
     margin: 0;
     color: var(--ink-muted);
     font-size: 1.08rem;
   }
 
-  .intro__lead {
-    color: var(--ink) !important;
+  .intro__copy :global(.intro__lead.rich-paragraph) {
+    color: var(--ink);
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2vw, 1.4rem) !important;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
     line-height: 1.45;
+  }
+
+  .intro__more {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .intro__more a {
+    text-decoration: none;
+  }
+
+  .intro__more a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 800px) {

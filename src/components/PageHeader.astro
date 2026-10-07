@@ -1,0 +1,59 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  lead?: string;
+  compact?: boolean;
+}
+
+const { label, title, lead, compact = false } = Astro.props;
+---
+
+<header class:list={["page-header", "page-shell", compact && "page-header--compact"]}>
+  {label ? <p class="section__label">{label}</p> : null}
+  <h1 class="page-header__title">{title}</h1>
+  {lead ? <p class="page-header__lead">{lead}</p> : null}
+</header>
+
+<style>
+  .page-header {
+    padding-bottom: var(--space-md);
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .page-header--compact {
+    padding-bottom: var(--space-sm);
+  }
+
+  .page-header--compact .section__label {
+    margin-bottom: 0.65rem;
+  }
+
+  .page-header__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .page-header--compact .page-header__title {
+    font-size: clamp(1.55rem, 3vw, 2rem);
+  }
+
+  .page-header__lead {
+    margin: var(--space-sm) 0 0;
+    max-width: var(--measure);
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+  }
+
+  .page-header--compact .page-header__lead {
+    margin-top: 0.55rem;
+    font-size: 0.98rem;
+    max-width: 34rem;
+  }
+</style>

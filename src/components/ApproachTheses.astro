@@ -1,0 +1,180 @@
+---
+import { getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const ui = getUi(locale);
+const { theses, closing } = ui.approach;
+---
+
+<section class="theses" aria-label={ui.approach.label}>
+  <div class="page-shell">
+    <ol class="theses__list">
+      {
+        theses.map((thesis, index) => (
+          <li class="thesis" data-thesis>
+            <div class="thesis__meta">
+              <span class="thesis__index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p class="thesis__tag">{thesis.tag}</p>
+            </div>
+            <div class="thesis__body">
+              <h2 class="thesis__title">{thesis.title}</h2>
+              <p class="thesis__statement">{thesis.statement}</p>
+              <p class="thesis__text">{thesis.body}</p>
+              {thesis.quote ? (
+                <blockquote class="thesis__quote">
+                  <p>{thesis.quote}</p>
+                  {thesis.quoteAttr ? (
+                    <cite>{thesis.quoteAttr}</cite>
+                  ) : null}
+                </blockquote>
+              ) : null}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="theses__closing">{closing}</p>
+  </div>
+</section>
+
+<script>
+  import { initApproachTheses } from "../scripts/approach-motion";
+
+  initApproachTheses();
+</script>
+
+<style>
+  .theses {
+    padding-block: var(--space-md) var(--space-xl);
+  }
+
+  .theses__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .thesis {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 9rem) minmax(0, 38rem);
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--line);
+  }
+
+  .thesis:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .thesis__meta {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .thesis__index {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+
+  .thesis__tag {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .thesis__body {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .thesis__title {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .thesis__statement {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .thesis__text {
+    margin: 0;
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  .thesis__quote {
+    margin: 0.35rem 0 0;
+    padding: 0.85rem 0 0.15rem 1rem;
+    border-left: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+
+  .thesis__quote p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  .thesis__quote cite {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-style: normal;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .theses__closing {
+    margin: var(--space-lg) 0 0;
+    max-width: 32rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 700px) {
+    .thesis {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding-block: var(--space-md);
+    }
+
+    .thesis__meta {
+      grid-template-columns: auto 1fr;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .thesis__index {
+      font-size: 1.75rem;
+    }
+  }
+</style>

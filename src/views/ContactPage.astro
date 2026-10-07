@@ -1,0 +1,20 @@
+---
+import Contact from "../components/Contact.astro";
+import PageHeader from "../components/PageHeader.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+const title = `${ui.pages.contactTitle} — ${site.name}`;
+---
+
+<SiteLayout title={title} description={ui.contact.lead}>
+  <PageHeader
+    label={ui.contact.label}
+    title={ui.contact.title}
+    lead={ui.contact.lead}
+  />
+  <Contact showHeader={false} showLead={false} />
+</SiteLayout>

@@ -1,6 +1,6 @@
 # Giuseppe Aceto — Personal Website
 
-Personal site for Giuseppe Aceto: design as responsibility — tools, laboratories, and writing.
+Personal site for Giuseppe Aceto: critical and speculative design — tools, laboratories, and writing.
 
 Built with [Astro](https://astro.build). Licensed under [AGPL-3.0](./LICENSE).
 
@@ -20,6 +20,8 @@ npm run preview
 
 ## Structure
 
-- `src/data/site.ts` — content (bio, work, links)
-- `src/components/` — hero, work, about, contact
+- `src/i18n/` — copy and routes (IT / EN)
+- `src/views/` — page compositions shared by locale routes
+- `src/components/` — UI sections and figures
+- `src/pages/` — Astro routes (`/` and `/en/…`)
 - `src/styles/global.css` — design tokens

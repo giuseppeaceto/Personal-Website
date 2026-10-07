@@ -1,16 +1,35 @@
 ---
 import { getSite, getUi, resolveLocale } from "../i18n";
 
+interface Props {
+  showHeader?: boolean;
+  showLead?: boolean;
+}
+
 const locale = resolveLocale(Astro.currentLocale);
 const site = getSite(locale);
 const ui = getUi(locale);
+const { showHeader = true, showLead = true } = Astro.props;
 ---
 
 <section class="section contact" id="contact" aria-labelledby="contact-title">
   <div class="page-shell">
-    <p class="section__label">{ui.contact.label}</p>
-    <h2 class="section__title" id="contact-title">{ui.contact.title}</h2>
-    <p class="section__lead">{ui.contact.lead}</p>
+    {
+      showHeader ? (
+        <>
+          <p class="section__label">{ui.contact.label}</p>
+          <h2 class="section__title" id="contact-title">{ui.contact.title}</h2>
+          {showLead ? <p class="section__lead">{ui.contact.lead}</p> : null}
+        </>
+      ) : (
+        <>
+          <h2 class="sr-only" id="contact-title">
+            {ui.contact.title}
+          </h2>
+          {showLead ? <p class="section__lead">{ui.contact.lead}</p> : null}
+        </>
+      )
+    }
 
     <div class="contact__panel">
       <p class="contact__location">{site.location}</p>
@@ -50,13 +69,6 @@ const ui = getUi(locale);
         </li>
         <li>
           <a
-            href={site.links.soundcloud}
-            target="_blank"
-            rel="noopener noreferrer">SoundCloud</a
-          >
-        </li>
-        <li>
-          <a
             href={site.links.substack}
             target="_blank"
             rel="noopener noreferrer">Substack</a
@@ -66,17 +78,6 @@ const ui = getUi(locale);
     </div>
   </div>
 </section>
-
-<footer class="site-footer">
-  <div class="page-shell site-footer__inner">
-    <p>© {new Date().getFullYear()} {site.name}</p>
-    <p>
-      <a href="https://github.com/giuseppeaceto/Personal-Website"
-        >{ui.contact.source}</a
-      >
-    </p>
-  </div>
-</footer>
 
 <style>
   .contact__panel {
@@ -111,34 +112,6 @@ const ui = getUi(locale);
   }
 
   .contact__links a:hover {
-    text-decoration: underline;
-  }
-
-  .site-footer {
-    border-top: 1px solid var(--line);
-    padding-block: var(--space-md);
-  }
-
-  .site-footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    color: var(--ink-muted);
-  }
-
-  .site-footer p {
-    margin: 0;
-  }
-
-  .site-footer a {
-    text-decoration: none;
-  }
-
-  .site-footer a:hover {
     text-decoration: underline;
   }
 </style>

@@ -1,0 +1,25 @@
+---
+import ApproachTheses from "../components/ApproachTheses.astro";
+import PageHeader from "../components/PageHeader.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+const title = `${ui.approach.title} — ${site.name}`;
+---
+
+<SiteLayout
+  title={title}
+  description={ui.approach.lead}
+  mainClass="site-main site-main--page"
+>
+  <PageHeader
+    label={ui.approach.label}
+    title={ui.approach.title}
+    lead={ui.approach.lead}
+    compact
+  />
+  <ApproachTheses />
+</SiteLayout>

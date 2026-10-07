@@ -1,0 +1,48 @@
+---
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+---
+
+<footer class="site-footer">
+  <div class="page-shell site-footer__inner">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+    <p>
+      <a href="https://github.com/giuseppeaceto/Personal-Website"
+        >{ui.contact.source}</a
+      >
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-md);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+
+  .site-footer a {
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+</style>

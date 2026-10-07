@@ -1,0 +1,96 @@
+---
+import { getUi, pagePath, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const ui = getUi(locale);
+---
+
+<section class="section home-teasers" aria-labelledby="home-teasers-title">
+  <div class="page-shell">
+    <h2 class="sr-only" id="home-teasers-title">{ui.home.exploreTitle}</h2>
+    <ul class="home-teasers__grid">
+      <li>
+        <a class="home-teasers__card" href={pagePath(locale, "about")}>
+          <span class="home-teasers__label">{ui.nav.about}</span>
+          <span class="home-teasers__text">{ui.home.aboutCard}</span>
+        </a>
+      </li>
+      <li>
+        <a class="home-teasers__card" href={pagePath(locale, "approach")}>
+          <span class="home-teasers__label">{ui.nav.approach}</span>
+          <span class="home-teasers__text">{ui.home.approachCard}</span>
+        </a>
+      </li>
+      <li>
+        <a class="home-teasers__card" href={pagePath(locale, "writing")}>
+          <span class="home-teasers__label">{ui.nav.writing}</span>
+          <span class="home-teasers__text">{ui.home.writingCard}</span>
+        </a>
+      </li>
+      <li>
+        <a class="home-teasers__card" href={pagePath(locale, "contact")}>
+          <span class="home-teasers__label">{ui.nav.contact}</span>
+          <span class="home-teasers__text">{ui.home.contactCard}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .home-teasers {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .home-teasers__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .home-teasers__card {
+    display: grid;
+    gap: 0.45rem;
+    height: 100%;
+    padding: 1rem 1.05rem;
+    border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--paper) 65%, white);
+    text-decoration: none;
+    transition:
+      border-color 200ms var(--ease),
+      background 200ms var(--ease);
+  }
+
+  .home-teasers__card:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+    background: color-mix(in srgb, var(--accent-soft) 40%, var(--paper));
+  }
+
+  .home-teasers__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .home-teasers__text {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 640px) {
+    .home-teasers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
