@@ -90,6 +90,14 @@ const isBrief = variant === "brief";
     letter-spacing: -0.04em;
   }
 
+  /* Home: name quieter, practice areas carry the signal */
+  .intro--brief .intro__name {
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink-muted);
+  }
+
   .intro__meta {
     margin: 0.95rem 0 0;
     padding-top: 0.95rem;
@@ -99,6 +107,20 @@ const isBrief = variant === "brief";
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-muted);
+  }
+
+  .intro--brief .intro__meta {
+    margin-top: 0.85rem;
+    padding-top: 0;
+    border-top: 0;
+    max-width: 14rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    line-height: 1.2;
+    color: var(--ink);
   }
 
   .intro__tagline {
