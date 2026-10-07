@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
+  getEssay,
   getSite,
   getUi,
   homePath,
@@ -8,12 +9,27 @@ import {
   resolveLocale,
 } from "../i18n";
 
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
 const locale = resolveLocale(Astro.currentLocale);
 const site = getSite(locale);
 const ui = getUi(locale);
-const { essay, writing } = site;
+const essay = getEssay(locale, slug);
+
+if (!essay) {
+  return Astro.redirect(pagePath(locale, "writing"));
+}
+
+const { writing } = site;
 const title = `${essay.title} — ${site.name}`;
 const writingHref = pagePath(locale, "writing");
+const dateLabel = new Date(essay.date).toLocaleDateString(
+  locale === "it" ? "it-IT" : "en-US",
+  { year: "numeric", month: "short", day: "numeric" },
+);
 ---
 
 <BaseLayout
@@ -31,18 +47,57 @@ const writingHref = pagePath(locale, "writing");
 
   <main id="main" class="essay">
     <article class="page-shell essay__article">
-      <p class="essay__meta">{essay.date} · {ui.essay.onThisSite}</p>
+      <p class="essay__meta">
+        <time datetime={essay.date}>{dateLabel}</time>
+        · {ui.essay.onThisSite}
+      </p>
       <h1 class="essay__title">{essay.title}</h1>
       <p class="essay__dek">{essay.dek}</p>
       <div class="essay__body">
-        {essay.body.map((paragraph) => <p>{paragraph}</p>)}
+        {
+          essay.body.map((block) => {
+            if (block.type === "h2") {
+              return <h2 class="essay__subhead">{block.text}</h2>;
+            }
+            if (block.type === "quote") {
+              return (
+                <blockquote class="essay__quote">
+                  <p>{block.text}</p>
+                </blockquote>
+              );
+            }
+            return <p>{block.text}</p>;
+          })
+        }
       </div>
       <p class="essay__more">
-        {ui.essay.morePrefix}
-        <a href={writing.href} target="_blank" rel="noopener noreferrer"
-          >{writing.title}</a
-        >
-        {ui.essay.moreSuffix}
+        {
+          essay.substackHref ? (
+            <>
+              {ui.essay.alsoOnPrefix}{" "}
+              <a
+                href={essay.substackHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {writing.title}
+              </a>
+              .
+            </>
+          ) : (
+            <>
+              {ui.essay.morePrefix}{" "}
+              <a
+                href={writing.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {writing.title}
+              </a>{" "}
+              {ui.essay.moreSuffix}
+            </>
+          )
+        }
       </p>
     </article>
   </main>
@@ -125,6 +180,28 @@ const writingHref = pagePath(locale, "writing");
     margin: 0;
     font-size: 1.08rem;
     line-height: 1.7;
+  }
+
+  .essay__subhead {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .essay__quote {
+    margin: 0;
+    padding: 0.15rem 0 0.15rem 0.95rem;
+    border-left: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+
+  .essay__quote p {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
   }
 
   .essay__more {

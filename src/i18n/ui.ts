@@ -79,6 +79,7 @@ export type UiCopy = {
     onThisSite: string;
     morePrefix: string;
     moreSuffix: string;
+    alsoOnPrefix: string;
     getInTouch: string;
     backHome: string;
   };
@@ -192,6 +193,7 @@ export const ui: Record<Locale, UiCopy> = {
       onThisSite: "Note",
       morePrefix: "Altri testi in",
       moreSuffix: "su Substack.",
+      alsoOnPrefix: "Pubblicato anche su",
       getInTouch: "Scrivimi",
       backHome: "Torna alla home",
     },
@@ -302,6 +304,7 @@ export const ui: Record<Locale, UiCopy> = {
       onThisSite: "Notes",
       morePrefix: "More writing in",
       moreSuffix: "on Substack.",
+      alsoOnPrefix: "Also published on",
       getInTouch: "Get in touch",
       backHome: "Back to home",
     },

@@ -48,14 +48,7 @@ export type SiteContent = {
     title: string;
     summary: string;
     href: string;
-    recent: readonly { title: string; note: string }[];
-  };
-  essay: {
-    slug: string;
-    title: string;
-    date: string;
-    dek: string;
-    body: readonly string[];
+    recent: readonly { title: string; note: string; href: string }[];
   };
   work: readonly WorkItem[];
 };
@@ -178,27 +171,20 @@ const sites: Record<Locale, SiteContent> = {
       href: "https://giuseppeaceto.substack.com",
       recent: [
         {
-          title: "La filosofia in busta paga",
-          note: "La Silicon Valley assume filosofi. La domanda è per chi lavorino.",
+          title: "Lo specchio spento",
+          note: "Bastava così poco per ingannare una mente umana.",
+          href: "https://giuseppeaceto.substack.com/p/lo-specchio-spento",
         },
         {
-          title: "Make people addicted",
-          note: "La dipendenza si progetta, come l'interfaccia.",
+          title: "Il futuro non si consegna mai",
+          note: "Come Musk ha trasformato il sogno collettivo in asset liquido.",
+          href: "https://giuseppeaceto.substack.com/p/il-futuro-non-si-consegna-mai",
         },
-      ],
-    },
-    essay: {
-      slug: "confidence-is-not-verification",
-      title: "La confidenza non è verifica",
-      date: "2025",
-      dek: "Un modello sicuro di sé non ha ancora dimostrato nulla. L'etica comincia dove una certezza si può rifiutare.",
-      body: [
-        "Abbiamo allenato una generazione di sistemi a parlare con sicurezza. L'interfaccia premia la scorrevolezza, la demo la velocità, la dashboard un numero verde. Lungo questa catena la certezza prende il posto della verità, e quasi nessuno se ne accorge.",
-        "Prendi una domanda di mutuo respinta da un modello. La risposta arriva in un secondo, senza un'esitazione, con un punteggio a due decimali. Chi può contestarla? Su quali basi, con quali prove, prima di quale decisione? Quasi sempre nessuno. La confidenza sta nel modello, mentre la verifica deve stare fuori: nei registri, nel diritto di obiezione, nelle stanze in cui un rifiuto ha ancora peso. Verificare è lento e non fa bella figura, quindi non succede da sé. Va costruito.",
-        "Per questo mi interessa l'infrastruttura. Un principio su una slide non ferma una pipeline. Uno strato di contestazione può farlo. Ma contestare presuppone di poter guardare: l'opacità non è un dettaglio tecnico, è una decisione su chi ha il diritto di vedere. Il software libero conta per questa ragione.",
-        "I filosofi nei team di prodotto servono, ma arrivano quasi sempre a roadmap già finanziata, e a quel punto la loro critica diventa una benedizione. Il lavoro che mi interessa viene prima: stabilire cosa si può affermare, cosa va mostrato, cosa deve restare indeciso. L'incertezza dichiarata non è un difetto del prodotto. È l'ultimo punto in cui qualcuno può ancora intervenire.",
-        "Il desiderio segue la stessa logica. Le piattaforme non si limitano a servire ciò che vogliamo: lo scrivono. Il mutuo negato è il caso estremo, il feed è quello quotidiano. Chiamo Debug dei Desideri questa lettura: la dipendenza come architettura, la sovranità come capacità di rifiutare una riscrittura del proprio volere. Anche qui vale la regola: si può rifiutare solo ciò che si può vedere, e solo se c'è qualcuno a cui dirlo.",
-        "Per questo progetto, scrivo, costruisco strumenti e tengo laboratori: un solo registro non basta. Un'etica impraticabile è arredo. Una pratica che nessuno può contestare è soltanto un'altra macchina sicura di sé.",
+        {
+          title: "Il Prezzo del Fuoco",
+          note: "IA, sindrome Haber-Bosch e il costo nascosto della civiltà che pensa.",
+          href: "https://giuseppeaceto.substack.com/p/il-prezzo-del-fuoco",
+        },
       ],
     },
     work: [
@@ -339,27 +325,20 @@ const sites: Record<Locale, SiteContent> = {
       href: "https://giuseppeaceto.substack.com",
       recent: [
         {
-          title: "La filosofia in busta paga",
-          note: "Silicon Valley is hiring philosophers. The question is who they work for.",
+          title: "Lo specchio spento",
+          note: "It took so little to fool a human mind.",
+          href: "https://giuseppeaceto.substack.com/p/lo-specchio-spento",
         },
         {
-          title: "Make people addicted",
-          note: "Addiction is designed in, like the interface.",
+          title: "Il futuro non si consegna mai",
+          note: "How Musk turned the collective dream into a liquid asset.",
+          href: "https://giuseppeaceto.substack.com/p/il-futuro-non-si-consegna-mai",
         },
-      ],
-    },
-    essay: {
-      slug: "confidence-is-not-verification",
-      title: "Confidence is not verification",
-      date: "2025",
-      dek: "A model sure of itself has not yet proved anything. Ethics begins where a certainty can be refused.",
-      body: [
-        "We have trained a generation of systems to speak with certainty. The interface rewards fluency, the demo rewards speed, the dashboard rewards a green number. Along that chain, certainty takes the place of truth, and almost no one notices.",
-        "Take a mortgage application rejected by a model. The answer arrives in a second, without hesitation, with a score to two decimal places. Who can contest it? On what grounds, with what evidence, before which decision? Almost always, no one. Confidence sits inside the model, while verification has to stand outside it: in the logs, in the right to object, in the rooms where a refusal still carries weight. Verification is slow and will not flatter the demo, so it does not happen on its own. It has to be built.",
-        "This is why infrastructure matters to me. A principle on a slide does not stop a pipeline. A layer of contestation can. But contestation assumes you can look: opacity is not a technical detail, it is a decision about who is allowed to see. Free software matters for that reason.",
-        "Philosophers inside product teams are useful, but they almost always arrive once the roadmap is already funded, and by then their critique becomes a blessing. The work I care about comes earlier: deciding what may be claimed, what must be shown, and what has to remain undecided. Declared uncertainty is not a product flaw. It is the last point at which someone can still intervene.",
-        "Desire follows the same logic. Platforms do not merely serve what we want; they write it. The denied mortgage is the extreme case; the feed is the everyday one. I call this reading Debug dei Desideri: addiction as architecture, sovereignty as the capacity to refuse a rewrite of one's own wanting. The same rule holds here: you can refuse only what you can see, and only if there is someone to say it to.",
-        "That is why I design, write, build tools, and keep laboratories: one register is never enough. Ethics that cannot be practiced is décor. A practice no one can contest is only another machine sure of itself.",
+        {
+          title: "Il Prezzo del Fuoco",
+          note: "AI, Haber–Bosch syndrome, and the hidden cost of a thinking civilisation.",
+          href: "https://giuseppeaceto.substack.com/p/il-prezzo-del-fuoco",
+        },
       ],
     },
     work: [

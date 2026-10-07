@@ -1,14 +1,15 @@
 :root {
-  --paper: #f2f0ec;
-  --bg: #ebe8e3;
-  --bg-deep: #e2dfd9;
-  --ink: #1a1c1f;
-  --ink-muted: #4a4f56;
-  --accent: #0a5c5c;
-  --accent-soft: rgba(10, 92, 92, 0.1);
-  --line: rgba(26, 28, 31, 0.12);
-  --surface: rgba(255, 255, 255, 0.4);
-  --surface-solid: color-mix(in srgb, var(--paper) 88%, white);
+  /* Cool stone paper — less “cream editorial”, more print / radical */
+  --paper: #eef1ef;
+  --bg: #e5e9e7;
+  --bg-deep: #d9dfdc;
+  --ink: #121417;
+  --ink-muted: #3e464c;
+  --accent: #0b524c;
+  --accent-soft: rgba(11, 82, 76, 0.12);
+  --line: rgba(18, 20, 23, 0.14);
+  --surface: rgba(255, 255, 255, 0.42);
+  --surface-solid: color-mix(in srgb, var(--paper) 86%, white);
   --radius: 0.7rem;
   --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 
@@ -59,10 +60,10 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.065;
   mix-blend-mode: multiply;
   background-image: var(--grain);
-  background-size: 220px 220px;
+  background-size: 200px 200px;
 }
 
 img {

@@ -1,0 +1,12 @@
+---
+import EssayPage from "../../../views/EssayPage.astro";
+import { getEssaySlugs } from "../../../i18n";
+
+export function getStaticPaths() {
+  return getEssaySlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<EssayPage slug={slug!} />
