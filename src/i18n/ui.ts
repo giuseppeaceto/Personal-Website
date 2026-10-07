@@ -26,6 +26,7 @@ export type UiCopy = {
     label: string;
     title: string;
     lead: string;
+    chartHint: string;
     closing: string;
     theses: readonly {
       tag: string;
@@ -58,8 +59,11 @@ export type UiCopy = {
   };
   writing: {
     label: string;
+    lead: string;
     readSubscribe: string;
     onThisSite: string;
+    newsletterLabel: string;
+    elsewhereLabel: string;
     continueReading: string;
   };
   contact: {
@@ -110,7 +114,8 @@ export const ui: Record<Locale, UiCopy> = {
     approach: {
       label: "Approccio",
       title: "Tre tesi",
-      lead: "Non un metodo da applicare. Tre posizioni da cui parto quando progetto, scrivo o tengo un laboratorio.",
+      lead: "Non una sequenza da seguire: tre posizioni che si sovrappongono nel lavoro. Clicca una fase per approfondire.",
+      chartHint: "Timeline · seleziona una fase",
       closing:
         "Relatronica, Welt Form e la Toolbox al CERN nascono da queste tre posizioni, non da una roadmap di prodotto.",
       theses: [
@@ -160,15 +165,18 @@ export const ui: Record<Locale, UiCopy> = {
       label: "Chi sono",
     },
     work: {
-      label: "Lavori selezionati",
-      title: "Lavori recenti",
-      lead: "Infrastrutture di verifica, design speculativo, formazione al pensiero critico. Oggetti e software che aiutano a discutere cosa fa la tecnologia alle persone.",
+      label: "Lavori",
+      title: "Selezionati",
+      lead: "Infrastruttura, design speculativo, formazione. Quattro pezzi che tengono insieme il resto.",
     },
     writing: {
       label: "Scrittura",
+      lead: "Saggi sul sito, newsletter su Substack. Stesso filo: desiderio, verifica, sovranità digitale.",
       readSubscribe: "Leggi e iscriviti",
-      onThisSite: "Note",
-      continueReading: "Continua a leggere",
+      onThisSite: "Su questo sito",
+      newsletterLabel: "Newsletter",
+      elsewhereLabel: "Su Substack",
+      continueReading: "Leggi l'essay",
     },
     contact: {
       label: "Contatti",
@@ -216,7 +224,8 @@ export const ui: Record<Locale, UiCopy> = {
     approach: {
       label: "Approach",
       title: "Three theses",
-      lead: "Not a method to apply. Three positions I start from when I design, write, or run a laboratory.",
+      lead: "Not a sequence to follow: three overlapping positions in the work. Click a phase to go deeper.",
+      chartHint: "Timeline · select a phase",
       closing:
         "Relatronica, Welt Form, and the CERN Toolbox come from these three positions — not from a product roadmap.",
       theses: [
@@ -265,15 +274,18 @@ export const ui: Record<Locale, UiCopy> = {
       label: "About",
     },
     work: {
-      label: "Selected work",
-      title: "Recent work",
-      lead: "Verification infrastructure, speculative design, training in critical thought. Objects and software for discussing what technology does to people.",
+      label: "Work",
+      title: "Selected",
+      lead: "Infrastructure, speculative design, training. Four pieces that hold the rest together.",
     },
     writing: {
       label: "Writing",
+      lead: "Essays on this site, a newsletter on Substack. Same thread: desire, verification, digital sovereignty.",
       readSubscribe: "Read & subscribe",
-      onThisSite: "Notes",
-      continueReading: "Continue reading",
+      onThisSite: "On this site",
+      newsletterLabel: "Newsletter",
+      elsewhereLabel: "On Substack",
+      continueReading: "Read the essay",
     },
     contact: {
       label: "Contact",

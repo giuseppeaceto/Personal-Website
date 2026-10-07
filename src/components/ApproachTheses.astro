@@ -3,178 +3,303 @@ import { getUi, resolveLocale } from "../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
 const ui = getUi(locale);
-const { theses, closing } = ui.approach;
+const { theses, closing, chartHint } = ui.approach;
+
+/** Gantt-like spans: overlapping positions, not a strict sequence */
+const spans = [
+  { start: 0, end: 68 },
+  { start: 18, end: 82 },
+  { start: 36, end: 100 },
+] as const;
 ---
 
-<section class="theses" aria-label={ui.approach.label}>
+<section class="approach-chart" aria-label={ui.approach.label} data-approach-chart>
   <div class="page-shell">
-    <ol class="theses__list">
+    <p class="approach-chart__hint">{chartHint}</p>
+
+    <div class="gantt" role="tablist" aria-label={ui.approach.title}>
       {
-        theses.map((thesis, index) => (
-          <li class="thesis" data-thesis>
-            <div class="thesis__meta">
-              <span class="thesis__index" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
+        theses.map((thesis, index) => {
+          const span = spans[index] ?? spans[0];
+          const id = `phase-${index}`;
+          return (
+            <button
+              type="button"
+              class="gantt__row"
+              role="tab"
+              id={`${id}-tab`}
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={`${id}-panel`}
+              data-phase-tab={index}
+            >
+              <span class="gantt__label">
+                <span class="gantt__index">{String(index + 1).padStart(2, "0")}</span>
+                <span class="gantt__tag">{thesis.tag}</span>
               </span>
-              <p class="thesis__tag">{thesis.tag}</p>
-            </div>
-            <div class="thesis__body">
-              <h2 class="thesis__title">{thesis.title}</h2>
-              <p class="thesis__statement">{thesis.statement}</p>
-              <p class="thesis__text">{thesis.body}</p>
+              <span class="gantt__track" aria-hidden="true">
+                <span
+                  class="gantt__bar"
+                  style={`--bar-start: ${span.start}%; --bar-end: ${span.end}%;`}
+                >
+                  <span class="gantt__bar-title">{thesis.title}</span>
+                </span>
+              </span>
+            </button>
+          );
+        })
+      }
+    </div>
+
+    <div class="approach-chart__panels">
+      {
+        theses.map((thesis, index) => {
+          const id = `phase-${index}`;
+          const open = index === 0;
+          return (
+            <article
+              class="phase-panel"
+              id={`${id}-panel`}
+              role="tabpanel"
+              aria-labelledby={`${id}-tab`}
+              data-phase-panel={index}
+              hidden={!open}
+            >
+              <p class="phase-panel__tag">{thesis.tag}</p>
+              <h2 class="phase-panel__statement">{thesis.statement}</h2>
+              <p class="phase-panel__body">{thesis.body}</p>
               {thesis.quote ? (
-                <blockquote class="thesis__quote">
+                <blockquote class="phase-panel__quote">
                   <p>{thesis.quote}</p>
-                  {thesis.quoteAttr ? (
-                    <cite>{thesis.quoteAttr}</cite>
-                  ) : null}
+                  {thesis.quoteAttr ? <cite>{thesis.quoteAttr}</cite> : null}
                 </blockquote>
               ) : null}
-            </div>
-          </li>
-        ))
+            </article>
+          );
+        })
       }
-    </ol>
-    <p class="theses__closing">{closing}</p>
+    </div>
+
+    <p class="approach-chart__closing">{closing}</p>
   </div>
 </section>
 
 <script>
-  import { initApproachTheses } from "../scripts/approach-motion";
+  import { initApproachChart } from "../scripts/approach-motion";
 
-  initApproachTheses();
+  initApproachChart();
 </script>
 
 <style>
-  .theses {
+  .approach-chart {
     padding-block: var(--space-md) var(--space-xl);
   }
 
-  .theses__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .approach-chart__hint {
+    margin: 0 0 var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
   }
 
-  .thesis {
-    display: grid;
-    grid-template-columns: minmax(6.5rem, 9rem) minmax(0, 38rem);
-    gap: var(--space-md);
-    padding-block: var(--space-lg);
-    border-top: 1px solid var(--line);
-  }
-
-  .thesis:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .thesis__meta {
+  .gantt {
     display: grid;
     gap: 0.55rem;
-    align-content: start;
+    padding: 1rem 1.05rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--line) 35%, transparent) 0,
+        color-mix(in srgb, var(--line) 35%, transparent) 1px,
+        transparent 1px
+      )
+      0 0 / calc(100% / 5) 100%,
+      color-mix(in srgb, var(--paper) 70%, white);
   }
 
-  .thesis__index {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.04em;
+  .gantt__row {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 9.5rem) minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0.2rem 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .gantt__row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  .gantt__label {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .gantt__index {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
     color: var(--accent);
   }
 
-  .thesis__tag {
+  .gantt__tag {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--ink-muted);
+    transition: color 180ms var(--ease);
+  }
+
+  .gantt__row[aria-selected="true"] .gantt__tag {
+    color: var(--ink);
+  }
+
+  .gantt__track {
+    position: relative;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background: color-mix(in srgb, var(--ink) 4%, transparent);
+  }
+
+  .gantt__bar {
+    position: absolute;
+    top: 0.28rem;
+    bottom: 0.28rem;
+    left: var(--bar-start);
+    width: calc(var(--bar-end) - var(--bar-start));
+    display: flex;
+    align-items: center;
+    padding: 0 0.65rem;
+    border-radius: 0.2rem;
+    background: color-mix(in srgb, var(--ink-muted) 18%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--ink-muted) 22%, transparent);
+    transition:
+      background 200ms var(--ease),
+      border-color 200ms var(--ease),
+      box-shadow 200ms var(--ease);
+  }
+
+  .gantt__row:hover .gantt__bar,
+  .gantt__row[aria-selected="true"] .gantt__bar {
+    background: color-mix(in srgb, var(--accent) 16%, white);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 8px 18px -14px rgba(10, 92, 92, 0.55);
+  }
+
+  .gantt__bar-title {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .approach-chart__panels {
+    margin-top: var(--space-md);
+    min-height: 11rem;
+  }
+
+  .phase-panel {
+    max-width: 38rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  /* class display beats the UA [hidden] rule — restore hide */
+  .phase-panel[hidden] {
+    display: none;
+  }
+
+  .phase-panel__tag {
     margin: 0;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-muted);
+    color: var(--accent);
   }
 
-  .thesis__body {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .thesis__title {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-
-  .thesis__statement {
+  .phase-panel__statement {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
     font-weight: 500;
     line-height: 1.25;
-    letter-spacing: -0.03em;
-    color: var(--ink);
+    letter-spacing: -0.025em;
   }
 
-  .thesis__text {
+  .phase-panel__body {
     margin: 0;
-    max-width: 34rem;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.98rem;
+    line-height: 1.55;
     color: var(--ink-muted);
   }
 
-  .thesis__quote {
-    margin: 0.35rem 0 0;
-    padding: 0.85rem 0 0.15rem 1rem;
+  .phase-panel__quote {
+    margin: 0.2rem 0 0;
+    padding: 0.7rem 0 0.1rem 0.9rem;
     border-left: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line));
   }
 
-  .thesis__quote p {
+  .phase-panel__quote p {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 1.02rem;
+    font-size: 0.98rem;
     line-height: 1.45;
     color: var(--ink);
   }
 
-  .thesis__quote cite {
+  .phase-panel__quote cite {
     display: block;
-    margin-top: 0.45rem;
+    margin-top: 0.4rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-style: normal;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--ink-muted);
   }
 
-  .theses__closing {
+  .approach-chart__closing {
     margin: var(--space-lg) 0 0;
-    max-width: 32rem;
+    max-width: 34rem;
     font-family: var(--font-display);
-    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    font-size: 1.05rem;
     line-height: 1.4;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
 
-  @media (max-width: 700px) {
-    .thesis {
+  @media (max-width: 720px) {
+    .gantt__row {
       grid-template-columns: 1fr;
-      gap: 0.75rem;
-      padding-block: var(--space-md);
+      gap: 0.35rem;
     }
 
-    .thesis__meta {
+    .gantt__track {
+      height: 2.15rem;
+    }
+
+    .gantt__label {
       grid-template-columns: auto 1fr;
       align-items: baseline;
-      gap: 0.75rem;
-    }
-
-    .thesis__index {
-      font-size: 1.75rem;
+      gap: 0.55rem;
     }
   }
 </style>

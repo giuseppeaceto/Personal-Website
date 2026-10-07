@@ -10,11 +10,12 @@ const ui = getUi(locale);
 const title = `${ui.pages.writingTitle} — ${site.name}`;
 ---
 
-<SiteLayout title={title} description={site.writing.summary}>
+<SiteLayout title={title} description={ui.writing.lead}>
   <PageHeader
     label={ui.writing.label}
     title={ui.pages.writingTitle}
-    lead={site.writing.summary}
+    lead={ui.writing.lead}
+    compact
   />
-  <Writing showHeader={false} showIntro={false} />
+  <Writing />
 </SiteLayout>

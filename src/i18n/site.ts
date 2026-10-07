@@ -5,8 +5,7 @@ export type WorkItem = {
   year: string;
   title: string;
   role: string;
-  fact: string;
-  summary: string;
+  blurb: string;
   href?: string;
 };
 
@@ -194,49 +193,45 @@ const sites: Record<Locale, SiteContent> = {
       date: "2025",
       dek: "Un modello sicuro di sé non ha ancora dimostrato nulla. L'etica comincia dove una certezza si può rifiutare.",
       body: [
-        "Abbiamo allenato una generazione di sistemi a parlare con sicurezza. L'interfaccia premia la scorrevolezza, la demo la velocità, la dashboard un numero verde. In quella catena la certezza prende il posto della verità, e quasi nessuno se ne accorge.",
-        "La verifica è lenta, e non fa bella figura. Chiede chi può contestare un output, su quali basi, con quali prove, e prima di quale decisione. La confidenza resta nel modello. La verifica sta fuori: nei registri, nel diritto di obiezione, nelle stanze in cui un rifiuto ha ancora peso.",
-        "Per questo mi interessa l'infrastruttura. Un principio su una slide non ferma una pipeline. Uno strato di contestazione può farlo. Il software libero conta per la stessa ragione: l'opacità è una scelta su chi ha il diritto di guardare.",
-        "I filosofi nei team di prodotto possono essere utili, e spesso arrivano quando la roadmap è già finanziata. Allora la critica benedice. Il lavoro che mi interessa è anteriore: stabilire cosa si può affermare, cosa va mostrato, cosa deve restare indeciso.",
-        "Il desiderio segue la stessa logica. Le piattaforme non si limitano a servire ciò che vogliamo: lo scrivono. Debug dei Desideri è il nome di questa lettura — la dipendenza come architettura, la sovranità come capacità di rifiutare una riscrittura del proprio volere.",
-        "Progetto, scrivo, costruisco strumenti e tengo dei laboratori perché un solo registro non basta. Un'etica impraticabile è arredo. Una pratica che nessuno può contestare è soltanto un'altra macchina sicura di sé.",
+        "Abbiamo allenato una generazione di sistemi a parlare con sicurezza. L'interfaccia premia la scorrevolezza, la demo la velocità, la dashboard un numero verde. Lungo questa catena la certezza prende il posto della verità, e quasi nessuno se ne accorge.",
+        "Prendi una domanda di mutuo respinta da un modello. La risposta arriva in un secondo, senza un'esitazione, con un punteggio a due decimali. Chi può contestarla? Su quali basi, con quali prove, prima di quale decisione? Quasi sempre nessuno. La confidenza sta nel modello, mentre la verifica deve stare fuori: nei registri, nel diritto di obiezione, nelle stanze in cui un rifiuto ha ancora peso. Verificare è lento e non fa bella figura, quindi non succede da sé. Va costruito.",
+        "Per questo mi interessa l'infrastruttura. Un principio su una slide non ferma una pipeline. Uno strato di contestazione può farlo. Ma contestare presuppone di poter guardare: l'opacità non è un dettaglio tecnico, è una decisione su chi ha il diritto di vedere. Il software libero conta per questa ragione.",
+        "I filosofi nei team di prodotto servono, ma arrivano quasi sempre a roadmap già finanziata, e a quel punto la loro critica diventa una benedizione. Il lavoro che mi interessa viene prima: stabilire cosa si può affermare, cosa va mostrato, cosa deve restare indeciso. L'incertezza dichiarata non è un difetto del prodotto. È l'ultimo punto in cui qualcuno può ancora intervenire.",
+        "Il desiderio segue la stessa logica. Le piattaforme non si limitano a servire ciò che vogliamo: lo scrivono. Il mutuo negato è il caso estremo, il feed è quello quotidiano. Chiamo Debug dei Desideri questa lettura: la dipendenza come architettura, la sovranità come capacità di rifiutare una riscrittura del proprio volere. Anche qui vale la regola: si può rifiutare solo ciò che si può vedere, e solo se c'è qualcuno a cui dirlo.",
+        "Per questo progetto, scrivo, costruisco strumenti e tengo laboratori: un solo registro non basta. Un'etica impraticabile è arredo. Una pratica che nessuno può contestare è soltanto un'altra macchina sicura di sé.",
       ],
     },
     work: [
       {
         year: "in corso",
         title: "Welt Form",
-        role: "Fondatore · Infrastruttura",
-        fact: "Progetto di infrastruttura per verificare ciò che le macchine producono prima che diventi decisione.",
-        summary:
-          "Un ecosistema: Dubitor per contestare decisioni e giustificazioni; Vektor, Roundel e Probe su stime, stabilità e agenti.",
+        role: "Infrastruttura",
+        blurb:
+          "Verifica di output automatici prima che diventino decisioni — Dubitor, Vektor, Roundel, Probe.",
         href: "https://www.weltform.com/it",
       },
       {
         year: "2025",
         title: "Toolbox for Ethical Futures",
-        role: "Autore · CERN OPEN",
-        fact: "Documento aperto pubblicato al CERN nel 2025: un PDF di esercizi e casi pratici per allenare, in gruppo, il pensiero critico sulla tecnologia, pensato per essere ripreso e adattato.",
-        summary:
-          "Esercizi per pensare la tecnologia insieme. PDF aperto del CERN, pensato per essere ripreso in aula e in laboratorio.",
+        role: "CERN OPEN",
+        blurb:
+          "Esercizi aperti per il pensiero critico sulla tecnologia, da riprendere in aula e in laboratorio.",
         href: "https://cds.cern.ch/record/2930771",
       },
       {
         year: "2025",
         title: "Responsible by Design",
         role: "Talk · SFSCON",
-        fact: "Intervento di quindici minuti a SFSCON 2025, a Bolzano, su come il software libero renda un sistema leggibile e quindi governabile da chi lo usa.",
-        summary:
-          "La responsabilità entra nel primo disegno: il software libero tiene il sistema leggibile, così chi lo usa può capirlo e governarlo insieme.",
+        blurb:
+          "Il software libero come condizione di leggibilità e governo collettivo del sistema.",
         href: "https://www.sfscon.it/talks/responsible-by-design/",
       },
       {
         year: "2024",
         title: "Relatronica",
-        role: "Fondatore · Design speculativo",
-        fact: "Laboratorio di design speculativo fondato in Svizzera nel 2024 da designer e ricercatori incontratisi al CERN; tra gli esiti pubblici, 404human, Segno e Substrato.",
-        summary:
-          "Design speculativo in Svizzera, tra ricerca e pratica pubblica. 404human, Segno, Substrato e altri esperimenti sul rapporto tra tecnologia e persone.",
+        role: "Design speculativo",
+        blurb:
+          "Laboratorio in Svizzera: 404human, Segno, Substrato e altri esperimenti pubblici.",
         href: "https://relatronica.com",
       },
     ],
@@ -360,48 +355,44 @@ const sites: Record<Locale, SiteContent> = {
       dek: "A model sure of itself has not yet proved anything. Ethics begins where a certainty can be refused.",
       body: [
         "We have trained a generation of systems to speak with certainty. The interface rewards fluency, the demo rewards speed, the dashboard rewards a green number. Along that chain, certainty takes the place of truth, and almost no one notices.",
-        "Verification is slow, and it will not flatter the demo. It asks who may contest an output, on what grounds, with what evidence, and before which decision. Confidence stays inside the model. Verification stands outside it: in the logs, in the right to object, in the rooms where a refusal still carries weight.",
-        "This is why infrastructure matters to me. A principle on a slide does not stop a pipeline. A layer of contestation can. Free software matters for the same reason: opacity is a choice about who is allowed to look.",
-        "Philosophers inside product teams can be useful, and they often arrive once the roadmap is already funded. Then critique blesses. The work I care about comes earlier: deciding what may be claimed, what must be shown, and what has to remain undecided.",
-        "Desire follows the same logic. Platforms do not merely serve what we want; they write it. Debug dei Desideri is my name for that reading — addiction as architecture, sovereignty as the capacity to refuse a rewrite of one's own wanting.",
-        "I design, write, build instruments, and keep laboratories because one register is never enough. Ethics that cannot be practiced is décor. A practice no one can contest is only another machine sure of itself.",
+        "Take a mortgage application rejected by a model. The answer arrives in a second, without hesitation, with a score to two decimal places. Who can contest it? On what grounds, with what evidence, before which decision? Almost always, no one. Confidence sits inside the model, while verification has to stand outside it: in the logs, in the right to object, in the rooms where a refusal still carries weight. Verification is slow and will not flatter the demo, so it does not happen on its own. It has to be built.",
+        "This is why infrastructure matters to me. A principle on a slide does not stop a pipeline. A layer of contestation can. But contestation assumes you can look: opacity is not a technical detail, it is a decision about who is allowed to see. Free software matters for that reason.",
+        "Philosophers inside product teams are useful, but they almost always arrive once the roadmap is already funded, and by then their critique becomes a blessing. The work I care about comes earlier: deciding what may be claimed, what must be shown, and what has to remain undecided. Declared uncertainty is not a product flaw. It is the last point at which someone can still intervene.",
+        "Desire follows the same logic. Platforms do not merely serve what we want; they write it. The denied mortgage is the extreme case; the feed is the everyday one. I call this reading Debug dei Desideri: addiction as architecture, sovereignty as the capacity to refuse a rewrite of one's own wanting. The same rule holds here: you can refuse only what you can see, and only if there is someone to say it to.",
+        "That is why I design, write, build tools, and keep laboratories: one register is never enough. Ethics that cannot be practiced is décor. A practice no one can contest is only another machine sure of itself.",
       ],
     },
     work: [
       {
         year: "ongoing",
         title: "Welt Form",
-        role: "Founder · Infrastructure",
-        fact: "An infrastructure project for verifying what machines produce before it becomes a decision.",
-        summary:
-          "An ecosystem: Dubitor for contesting decisions and justifications; Vektor, Roundel, and Probe on estimates, stability, and agents.",
+        role: "Infrastructure",
+        blurb:
+          "Verifying automated outputs before they become decisions — Dubitor, Vektor, Roundel, Probe.",
         href: "https://www.weltform.com/en",
       },
       {
         year: "2025",
         title: "Toolbox for Ethical Futures",
-        role: "Author · CERN OPEN",
-        fact: "An open document published at CERN in 2025: a PDF of exercises and practical cases for training critical thought about technology in a group, meant to be taken up and adapted.",
-        summary:
-          "Exercises for thinking about technology together. An open CERN PDF, meant to be picked up in classrooms and labs.",
+        role: "CERN OPEN",
+        blurb:
+          "Open exercises for critical thought about technology, meant for classrooms and labs.",
         href: "https://cds.cern.ch/record/2930771",
       },
       {
         year: "2025",
         title: "Responsible by Design",
         role: "Talk · SFSCON",
-        fact: "A fifteen-minute talk at SFSCON 2025 in Bolzano, on how free software makes a system readable, and therefore governable by the people who use it.",
-        summary:
-          "Responsibility enters with the first design: free software keeps the system readable, so the people who use it can understand it and govern it together.",
+        blurb:
+          "Free software as the condition for readability and collective governance of a system.",
         href: "https://www.sfscon.it/talks/responsible-by-design/",
       },
       {
         year: "2024",
         title: "Relatronica",
-        role: "Founder · Speculative design",
-        fact: "A speculative-design laboratory founded in Switzerland in 2024 by designers and researchers who met at CERN; public outcomes include 404human, Segno, and Substrato.",
-        summary:
-          "Speculative design in Switzerland, between research and public practice. 404human, Segno, Substrato, and other experiments on technology and people.",
+        role: "Speculative design",
+        blurb:
+          "A laboratory in Switzerland: 404human, Segno, Substrato, and other public experiments.",
         href: "https://relatronica.com",
       },
     ],
