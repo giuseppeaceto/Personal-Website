@@ -1,4 +1,5 @@
 ---
+import RichParagraph from "./RichParagraph.astro";
 import { getUi, resolveLocale } from "../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -66,7 +67,7 @@ const spans = [
             >
               <p class="phase-panel__tag">{thesis.tag}</p>
               <h2 class="phase-panel__statement">{thesis.statement}</h2>
-              <p class="phase-panel__body">{thesis.body}</p>
+              <RichParagraph parts={thesis.body} class="phase-panel__body" />
               {thesis.quote ? (
                 <blockquote class="phase-panel__quote">
                   <p>{thesis.quote}</p>

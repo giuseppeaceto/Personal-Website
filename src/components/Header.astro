@@ -140,18 +140,26 @@ function isCurrent(href: string) {
     border: 1px solid color-mix(in srgb, white 55%, var(--line));
     border-radius: var(--radius);
     background: color-mix(in srgb, var(--paper) 58%, transparent);
-    box-shadow: 0 1px 0 color-mix(in srgb, white 40%, transparent) inset;
+    box-shadow:
+      0 1px 0 color-mix(in srgb, white 40%, transparent) inset,
+      0 8px 24px -14px rgba(26, 28, 31, 0.28),
+      0 2px 8px -4px rgba(26, 28, 31, 0.1);
     backdrop-filter: blur(16px) saturate(1.15);
     -webkit-backdrop-filter: blur(16px) saturate(1.15);
     transition:
       background 280ms var(--ease),
-      border-color 280ms var(--ease);
+      border-color 280ms var(--ease),
+      box-shadow 280ms var(--ease);
   }
 
   .site-header.is-scrolled .site-header__inner,
   .site-header.is-open .site-header__inner {
     background: color-mix(in srgb, var(--paper) 88%, transparent);
     border-color: var(--line);
+    box-shadow:
+      0 1px 0 color-mix(in srgb, white 55%, transparent) inset,
+      0 14px 32px -16px rgba(26, 28, 31, 0.36),
+      0 4px 12px -6px rgba(26, 28, 31, 0.14);
   }
 
   .site-header__brand {

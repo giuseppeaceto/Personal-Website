@@ -3,7 +3,8 @@ import RichParagraph from "./RichParagraph.astro";
 import { getSite, getUi, pagePath, resolveLocale } from "../i18n";
 
 interface Props {
-  variant?: "full" | "brief";
+  /** full = Chi sono page; mast = home identity + practice orientation */
+  variant?: "full" | "mast";
 }
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -11,17 +12,16 @@ const site = getSite(locale);
 const { about } = site;
 const ui = getUi(locale);
 const { variant = "full" } = Astro.props;
-const paragraphs =
-  variant === "brief" ? about.paragraphs.slice(0, 1) : about.paragraphs;
-const isBrief = variant === "brief";
+const isMast = variant === "mast";
+const approachHref = pagePath(locale, "approach");
 ---
 
 <section
-  class:list={["section", "intro", isBrief && "intro--brief"]}
-  id="about"
+  class:list={["section", "intro", isMast && "intro--mast"]}
+  id={isMast ? "intro" : "about"}
   aria-labelledby="intro-name"
 >
-  <div class="page-shell intro__grid">
+  <div class:list={["page-shell", "intro__grid", isMast && "intro__grid--mast"]}>
     <header class="intro__mast">
       <p class="intro__label">{ui.intro.label}</p>
       <h1 id="intro-name" class="intro__name">{site.name}</h1>
@@ -29,21 +29,33 @@ const isBrief = variant === "brief";
       <p class="intro__tagline">{site.tagline}</p>
     </header>
 
-    <div class="intro__copy">
-      <RichParagraph parts={about.lead} class="intro__lead" />
-      {
-        paragraphs.map((paragraph) => (
-          <RichParagraph parts={paragraph} />
-        ))
-      }
-      {
-        isBrief ? (
-          <p class="intro__more">
-            <a href={pagePath(locale, "about")}>{ui.home.readAbout}</a>
+    {
+      isMast ? (
+        <div class="intro__orient">
+          <p class="intro__orient-lead">{ui.home.mastLead}</p>
+          <ul class="intro__positions">
+            {ui.approach.theses.map((thesis) => (
+              <li>
+                <a class="intro__position" href={approachHref}>
+                  <span class="intro__position-tag">{thesis.tag}</span>
+                  <span class="intro__position-title">{thesis.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="intro__orient-more">
+            <a href={approachHref}>{ui.home.mastApproach}</a>
           </p>
-        ) : null
-      }
-    </div>
+        </div>
+      ) : (
+        <div class="intro__copy">
+          <RichParagraph parts={about.lead} class="intro__lead" />
+          {about.paragraphs.map((paragraph) => (
+            <RichParagraph parts={paragraph} />
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>
 
@@ -53,7 +65,7 @@ const isBrief = variant === "brief";
     padding-bottom: var(--space-lg);
   }
 
-  .intro--brief {
+  .intro--mast {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-md);
   }
@@ -65,11 +77,106 @@ const isBrief = variant === "brief";
     align-items: start;
   }
 
+  .intro__grid--mast {
+    grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .intro__orient {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 34rem;
+    margin: 0;
+    padding: 0;
+    animation: rise-in 0.85s var(--ease) 0.06s both;
+  }
+
+  .intro__orient-lead {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.9vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .intro__positions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  }
+
+  .intro__position {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.75rem 1rem;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+    text-decoration: none;
+    color: inherit;
+    transition: color 180ms var(--ease);
+  }
+
+  .intro__position:hover {
+    color: var(--accent);
+  }
+
+  .intro__position:hover .intro__position-tag {
+    color: var(--accent);
+  }
+
+  .intro__position-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    transition: color 180ms var(--ease);
+  }
+
+  .intro__position-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .intro__orient-more {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .intro__orient-more a {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .intro__orient-more a:hover {
+    text-decoration: underline;
+  }
+
   .intro__mast {
     position: sticky;
     top: 5.25rem;
     padding-right: 0.5rem;
     animation: rise-in 0.85s var(--ease) both;
+  }
+
+  .intro--mast .intro__mast {
+    position: static;
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
+    padding: 0;
+    max-width: 18rem;
   }
 
   .intro__label {
@@ -81,6 +188,10 @@ const isBrief = variant === "brief";
     color: var(--accent);
   }
 
+  .intro--mast .intro__label {
+    margin: 0;
+  }
+
   .intro__name {
     margin: 0;
     font-family: var(--font-display);
@@ -90,11 +201,12 @@ const isBrief = variant === "brief";
     letter-spacing: -0.04em;
   }
 
-  /* Home: name quieter, practice areas carry the signal */
-  .intro--brief .intro__name {
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  /* Home: name quieter, sized to share a top line with the right lead */
+  .intro--mast .intro__name {
+    font-size: clamp(1.15rem, 1.9vw, 1.35rem);
+    font-weight: 500;
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.35;
     color: var(--ink-muted);
   }
 
@@ -109,17 +221,17 @@ const isBrief = variant === "brief";
     color: var(--ink-muted);
   }
 
-  .intro--brief .intro__meta {
-    margin-top: 0.85rem;
-    padding-top: 0;
-    border-top: 0;
-    max-width: 14rem;
+  .intro--mast .intro__meta {
+    margin: 0;
+    padding: 0.15rem 0 0;
+    border: 0;
+    max-width: 16rem;
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
     font-weight: 500;
     letter-spacing: -0.03em;
     text-transform: none;
-    line-height: 1.2;
+    line-height: 1.18;
     color: var(--ink);
   }
 
@@ -132,6 +244,14 @@ const isBrief = variant === "brief";
     line-height: 1.35;
     letter-spacing: -0.02em;
     color: var(--ink);
+  }
+
+  .intro--mast .intro__tagline {
+    margin: 0.15rem 0 0;
+    max-width: 16rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--ink-muted);
   }
 
   .intro__copy {
@@ -157,25 +277,9 @@ const isBrief = variant === "brief";
     letter-spacing: -0.015em;
   }
 
-  .intro__more {
-    margin: 0.4rem 0 0;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .intro__more a {
-    text-decoration: none;
-    color: var(--accent);
-  }
-
-  .intro__more a:hover {
-    text-decoration: underline;
-  }
-
   @media (max-width: 800px) {
-    .intro__grid {
+    .intro__grid,
+    .intro__grid--mast {
       grid-template-columns: 1fr;
       gap: var(--space-md);
     }
@@ -187,15 +291,32 @@ const isBrief = variant === "brief";
       border-bottom: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
     }
 
+    .intro--mast .intro__mast {
+      max-width: none;
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+    }
+
+    .intro--mast .intro__meta,
+    .intro--mast .intro__tagline {
+      max-width: 28rem;
+    }
+
     .intro__tagline {
       max-width: 28rem;
+    }
+
+    .intro__position {
+      grid-template-columns: 6.75rem minmax(0, 1fr);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .intro__mast,
+    .intro__orient,
     .intro__copy {
       animation: none;
     }
   }
 </style>
+

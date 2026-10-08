@@ -1,4 +1,24 @@
 import type { Locale } from "./locales";
+import { lnk, rich, txt, type RichParagraph } from "./rich-text";
+
+const links = {
+  dunneRaby: "http://www.dunneandraby.co.uk/",
+  rca: "https://www.rca.ac.uk/",
+  foucault: "https://plato.stanford.edu/entries/foucault/",
+  techSelf: "https://plato.stanford.edu/entries/foucault/#TechSelf",
+  jonasIt: "https://it.wikipedia.org/wiki/Hans_Jonas",
+  jonasEn: "https://en.wikipedia.org/wiki/Hans_Jonas",
+  responsibilityIt: "https://it.wikipedia.org/wiki/Il_principio_responsabilit%C3%A0",
+  responsibilityEn:
+    "https://press.uchicago.edu/ucp/books/book/chicago/I/bo5953283.html",
+  relatronica: "https://relatronica.com",
+  weltform: "https://www.weltform.com",
+  cern: "https://cds.cern.ch/record/2930771",
+  freeSwIt: "https://www.gnu.org/philosophy/free-sw.it.html",
+  freeSwEn: "https://www.gnu.org/philosophy/free-sw.html",
+  radicalIt: "/about/#tradition",
+  radicalEn: "/en/about/#tradition",
+} as const;
 
 export type UiCopy = {
   skipToContent: string;
@@ -20,8 +40,9 @@ export type UiCopy = {
     writingCard: string;
     contactCard: string;
     allWork: string;
-    readAbout: string;
     affinitiesLabel: string;
+    mastLead: string;
+    mastApproach: string;
   };
   approach: {
     label: string;
@@ -33,7 +54,7 @@ export type UiCopy = {
       tag: string;
       title: string;
       statement: string;
-      body: string;
+      body: RichParagraph;
       quote?: string;
       quoteAttr?: string;
     }[];
@@ -106,13 +127,15 @@ export const ui: Record<Locale, UiCopy> = {
     },
     home: {
       exploreTitle: "Esplora",
-      aboutCard: "Percorso, radici italiane del design radicale.",
+      aboutCard: "Formazione umanistica, design digitale, radici nel radicale italiano.",
       approachCard: "Tre tesi: provocare, verificare, rendere leggibile.",
       writingCard: "Essay e newsletter Debug dei Desideri.",
       contactCard: "Talk, workshop, ricerca, consulenza.",
       allWork: "Tutti i lavori",
-      readAbout: "Leggi tutto",
       affinitiesLabel: "Affinità",
+      mastLead:
+        "Il design qui non chiude un problema: apre uno spazio di discussione, di verifica, di lettura.",
+      mastApproach: "Vedi l’approccio",
     },
     approach: {
       label: "Approccio",
@@ -127,7 +150,21 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Design critico",
           statement:
             "Il design non deve solo risolvere. Può mettere in scena ciò che preferiamo non vedere.",
-          body: "Dal design radicale italiano a Dunne e Raby: oggetti e scenari che commentano consumo, tecnologia e abitudini. Non vendono un futuro migliore — lo rendono discutibile. Relatronica lavora in questo registro.",
+          body: rich(
+            txt("Dal "),
+            lnk("design radicale", links.radicalIt),
+            txt(" italiano a "),
+            lnk("Dunne & Raby", links.dunneRaby),
+            txt(" al "),
+            lnk("RCA", links.rca),
+            txt(": oggetti e scenari che commentano consumo, tecnologia e abitudini. Non vendono un futuro migliore — lo rendono discutibile. "),
+            lnk("Foucault", links.foucault),
+            txt(", sulle "),
+            lnk("tecnologie del sé", links.techSelf),
+            txt(": ogni dispositivo forma anche un soggetto. "),
+            lnk("Relatronica", links.relatronica),
+            txt(" lavora in questo registro."),
+          ),
           quote:
             "Il design può servire a porre domande taglienti e a far pensare, invece di offrire soluzioni pronte.",
           quoteAttr: "Dunne & Raby · Speculative Everything",
@@ -137,7 +174,15 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Infrastruttura",
           statement:
             "Un modello sicuro di sé non ha ancora dimostrato nulla.",
-          body: "Tra ciò che una macchina produce e ciò che diventa decisione serve uno spazio di contestazione: prove, obiezioni, traccia. Welt Form è costruito lì — sulla verifica, non sulla confidenza dell’interfaccia.",
+          body: rich(
+            txt("Tra ciò che una macchina produce e ciò che diventa decisione serve uno spazio di contestazione: prove, obiezioni, traccia. "),
+            lnk("Jonas", links.jonasIt),
+            txt(" chiamava «heuristic fear», nel "),
+            lnk("Principio responsabilità", links.responsibilityIt),
+            txt(", immaginare conseguenze mentre si può ancora agire. "),
+            lnk("Welt Form", links.weltform),
+            txt(" è costruito lì — sulla verifica, non sulla confidenza dell’interfaccia."),
+          ),
           quote:
             "L’etica comincia dove una certezza si può rifiutare.",
           quoteAttr: "Dal saggio · La confidenza non è verifica",
@@ -147,7 +192,13 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Software libero",
           statement:
             "Ciò che non si può leggere non si può contestare.",
-          body: "Apertura del codice, strumenti pubblicati, documenti riprendibili: non è un optional etico. È la condizione perché qualcuno, fuori dal team, possa capire e intervenire. Per questo la Toolbox for Ethical Futures è OPEN al CERN.",
+          body: rich(
+            txt("Apertura del codice, strumenti pubblicati, documenti riprendibili: non è un optional etico. È la condizione perché qualcuno, fuori dal team, possa capire e intervenire — il "),
+            lnk("software libero", links.freeSwIt),
+            txt(" rende leggibile ciò che altrimenti resterebbe una scatola nera. Per questo la "),
+            lnk("Toolbox for Ethical Futures", links.cern),
+            txt(" è OPEN al CERN."),
+          ),
         },
       ],
     },
@@ -158,11 +209,10 @@ export const ui: Record<Locale, UiCopy> = {
     },
     hero: {
       meta: "Design critico · pratiche aperte",
-      quote:
-        "Il design può servire a porre domande taglienti e a far pensare, invece di offrire soluzioni pronte.",
-      quoteAuthor: "Anthony Dunne & Fiona Raby",
-      quoteContext: "Speculative Everything, MIT Press, 2013",
-      quoteCite: "https://mitpress.mit.edu/9780262019842/speculative-everything/",
+      quote: "L’etica comincia dove una certezza si può rifiutare.",
+      quoteAuthor: "Giuseppe Aceto",
+      quoteContext: "Dal saggio · La confidenza non è verifica",
+      quoteCite: "/writing/confidence-is-not-verification",
     },
     intro: {
       label: "Chi sono",
@@ -218,13 +268,15 @@ export const ui: Record<Locale, UiCopy> = {
     },
     home: {
       exploreTitle: "Explore",
-      aboutCard: "Background and Italy's radical-design roots.",
+      aboutCard: "Humanities, digital design, roots in Italian radical design.",
       approachCard: "Three theses: provoke, verify, make readable.",
       writingCard: "Essays and the Debug dei Desideri newsletter.",
       contactCard: "Talks, workshops, research, consulting.",
       allWork: "All work",
-      readAbout: "Read more",
       affinitiesLabel: "Affinities",
+      mastLead:
+        "Design here does not close a problem: it opens a space for discussion, verification, and reading.",
+      mastApproach: "See the approach",
     },
     approach: {
       label: "Approach",
@@ -239,7 +291,21 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Critical design",
           statement:
             "Design does not only have to solve. It can stage what we would rather not see.",
-          body: "From Italian radical design to Dunne and Raby: objects and scenarios that comment on consumption, technology, and habit. They do not sell a better future — they make it contestable. Relatronica works in that register.",
+          body: rich(
+            txt("From Italian "),
+            lnk("radical design", links.radicalEn),
+            txt(" to "),
+            lnk("Dunne & Raby", links.dunneRaby),
+            txt(" at the "),
+            lnk("RCA", links.rca),
+            txt(": objects and scenarios that comment on consumption, technology, and habit. They do not sell a better future — they make it contestable. "),
+            lnk("Foucault", links.foucault),
+            txt(", on "),
+            lnk("technologies of the self", links.techSelf),
+            txt(": every device also shapes a subject. "),
+            lnk("Relatronica", links.relatronica),
+            txt(" works in that register."),
+          ),
           quote:
             "Design can be used to pose incisive questions and encourage thinking, rather than provide ready-made solutions.",
           quoteAttr: "Dunne & Raby · Speculative Everything",
@@ -249,7 +315,15 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Infrastructure",
           statement:
             "A model sure of itself has not yet proved anything.",
-          body: "Between what a machine produces and what becomes a decision, there must be room for contestation: evidence, objection, a trace. Welt Form is built there — on verification, not on the confidence of the interface.",
+          body: rich(
+            txt("Between what a machine produces and what becomes a decision, there must be room for contestation: evidence, objection, a trace. "),
+            lnk("Jonas", links.jonasEn),
+            txt(" called “heuristic fear”, in "),
+            lnk("The Imperative of Responsibility", links.responsibilityEn),
+            txt(", imagining consequences while you can still act. "),
+            lnk("Welt Form", links.weltform),
+            txt(" is built there — on verification, not on the confidence of the interface."),
+          ),
           quote: "Ethics begins where a certainty can be refused.",
           quoteAttr: "From the essay · Confidence is not verification",
         },
@@ -258,7 +332,13 @@ export const ui: Record<Locale, UiCopy> = {
           title: "Free software",
           statement:
             "What you cannot read, you cannot contest.",
-          body: "Open source, published tools, documents others can remake: this is not an ethical optional. It is the condition for someone outside the team to understand and intervene. That is why the Toolbox for Ethical Futures is OPEN at CERN.",
+          body: rich(
+            txt("Open source, published tools, documents others can remake: this is not an ethical optional. It is the condition for someone outside the team to understand and intervene — "),
+            lnk("free software", links.freeSwEn),
+            txt(" makes readable what would otherwise stay a black box. That is why the "),
+            lnk("Toolbox for Ethical Futures", links.cern),
+            txt(" is OPEN at CERN."),
+          ),
         },
       ],
     },
@@ -269,11 +349,10 @@ export const ui: Record<Locale, UiCopy> = {
     },
     hero: {
       meta: "Critical design · open practices",
-      quote:
-        "Design can be used to pose incisive questions and encourage thinking, rather than provide ready-made solutions.",
-      quoteAuthor: "Anthony Dunne & Fiona Raby",
-      quoteContext: "Speculative Everything, MIT Press, 2013",
-      quoteCite: "https://mitpress.mit.edu/9780262019842/speculative-everything/",
+      quote: "Ethics begins where a certainty can be refused.",
+      quoteAuthor: "Giuseppe Aceto",
+      quoteContext: "From the essay · Confidence is not verification",
+      quoteCite: "/en/writing/confidence-is-not-verification",
     },
     intro: {
       label: "About",
