@@ -60,6 +60,7 @@ const sharedLinks = {
   mastodon: "https://mastodon.social/@giuseppeaceto",
   relatronica: "https://relatronica.com",
   weltform: "https://www.weltform.com",
+  substrato: "https://substrato.eu",
   substack: "https://giuseppeaceto.substack.com",
   toolkit:
     "https://cds.cern.ch/record/2930771/files/CERN-OPEN-2025-003.pdf",
@@ -200,6 +201,22 @@ const sites: Record<Locale, SiteContent> = {
         href: "https://cds.cern.ch/record/2930771",
       },
       {
+        year: "2026",
+        title: "Fuoco prescritto",
+        role: "Talk · TEDxLecco",
+        blurb:
+          "Un’ecologia politica dell’umano: rinuncia come cura, attrito come significato, decisione come spazio civico.",
+        href: "https://www.youtube.com/watch?v=nKGsgwAX354",
+      },
+      {
+        year: "in corso",
+        title: "Substrato",
+        role: "Civic tech",
+        blurb:
+          "Mappa dell’infrastruttura fisica dietro cloud e IA: data center, energia, filiere, con fonti e grado di certezza.",
+        href: sharedLinks.substrato,
+      },
+      {
         year: "2025",
         title: "Responsible by Design",
         role: "Talk · SFSCON",
@@ -212,7 +229,7 @@ const sites: Record<Locale, SiteContent> = {
         title: "Relatronica",
         role: "Design speculativo",
         blurb:
-          "Laboratorio in Svizzera: 404human, Segno, Substrato e altri esperimenti pubblici.",
+          "Laboratorio in Svizzera: 404human, Segno e altri esperimenti pubblici.",
         href: "https://relatronica.com",
       },
     ],
@@ -348,6 +365,22 @@ const sites: Record<Locale, SiteContent> = {
         href: "https://cds.cern.ch/record/2930771",
       },
       {
+        year: "2026",
+        title: "Fuoco prescritto",
+        role: "Talk · TEDxLecco",
+        blurb:
+          "A political ecology of the human: refusal as care, friction as meaning, decision as civic space.",
+        href: "https://www.youtube.com/watch?v=nKGsgwAX354",
+      },
+      {
+        year: "ongoing",
+        title: "Substrato",
+        role: "Civic tech",
+        blurb:
+          "A map of the physical infrastructure behind cloud and AI: data centres, energy, supply chains, with sources and stated certainty.",
+        href: sharedLinks.substrato,
+      },
+      {
         year: "2025",
         title: "Responsible by Design",
         role: "Talk · SFSCON",
@@ -360,7 +393,7 @@ const sites: Record<Locale, SiteContent> = {
         title: "Relatronica",
         role: "Speculative design",
         blurb:
-          "A laboratory in Switzerland: 404human, Segno, Substrato, and other public experiments.",
+          "A laboratory in Switzerland: 404human, Segno, and other public experiments.",
         href: "https://relatronica.com",
       },
     ],

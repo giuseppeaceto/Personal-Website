@@ -220,7 +220,7 @@ export const ui: Record<Locale, UiCopy> = {
     work: {
       label: "Lavori",
       title: "Selezionati",
-      lead: "Infrastruttura, design speculativo, formazione. Quattro pezzi che tengono insieme il resto.",
+      lead: "Infrastruttura, design speculativo, formazione, talk. I pezzi che tengono insieme il resto.",
     },
     writing: {
       label: "Scrittura",
@@ -360,7 +360,7 @@ export const ui: Record<Locale, UiCopy> = {
     work: {
       label: "Work",
       title: "Selected",
-      lead: "Infrastructure, speculative design, training. Four pieces that hold the rest together.",
+      lead: "Infrastructure, speculative design, training, talks. The pieces that hold the rest together.",
     },
     writing: {
       label: "Writing",
