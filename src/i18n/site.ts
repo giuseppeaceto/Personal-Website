@@ -414,13 +414,20 @@ export function homePath(locale: Locale): string {
   return locale === "it" ? "/" : "/en/";
 }
 
-export type SitePage = "about" | "approach" | "work" | "writing" | "contact";
+export type SitePage =
+  | "about"
+  | "approach"
+  | "work"
+  | "writing"
+  | "resources"
+  | "contact";
 
 const pageSegments: Record<SitePage, string> = {
   about: "/about",
   approach: "/approach",
   work: "/work",
   writing: "/writing",
+  resources: "/resources",
   contact: "/contact",
 };
 

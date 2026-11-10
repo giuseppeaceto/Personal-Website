@@ -1,3 +1,4 @@
+import type { ResourceKind, ResourceTheme } from "../data/resources";
 import type { Locale } from "./locales";
 import { lnk, rich, txt, type RichParagraph } from "./rich-text";
 
@@ -29,6 +30,7 @@ export type UiCopy = {
     approach: string;
     work: string;
     writing: string;
+    resources: string;
     contact: string;
     menuOpen: string;
     menuClose: string;
@@ -95,6 +97,16 @@ export type UiCopy = {
     toolkit: string;
     source: string;
   };
+  resources: {
+    label: string;
+    title: string;
+    lead: string;
+    indexLabel: string;
+    filterLabel: string;
+    filterAll: string;
+    kinds: Record<ResourceKind, string>;
+    themes: Record<ResourceTheme, string>;
+  };
   essay: {
     back: string;
     onThisSite: string;
@@ -121,6 +133,7 @@ export const ui: Record<Locale, UiCopy> = {
       approach: "Approccio",
       work: "Lavoro",
       writing: "Scrittura",
+      resources: "Risorse",
       contact: "Contatti",
       menuOpen: "Menu",
       menuClose: "Chiudi",
@@ -238,6 +251,29 @@ export const ui: Record<Locale, UiCopy> = {
       toolkit: "Toolkit (PDF)",
       source: "Codice sorgente (AGPL-3.0)",
     },
+    resources: {
+      label: "Mentoring",
+      title: "Risorse",
+      lead: "Una raccolta curata di letture, paper e strumenti che uso nel mentoring, su sette temi: etica dell’IA, sovranità cognitiva, filosofia della tecnologia, pensiero critico, diritti digitali, open source e lavoro. Scegli da dove partire: sono tutti gratuiti e aperti, e ogni voce ti dice in una riga perché conta.",
+      indexLabel: "Temi",
+      filterLabel: "Filtra per tipo",
+      filterAll: "Tutti",
+      kinds: {
+        paper: "Paper",
+        book: "Libro",
+        tool: "Strumento",
+        media: "Corso · Podcast",
+      },
+      themes: {
+        "ai-ethics": "Etica dell’IA",
+        "cognitive-sovereignty": "Sovranità cognitiva",
+        "philosophy-of-technology": "Filosofia della tecnologia",
+        "critical-thinking": "Pensiero critico",
+        "digital-rights": "Diritti digitali",
+        "open-source": "Open source",
+        "work-and-technology": "Lavoro e tecnologia",
+      },
+    },
     essay: {
       back: "← Scrittura",
       onThisSite: "Note",
@@ -262,6 +298,7 @@ export const ui: Record<Locale, UiCopy> = {
       approach: "Approach",
       work: "Work",
       writing: "Writing",
+      resources: "Resources",
       contact: "Contact",
       menuOpen: "Menu",
       menuClose: "Close",
@@ -377,6 +414,29 @@ export const ui: Record<Locale, UiCopy> = {
       lead: "Talks, workshops, research, and consulting. I work with laboratories, institutions, and teams on verification, speculation, and free software.",
       toolkit: "Toolkit (PDF)",
       source: "Source (AGPL-3.0)",
+    },
+    resources: {
+      label: "Mentoring",
+      title: "Resources",
+      lead: "A curated collection of readings, papers, and tools I use in mentoring, across seven themes: AI ethics, cognitive sovereignty, philosophy of technology, critical thinking, digital rights, open source, and work. Pick where to start: everything is free and open, and each entry tells you in one line why it matters.",
+      indexLabel: "Themes",
+      filterLabel: "Filter by type",
+      filterAll: "All",
+      kinds: {
+        paper: "Paper",
+        book: "Book",
+        tool: "Tool",
+        media: "Course · Podcast",
+      },
+      themes: {
+        "ai-ethics": "AI ethics",
+        "cognitive-sovereignty": "Cognitive sovereignty",
+        "philosophy-of-technology": "Philosophy of technology",
+        "critical-thinking": "Critical thinking",
+        "digital-rights": "Digital rights",
+        "open-source": "Open source",
+        "work-and-technology": "Work & technology",
+      },
     },
     essay: {
       back: "← Writing",

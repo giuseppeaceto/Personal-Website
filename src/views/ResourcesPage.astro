@@ -1,0 +1,21 @@
+---
+import PageHeader from "../components/PageHeader.astro";
+import Resources from "../components/Resources.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getSite, getUi, resolveLocale } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const site = getSite(locale);
+const ui = getUi(locale);
+const title = `${ui.resources.title} — ${site.name}`;
+---
+
+<SiteLayout title={title} description={ui.resources.lead}>
+  <PageHeader
+    label={ui.resources.label}
+    title={ui.resources.title}
+    lead={ui.resources.lead}
+    compact
+  />
+  <Resources />
+</SiteLayout>
