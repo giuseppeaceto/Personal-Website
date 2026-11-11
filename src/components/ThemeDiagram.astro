@@ -1,0 +1,372 @@
+---
+import type { ResourceTheme } from "../data/resources";
+
+interface Props {
+  theme: ResourceTheme;
+  class?: string;
+}
+
+const { theme, class: className } = Astro.props;
+---
+
+{
+  theme === "ai-ethics" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="12" y1="48" x2="108" y2="48" stroke-opacity="0.25" />
+      <path
+        d="M16 48 C32 48, 36 18, 52 18 C68 18, 72 48, 88 48"
+        stroke="var(--accent)"
+      />
+      <line
+        x1="52"
+        y1="10"
+        x2="52"
+        y2="50"
+        stroke-dasharray="2 2"
+        stroke-opacity="0.5"
+      />
+      <circle cx="52" cy="18" r="3" fill="var(--paper)" stroke="var(--accent)" />
+      <circle cx="80" cy="38" r="2.5" fill="currentColor" opacity="0.6" />
+      <circle cx="30" cy="42" r="2" fill="currentColor" opacity="0.4" />
+      <circle cx="98" cy="48" r="1.5" fill="currentColor" opacity="0.4" />
+    </svg>
+  )
+}
+{
+  theme === "understanding-ai" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="24" cy="18" r="2.5" fill="var(--paper)" />
+      <circle cx="24" cy="30" r="2.5" fill="var(--paper)" />
+      <circle cx="24" cy="42" r="2.5" fill="var(--paper)" />
+      <circle
+        cx="60"
+        cy="12"
+        r="2.5"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle
+        cx="60"
+        cy="24"
+        r="2.5"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle
+        cx="60"
+        cy="36"
+        r="2.5"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle
+        cx="60"
+        cy="48"
+        r="2.5"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle cx="96" cy="24" r="2.5" fill="var(--paper)" />
+      <circle cx="96" cy="36" r="2.5" fill="var(--paper)" />
+      <line x1="26.5" y1="18" x2="57.5" y2="12" stroke-opacity="0.3" />
+      <line
+        x1="26.5"
+        y1="18"
+        x2="57.5"
+        y2="24"
+        stroke="var(--accent)"
+        stroke-opacity="0.7"
+      />
+      <line x1="26.5" y1="30" x2="57.5" y2="24" stroke-opacity="0.3" />
+      <line
+        x1="26.5"
+        y1="30"
+        x2="57.5"
+        y2="36"
+        stroke="var(--accent)"
+        stroke-opacity="0.8"
+      />
+      <line x1="26.5" y1="42" x2="57.5" y2="36" stroke-opacity="0.3" />
+      <line x1="26.5" y1="42" x2="57.5" y2="48" stroke-opacity="0.3" />
+      <line x1="62.5" y1="12" x2="93.5" y2="24" stroke-opacity="0.3" />
+      <line
+        x1="62.5"
+        y1="24"
+        x2="93.5"
+        y2="24"
+        stroke="var(--accent)"
+        stroke-opacity="0.9"
+      />
+      <line
+        x1="62.5"
+        y1="36"
+        x2="93.5"
+        y2="36"
+        stroke="var(--accent)"
+        stroke-opacity="0.9"
+      />
+      <line x1="62.5" y1="48" x2="93.5" y2="36" stroke-opacity="0.3" />
+    </svg>
+  )
+}
+{
+  theme === "cognitive-sovereignty" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 24 Q22 18, 32 24 T50 24" stroke-opacity="0.25" />
+      <path d="M12 36 Q22 30, 32 36 T50 36" stroke-opacity="0.25" />
+      <path d="M70 24 Q80 18, 90 24 T108 24" stroke-opacity="0.25" />
+      <path d="M70 36 Q80 30, 90 36 T108 36" stroke-opacity="0.25" />
+      <circle
+        cx="60"
+        cy="30"
+        r="17"
+        stroke="currentColor"
+        stroke-opacity="0.35"
+        stroke-dasharray="2 2"
+      />
+      <circle
+        cx="60"
+        cy="30"
+        r="9"
+        stroke="var(--accent)"
+        fill="var(--paper)"
+      />
+      <circle cx="60" cy="30" r="2.5" fill="var(--accent)" />
+      <line x1="60" y1="17" x2="60" y2="22" stroke="var(--accent)" />
+      <line x1="60" y1="38" x2="60" y2="43" stroke="var(--accent)" />
+      <line x1="47" y1="30" x2="52" y2="30" stroke="var(--accent)" />
+      <line x1="68" y1="30" x2="73" y2="30" stroke="var(--accent)" />
+    </svg>
+  )
+}
+{
+  theme === "philosophy-of-technology" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="16" y1="30" x2="104" y2="30" stroke-opacity="0.2" />
+      <line x1="60" y1="8" x2="60" y2="52" stroke-opacity="0.2" />
+      <circle cx="50" cy="30" r="16" stroke="currentColor" stroke-opacity="0.45" />
+      <rect
+        x="50"
+        y="14"
+        width="32"
+        height="32"
+        rx="1"
+        stroke="var(--accent)"
+        fill="var(--paper)"
+        fill-opacity="0.5"
+      />
+      <circle cx="50" cy="30" r="2.5" fill="currentColor" />
+      <circle cx="66" cy="30" r="2.5" fill="var(--accent)" />
+      <line
+        x1="34"
+        y1="46"
+        x2="82"
+        y2="14"
+        stroke-opacity="0.3"
+        stroke-dasharray="2 2"
+      />
+    </svg>
+  )
+}
+{
+  theme === "critical-thinking" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="14" y1="30" x2="48" y2="30" stroke="currentColor" stroke-opacity="0.7" />
+      <polygon
+        points="60 12, 45 46, 75 46"
+        stroke="var(--accent)"
+        fill="var(--paper)"
+      />
+      <line x1="64" y1="28" x2="106" y2="18" stroke="var(--accent)" />
+      <line
+        x1="66"
+        y1="32"
+        x2="106"
+        y2="30"
+        stroke="currentColor"
+        stroke-opacity="0.6"
+      />
+      <line
+        x1="64"
+        y1="36"
+        x2="106"
+        y2="42"
+        stroke="currentColor"
+        stroke-opacity="0.35"
+      />
+      <circle cx="106" cy="18" r="2" fill="var(--accent)" />
+      <circle cx="106" cy="30" r="2" fill="currentColor" opacity="0.6" />
+      <circle cx="106" cy="42" r="2" fill="currentColor" opacity="0.35" />
+    </svg>
+  )
+}
+{
+  theme === "digital-rights" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="16" y1="18" x2="104" y2="18" stroke-opacity="0.2" />
+      <line x1="16" y1="30" x2="104" y2="30" stroke-opacity="0.2" />
+      <line x1="16" y1="42" x2="104" y2="42" stroke-opacity="0.2" />
+      <line x1="32" y1="10" x2="32" y2="50" stroke-opacity="0.2" />
+      <line x1="88" y1="10" x2="88" y2="50" stroke-opacity="0.2" />
+      <path
+        d="M60 14 L76 20 V33 C76 41, 60 48, 60 48 C60 48, 44 41, 44 33 V20 Z"
+        stroke="var(--accent)"
+        fill="var(--paper)"
+      />
+      <circle cx="60" cy="27" r="3" fill="var(--accent)" />
+      <path d="M59 29 L58 35 H62 L61 29 Z" fill="var(--accent)" />
+    </svg>
+  )
+}
+{
+  theme === "open-source" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="16" y1="38" x2="104" y2="38" stroke="currentColor" stroke-opacity="0.45" />
+      <path
+        d="M38 38 C46 38, 50 18, 60 18 C70 18, 74 38, 82 38"
+        stroke="var(--accent)"
+      />
+      <circle cx="22" cy="38" r="2.5" fill="var(--paper)" stroke="currentColor" />
+      <circle cx="38" cy="38" r="2.5" fill="var(--paper)" stroke="currentColor" />
+      <circle
+        cx="60"
+        cy="18"
+        r="3"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle cx="60" cy="38" r="2.5" fill="var(--paper)" stroke="currentColor" />
+      <circle
+        cx="82"
+        cy="38"
+        r="2.5"
+        fill="var(--paper)"
+        stroke="var(--accent)"
+      />
+      <circle cx="98" cy="38" r="2.5" fill="var(--paper)" stroke="currentColor" />
+    </svg>
+  )
+}
+{
+  theme === "work-and-technology" && (
+    <svg
+      class={className}
+      viewBox="0 0 120 60"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="16" y1="46" x2="104" y2="46" stroke-opacity="0.25" />
+      <rect
+        x="20"
+        y="34"
+        width="26"
+        height="6"
+        rx="1.5"
+        stroke="currentColor"
+        stroke-opacity="0.5"
+      />
+      <rect
+        x="40"
+        y="24"
+        width="34"
+        height="6"
+        rx="1.5"
+        stroke="var(--accent)"
+        fill="var(--paper)"
+      />
+      <rect
+        x="68"
+        y="14"
+        width="28"
+        height="6"
+        rx="1.5"
+        stroke="currentColor"
+        stroke-opacity="0.5"
+      />
+      <path
+        d="M96 28 A12 12 0 1 1 84 16"
+        stroke="var(--accent)"
+        stroke-opacity="0.45"
+        stroke-dasharray="2 2"
+      />
+      <polyline points="84 12, 84 16, 88 16" stroke="var(--accent)" />
+    </svg>
+  )
+}
+
+<style>
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+</style>
+

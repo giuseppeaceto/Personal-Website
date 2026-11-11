@@ -3,6 +3,7 @@ import type { Locale } from "../i18n/locales";
 export type ResourceKind = "paper" | "book" | "tool" | "media";
 export type ResourceTheme =
   | "ai-ethics"
+  | "understanding-ai"
   | "cognitive-sovereignty"
   | "philosophy-of-technology"
   | "critical-thinking"
@@ -24,6 +25,7 @@ export type Resource = {
 /** Display order of the themes on the page. */
 export const resourceThemes: readonly ResourceTheme[] = [
   "ai-ethics",
+  "understanding-ai",
   "cognitive-sovereignty",
   "philosophy-of-technology",
   "critical-thinking",
@@ -121,15 +123,88 @@ export const resources: readonly Resource[] = [
       en: "A free seven-chapter course with no prerequisites. The starting point I recommend.",
     },
   },
+  // — Understanding AI ————————————————————————————————
   {
     title: "Elements of AI",
     author: "University of Helsinki · MOOC",
     kind: "media",
-    theme: "ai-ethics",
+    theme: "understanding-ai",
     href: "https://www.elementsofai.com/",
     note: {
       it: "Cosa è davvero l’IA, senza matematica. Toglie il vocabolario magico prima di discuterne l’etica.",
       en: "What AI actually is, without the maths. Clears the magical vocabulary before you argue about ethics.",
+    },
+  },
+  {
+    title: "ChatGPT Is a Blurry JPEG of the Web",
+    author: "Ted Chiang",
+    year: "2023",
+    kind: "paper",
+    theme: "understanding-ai",
+    href: "https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web",
+    note: {
+      it: "I grandi modelli linguistici come compressione lossy di Internet: la metafora più lucida per capire le allucinazioni.",
+      en: "Large language models as lossy web compression: the clearest metaphor for why they hallucinate.",
+    },
+  },
+  {
+    title: "Transformer Explainer",
+    author: "Polo Club of Data Science · Georgia Tech",
+    year: "2024",
+    kind: "tool",
+    theme: "understanding-ai",
+    href: "https://poloclub.github.io/transformer-explainer/",
+    note: {
+      it: "Modello Transformer interattivo nel browser: visualizza matrici di attenzione, vettori e predizione token per token in tempo reale.",
+      en: "An interactive Transformer running live in the browser: visualising attention weights, vectors, and token probabilities.",
+    },
+  },
+  {
+    title: "Neural Networks",
+    author: "3Blue1Brown",
+    year: "2017",
+    kind: "media",
+    theme: "understanding-ai",
+    href: "https://www.3blue1brown.com/topics/neural-networks",
+    note: {
+      it: "La migliore introduzione visiva e intuitiva a reti neurali, gradient descent e backpropagation: la geometria dietro i pesi.",
+      en: "The best intuitive, visual introduction to neural networks, gradient descent, and backpropagation: the geometry behind the weights.",
+    },
+  },
+  {
+    title: "The Illustrated Transformer",
+    author: "Jay Alammar",
+    year: "2018",
+    kind: "tool",
+    theme: "understanding-ai",
+    href: "https://jalammar.github.io/illustrated-transformer/",
+    note: {
+      it: "La scomposizione grafica di riferimento dell’architettura Transformer: self-attention, matrici Query-Key-Value e strati spiegati con chiarezza.",
+      en: "The canonical visual walkthrough of the Transformer architecture: self-attention, Query-Key-Value matrices, and layers made clear.",
+    },
+  },
+  {
+    title: "Why AI Is Harder Than We Think",
+    author: "Melanie Mitchell",
+    year: "2021",
+    kind: "paper",
+    theme: "understanding-ai",
+    href: "https://arxiv.org/abs/2104.12871",
+    note: {
+      it: "Quattro fallacie cognitive che ci inducono a sovrastimare l’IA. Essenziale per distinguere abilità ristrette da comprensione del mondo.",
+      en: "Four cognitive fallacies that lead us to overestimate AI progress. Essential to separate narrow skill from real understanding.",
+    },
+  },
+  {
+    title: "Deep Learning",
+    author: "Goodfellow, Bengio, Courville",
+    year: "2016",
+    kind: "book",
+    theme: "understanding-ai",
+    href: "https://www.deeplearningbook.org/",
+    note: {
+      it: "Il testo di riferimento della disciplina, liberamente accessibile online: dall’algebra lineare alle architetture generative.",
+      en: "The benchmark textbook of the field, freely accessible online: from linear algebra to generative architectures.",
     },
   },
 

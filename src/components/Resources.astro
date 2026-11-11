@@ -1,5 +1,7 @@
 ---
 import { resourceThemes, resources, type ResourceKind } from "../data/resources";
+import ResourceIcon from "./ResourceIcon.astro";
+import ThemeDiagram from "./ThemeDiagram.astro";
 import { getUi, resolveLocale } from "../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -10,39 +12,99 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
 
 <section class="section resources">
   <div class="page-shell">
-    <div class="resources__controls">
-      <nav class="resources__index" aria-label={ui.resources.indexLabel}>
-        <ul>
-          {
-            resourceThemes.map((theme) => (
-              <li data-index-item={theme}>
-                <a href={`#resources-${theme}`}>{ui.resources.themes[theme]}</a>
+    <nav
+      class="resources__directory"
+      id="resources-themes"
+      aria-label={ui.resources.indexLabel}
+    >
+      <ul class="resources__cards">
+        {
+          resourceThemes.map((theme, index) => {
+            const count = resources.filter((item) => item.theme === theme).length;
+            const num = String(index + 1).padStart(2, "0");
+            const countLabel =
+              locale === "it"
+                ? `${count} ${count === 1 ? "risorsa" : "risorse"}`
+                : `${count} ${count === 1 ? "resource" : "resources"}`;
+            return (
+              <li class="resources__card-item" data-index-item={theme}>
+                <a class="resources__card" href={`#resources-${theme}`}>
+                  <div class="resources__card-visual" aria-hidden="true">
+                    <ThemeDiagram
+                      theme={theme}
+                      class="resources__card-diagram"
+                    />
+                  </div>
+                  <div class="resources__card-body">
+                    <div class="resources__card-meta">
+                      <span class="resources__card-num">{num}</span>
+                      <span class="resources__card-count">{countLabel}</span>
+                    </div>
+                    <h3 class="resources__card-title">
+                      {ui.resources.themes[theme]}
+                    </h3>
+                  </div>
+                </a>
               </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+
+    <div class="resources__controls">
+      <div class="resources__controls-inner">
+        <div
+          class="resources__filters"
+          role="group"
+          aria-label={ui.resources.filterLabel}
+        >
+          <span class="resources__filter-label" aria-hidden="true">
+            {ui.resources.filterLabel}:
+          </span>
+          <button
+            type="button"
+            class="resources__chip"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            <ResourceIcon
+              kind="all"
+              class="resources__chip-icon"
+              size="0.82rem"
+            />
+            <span>{ui.resources.filterAll}</span>
+          </button>
+          {
+            kinds.map((kind) => (
+              <button
+                type="button"
+                class="resources__chip"
+                data-filter={kind}
+                aria-pressed="false"
+              >
+                <ResourceIcon
+                  kind={kind}
+                  class="resources__chip-icon"
+                  size="0.82rem"
+                />
+                <span>{ui.resources.kinds[kind]}</span>
+              </button>
             ))
           }
-        </ul>
-      </nav>
-      <div
-        class="resources__filters"
-        role="group"
-        aria-label={ui.resources.filterLabel}
-      >
-        <button
-          type="button"
-          class="resources__chip"
-          data-filter="all"
-          aria-pressed="true">{ui.resources.filterAll}</button>
-        {
-          kinds.map((kind) => (
-            <button
-              type="button"
-              class="resources__chip"
-              data-filter={kind}
-              aria-pressed="false">
-              {ui.resources.kinds[kind]}
-            </button>
-          ))
-        }
+        </div>
+        <a
+          class="resources__jump-top"
+          href="#resources-themes"
+          aria-label={
+            locale === "it"
+              ? "Torna all'indice dei temi"
+              : "Back to themes index"
+          }
+        >
+          <span>{locale === "it" ? "Temi" : "Themes"}</span>
+          <span aria-hidden="true">↑</span>
+        </a>
       </div>
     </div>
 
@@ -71,7 +133,12 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
                     >
                       <span class="resources__meta">
                         <span class="resources__kind">
-                          {ui.resources.kinds[item.kind]}
+                          <ResourceIcon
+                            kind={item.kind}
+                            class="resources__meta-icon"
+                            size="0.76rem"
+                          />
+                          <span>{ui.resources.kinds[item.kind]}</span>
                         </span>
                         <span class="resources__byline">
                           {item.author}
@@ -97,59 +164,166 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
     padding-bottom: var(--space-xl);
   }
 
+  .resources__directory {
+    margin-bottom: var(--space-lg);
+  }
+
+  .resources__cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .resources__card-item {
+    transition:
+      opacity 220ms var(--ease),
+      filter 220ms var(--ease);
+  }
+
+  .resources__card-item.is-disabled {
+    opacity: 0.28;
+    pointer-events: none;
+    filter: grayscale(0.85);
+  }
+
+  .resources__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--paper) 70%, white);
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      border-color 200ms var(--ease),
+      background 200ms var(--ease),
+      transform 200ms var(--ease),
+      box-shadow 200ms var(--ease);
+  }
+
+  .resources__card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    background: color-mix(in srgb, var(--accent-soft) 35%, var(--paper));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px rgba(18, 20, 23, 0.15);
+  }
+
+  .resources__card-visual {
+    height: 4.8rem;
+    padding: 0.65rem 1rem 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--accent) 3.5%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+    transition: color 200ms var(--ease);
+  }
+
+  .resources__card:hover .resources__card-visual {
+    color: var(--accent);
+  }
+
+  .resources__card-diagram {
+    width: 100%;
+    height: 100%;
+    max-width: 130px;
+    max-height: 52px;
+  }
+
+  .resources__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 0.85rem 0.95rem;
+    flex: 1;
+  }
+
+  .resources__card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .resources__card-num {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .resources__card-count {
+    color: var(--ink-muted);
+  }
+
+  .resources__card-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    transition: color 200ms var(--ease);
+  }
+
+  .resources__card:hover .resources__card-title {
+    color: var(--accent);
+  }
+
   .resources__controls {
     position: sticky;
     top: 4.5rem;
     z-index: 20;
-    display: grid;
-    gap: 0.7rem;
-    padding-block: 0.85rem;
+    padding-block: 0.75rem;
     background: color-mix(in srgb, var(--paper) 94%, transparent);
     border-bottom: 1px solid var(--line);
     backdrop-filter: blur(14px) saturate(1.1);
     -webkit-backdrop-filter: blur(14px) saturate(1.1);
   }
 
-  .resources__index ul {
+  .resources__controls-inner {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3rem 0.95rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
-
-  .resources__index a {
-    text-decoration: none;
-    color: var(--ink-muted);
-  }
-
-  .resources__index a:hover {
-    color: var(--accent);
-  }
-
-  .resources__index li[hidden] {
-    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem 1rem;
   }
 
   .resources__filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .resources__filter-label {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-right: 0.25rem;
   }
 
   .resources__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     margin: 0;
-    padding: 0.24rem 0.62rem;
+    padding: 0.28rem 0.65rem;
     border: 1px solid var(--line);
     border-radius: 999px;
     background: transparent;
     font-family: var(--font-mono);
     font-size: 0.64rem;
+    line-height: 1;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-muted);
@@ -158,6 +332,15 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
       border-color 180ms var(--ease),
       color 180ms var(--ease),
       background 180ms var(--ease);
+  }
+
+  .resources__chip :global(.resources__chip-icon),
+  .resources__chip-icon {
+    width: 0.82rem;
+    height: 0.82rem;
+    flex-shrink: 0;
+    stroke: currentColor;
+    display: inline-block;
   }
 
   .resources__chip:hover {
@@ -171,12 +354,38 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
     background: color-mix(in srgb, var(--accent-soft) 60%, transparent);
   }
 
+  .resources__jump-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 0.25rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    transition:
+      color 180ms var(--ease),
+      border-color 180ms var(--ease),
+      background 180ms var(--ease);
+  }
+
+  .resources__jump-top:hover {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+    background: color-mix(in srgb, var(--accent-soft) 40%, transparent);
+  }
+
   .resources__group {
     display: grid;
     grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
     gap: var(--space-sm) clamp(1.5rem, 4vw, 3rem);
     padding-block: var(--space-lg);
-    scroll-margin-top: 9.5rem;
+    scroll-margin-top: 8.5rem;
   }
 
   .resources__group:first-child {
@@ -222,6 +431,7 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
   .resources__meta {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.35rem 0.6rem;
     font-family: var(--font-mono);
     font-size: 0.65rem;
@@ -231,7 +441,19 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
   }
 
   .resources__kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     color: var(--accent);
+  }
+
+  .resources__kind :global(.resources__meta-icon),
+  .resources__meta-icon {
+    width: 0.76rem;
+    height: 0.76rem;
+    flex-shrink: 0;
+    stroke: currentColor;
+    display: inline-block;
   }
 
   .resources__title {
@@ -254,15 +476,27 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
     color: var(--ink-muted);
   }
 
+  @media (max-width: 980px) {
+    .resources__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 780px) {
     .resources__group {
       grid-template-columns: 1fr;
       gap: var(--space-sm);
-      scroll-margin-top: 11rem;
+      scroll-margin-top: 10rem;
     }
 
     .resources__group:first-child {
       padding-top: var(--space-sm);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .resources__cards {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -301,7 +535,9 @@ const kinds: readonly ResourceKind[] = ["paper", "book", "tool", "media"];
     for (const indexItem of indexItems) {
       const theme = indexItem.dataset.indexItem;
       const group = theme ? document.getElementById(`resources-${theme}`) : null;
-      indexItem.hidden = group === null || group.hidden;
+      const isHidden = group === null || group.hidden;
+      indexItem.classList.toggle("is-disabled", isHidden);
+      indexItem.setAttribute("aria-hidden", String(isHidden));
     }
 
     for (const chip of chips) {

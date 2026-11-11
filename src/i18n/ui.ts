@@ -254,7 +254,7 @@ export const ui: Record<Locale, UiCopy> = {
     resources: {
       label: "Mentoring",
       title: "Risorse",
-      lead: "Una raccolta curata di letture, paper e strumenti che uso nel mentoring, su sette temi: etica dell’IA, sovranità cognitiva, filosofia della tecnologia, pensiero critico, diritti digitali, open source e lavoro. Scegli da dove partire: sono tutti gratuiti e aperti, e ogni voce ti dice in una riga perché conta.",
+      lead: "Una raccolta curata di letture, paper e strumenti che uso nel mentoring, su otto temi: etica dell’IA, capire l’IA, sovranità cognitiva, filosofia della tecnologia, pensiero critico, diritti digitali, open source e lavoro. Scegli da dove partire: sono tutti gratuiti e aperti, e ogni voce ti dice in una riga perché conta.",
       indexLabel: "Temi",
       filterLabel: "Filtra per tipo",
       filterAll: "Tutti",
@@ -266,6 +266,7 @@ export const ui: Record<Locale, UiCopy> = {
       },
       themes: {
         "ai-ethics": "Etica dell’IA",
+        "understanding-ai": "Capire l’IA",
         "cognitive-sovereignty": "Sovranità cognitiva",
         "philosophy-of-technology": "Filosofia della tecnologia",
         "critical-thinking": "Pensiero critico",
@@ -418,7 +419,7 @@ export const ui: Record<Locale, UiCopy> = {
     resources: {
       label: "Mentoring",
       title: "Resources",
-      lead: "A curated collection of readings, papers, and tools I use in mentoring, across seven themes: AI ethics, cognitive sovereignty, philosophy of technology, critical thinking, digital rights, open source, and work. Pick where to start: everything is free and open, and each entry tells you in one line why it matters.",
+      lead: "A curated collection of readings, papers, and tools I use in mentoring, across eight themes: AI ethics, understanding AI, cognitive sovereignty, philosophy of technology, critical thinking, digital rights, open source, and work. Pick where to start: everything is free and open, and each entry tells you in one line why it matters.",
       indexLabel: "Themes",
       filterLabel: "Filter by type",
       filterAll: "All",
@@ -430,6 +431,7 @@ export const ui: Record<Locale, UiCopy> = {
       },
       themes: {
         "ai-ethics": "AI ethics",
+        "understanding-ai": "Understanding AI",
         "cognitive-sovereignty": "Cognitive sovereignty",
         "philosophy-of-technology": "Philosophy of technology",
         "critical-thinking": "Critical thinking",
