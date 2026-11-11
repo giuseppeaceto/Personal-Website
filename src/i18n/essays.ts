@@ -24,6 +24,162 @@ export const ESSAYS_MIRROR_UPDATED = "2026-10-07";
 
 const essaysItBase: readonly Essay[] = [
   {
+    slug: "il-tutto-e-piu-della-somma-delle-parti",
+    date: "2026-11-11",
+    title: "Il tutto è più (e meno) della somma delle parti",
+    dek: "Una riflessione su specializzazione, visione d’insieme e tutto ciò che si perde quando smontiamo le cose.",
+    body: [
+      {
+        type: "p",
+        text: "Avevo otto anni quando ho smontato la sveglia di casa per capire come funzionava. Il risultato: quarantadue pezzi sul tavolo, ciascuno perfettamente comprensibile, e nessuno di loro che segnava l'ora. Mio padre, giustamente, non l'ha presa bene.",
+      },
+      {
+        type: "p",
+        text: "Ripetuta per qualche secolo su scala planetaria, questa scena è più o meno la storia del pensiero moderno. Poi è arrivata l'IA, con una notizia buona e una cattiva. Quella buona: i pezzi te li produce lei, lucidati, in quattro secondi. Quella cattiva: l'ora continua a non segnarla nessuno. E nel frattempo tu hai smesso di ricordarti come si rimontava.",
+      },
+      {
+        type: "h2",
+        text: "Il patto che abbiamo firmato senza leggere",
+      },
+      {
+        type: "p",
+        text: "Qualche secolo fa abbiamo stretto un patto con noi stessi: dividere ogni problema in pezzi abbastanza piccoli da poterli capire. Cartesio ne fece un metodo, Adam Smith una fabbrica di spilli, Frederick Taylor un cronometro. E funzionò in modo spettacolare. Medicina, microchip, aerei, vaccini: quasi tutto ciò che ci rende la vita comoda viene da qualcuno che ha passato vent'anni su un pezzetto minuscolo di qualcosa.",
+      },
+      {
+        type: "p",
+        text: "Ma nei patti ci sono sempre le clausole in piccolo, e questa diceva più o meno: tu ottieni competenza, e in cambio nessuno è più responsabile del tutto. Non l'abbiamo letta, perché i primi decenni di vantaggi erano troppo belli. Oggi il conto arriva, e con l'IA arriva con gli interessi.",
+      },
+      {
+        type: "h2",
+        text: "Dove vivono i problemi",
+      },
+      {
+        type: "p",
+        text: "Il pensiero sistemico nasce nel Novecento tra biologi, ingegneri e matematici che non si parlavano (von Bertalanffy, Wiener, Forrester, poi Donella Meadows), ma che sostenevano tutti la stessa cosa: i problemi seri non abitano dentro le parti, abitano tra le parti. Nelle interfacce, nei passaggi di consegna, nel punto in cui il reparto A finisce, il reparto B comincia, e in mezzo c'è un territorio di nessuno.",
+      },
+      {
+        type: "p",
+        text: "Quando un ospedale funziona male, di rado è perché i cardiologi non sanno gestire un cuore: è perché cardiologia, radiologia e amministrazione ottimizzano ciascuna il proprio indicatore, e il paziente è l'unico a dover attraversare tutto. Quando una città soffoca nel traffico, ogni singolo pezzo (un parcheggio, una strada, un centro commerciale) è sensato e spesso funziona benissimo. Il disastro emerge dalla somma, senza che nessuno lo abbia deciso.",
+      },
+      {
+        type: "quote",
+        text: "La sensazione la conosciamo tutti: «non è colpa di nessuno, eppure non funziona». Ecco, quello è un sistema.",
+      },
+      {
+        type: "p",
+        text: "Russell Ackoff amava un esperimento mentale: prendi il miglior motore del mondo, il miglior cambio, i migliori freni, ciascuno da un'auto diversa, e assemblali. Non ottieni l'auto migliore, ottieni un mucchio costosissimo di rottami, perché i pezzi non sono fatti per parlarsi. Migliorare ogni parte separatamente può distruggere il tutto.",
+      },
+      {
+        type: "p",
+        text: "E il mondo è pieno di versioni reali di questo giochino. Nella Cina del 1958 si fece guerra ai passeri, accusati di mangiare i semi; ma mangiavano anche gli insetti, le locuste prosperarono, e il disastro agricolo contribuì a una carestia terribile (insieme a molte altre decisioni, perché i sistemi complessi non hanno mai una causa sola, ed è proprio questo il punto). Alla Wells Fargo obiettivi di vendita tanto aggressivi quanto irrealistici spinsero i dipendenti ad aprire milioni di conti che nessuno aveva chiesto; lo scandalo esplose nel 2016 e si chiuse nel 2020 con un accordo da 3 miliardi di dollari. Gli incentivi sono un modo di parlare a un sistema, e i sistemi rispondono in modo letterale e pessimo.",
+      },
+      {
+        type: "p",
+        text: "Nessuna di queste è una storia di stupidità. Sono storie di intelligenza locale, brillante, applicata nel punto sbagliato.",
+      },
+      {
+        type: "h2",
+        text: "Il conto, versione 2025",
+      },
+      {
+        type: "p",
+        text: "Ora prendete l'IA e guardatela con questi occhi: è il migliore specialista che l'umanità abbia mai costruito. Sa tutto di ogni pezzo e non ha mai visto la sveglia.",
+      },
+      {
+        type: "p",
+        text: "Nel 2025 il MIT Media Lab ha pubblicato un preprint dal titolo programmatico, Your Brain on ChatGPT: Accumulation of Cognitive Debt. Cinquantaquattro persone con l'elettroencefalogramma in testa, a scrivere saggi in tre modi: con ChatGPT, con Google, a mente nuda. Chi usava ChatGPT mostrava la connettività cerebrale più debole e faticava a ricordare cosa aveva scritto pochi minuti prima.",
+      },
+      {
+        type: "quote",
+        text: "«Debito cognitivo»: prendi in prestito capacità di pensiero futura in cambio di comodità presente.",
+      },
+      {
+        type: "p",
+        text: "Prima che qualcuno si strappi i capelli, un po' di igiene: è un preprint, non è stato validato da una revisione tra pari, il campione è piccolo (solo diciotto persone hanno completato l'ultima sessione) e nessuno può onestamente dire che l'IA «danneggi il cervello». Chi lo scrive nei titoli ha fretta, o ha qualcosa da vendere.",
+      },
+      {
+        type: "p",
+        text: "Ma dentro lo studio c'è un dettaglio molto più interessante dell'allarme. Chi partiva da solo e poi usava l'IA recuperava un'attività cerebrale forte. E in altri lavori, gli studenti che chiedevano risposte già pronte andavano peggio quando lo strumento spariva, mentre quelli che chiedevano suggerimenti andavano come chi non l'aveva mai usato. Stesso strumento, effetti opposti. Il problema è l'architettura della relazione tra la macchina e chi la usa.",
+      },
+      {
+        type: "p",
+        text: "Cioè, di nuovo, un sistema. Il debito cognitivo ne ha tutte le caratteristiche: uno stock che si accumula, un ritardo (non senti niente finché non devi fare a meno dello strumento) e un ciclo che si autorinforza, perché meno sforzo significa meno competenza, che significa più dipendenza. Funziona come un mutuo a tasso variabile: va tutto benissimo, finché non devi rinegoziarlo.",
+      },
+      {
+        type: "p",
+        text: "L'aviazione lo sa da decenni. Si chiama automation complacency: i piloti che si affidano troppo al pilota automatico perdono la manualità e la vigilanza. La risposta non è stata togliere l'automazione, che sarebbe stato stupido: è stata progettare il sistema uomo-macchina, con regole su quando si vola a mano e quando no. Nessuno ha dato la colpa all'autopilota. Né al pilota.",
+      },
+      {
+        type: "h2",
+        text: "Tre idee che sembrano tecniche e sono filosofia",
+      },
+      {
+        type: "p",
+        text: "Le cose importanti stanno in mezzo. Nessuna molecola d'acqua è bagnata, nessun neurone è cosciente: le proprietà più interessanti del mondo nascono dalle relazioni, non dai mattoni. E nessun paragrafo generato è un'idea: l'idea sta nel modo in cui i paragrafi si tengono insieme, ed è esattamente il lavoro che ci stiamo disabituando a fare.",
+      },
+      {
+        type: "p",
+        text: "Cercare il colpevole è pigrizia. Il pensiero ordinario ragiona in linea retta: A causa B, quindi la colpa è di A. Nei sistemi B retroagisce su A, C modifica entrambi, e la struttura produce il suo comportamento a prescindere da chi la occupa. Metti persone ottime in un sistema pessimo e vincerà il sistema. Non è colpa dell'IA e non è nemmeno tua: è che tutto, dalle scadenze alle metriche alla fretta, ti spinge ad accettare la prima risposta. Invece di cercare il cattivo, si guarda il disegno.",
+      },
+      {
+        type: "p",
+        text: "Chi osserva fa parte della scena. I confini di un sistema non sono scritti nella natura: li traccia chi guarda. Dove finisce «il compito» e dove comincia «la persona che dovrebbe imparare qualcosa facendolo»? Ogni mappa è una scelta, e ogni scelta lascia fuori qualcosa. «La mappa non è il territorio», diceva Korzybski; e George Box, più sardonico: tutti i modelli sono sbagliati, ma alcuni sono utili.",
+      },
+      {
+        type: "p",
+        text: "Queste intuizioni hanno un sapore antico: le ritroviamo in Eraclito, nel taoismo, in tutte le tradizioni che vedono il mondo come una rete di relazioni più che come un deposito di oggetti. Forse l'Occidente, avendo scelto di smontare la sveglia, ha dovuto aspettare tre secoli per accorgersi di ciò che aveva smesso di guardare.",
+      },
+      {
+        type: "h2",
+        text: "Le leve, e dove le cerchiamo",
+      },
+      {
+        type: "p",
+        text: "Donella Meadows, in un saggio del 1999 diventato leggendario, scrisse che nei sistemi complessi esistono punti in cui un piccolo sforzo produce grandi cambiamenti, e che quasi sempre li cerchiamo nel posto sbagliato. Le leve più deboli sono i numeri: budget, quote, aliquote. Più potenti sono i flussi di informazione (chi vede cosa) e le regole del gioco. Ancora più su stanno gli obiettivi che il sistema persegue, e in cima c'è il paradigma, la storia che una società racconta su sé stessa.",
+      },
+      {
+        type: "p",
+        text: "Applichiamola al nostro caso. Misurare «ore risparmiate» o «output per persona» è la leva più debole, il numero. Decidere cosa non delegare mai è una regola. Chiedersi se vogliamo persone che producono più documenti o persone che capiscono di più è un obiettivo. E il paradigma? Quello che dice che pensare è un costo da eliminare, non la cosa per cui esistiamo.",
+      },
+      {
+        type: "p",
+        text: "Un'azienda che premia solo la velocità sta pagando i dipendenti per accumulare debito, e poi si stupisce quando non c'è nessuno in grado di dire se la risposta della macchina è sbagliata.",
+      },
+      {
+        type: "h2",
+        text: "L'ironia finale",
+      },
+      {
+        type: "p",
+        text: "Il pensiero sistemico può diventare l'ennesima specializzazione chiusa: un gergo (loop, stock, punti di leva) che separa iniziati e profani, un modo di dire «complessità» per non sporcarsi le mani con i fatti. Esistono consulenti che disegnano diagrammi bellissimi, con frecce ovunque, e non hanno mai riparato nulla.",
+      },
+      {
+        type: "p",
+        text: "E adesso quei diagrammi li genera l'IA in quattro secondi. Un diagramma dei cicli causali che nessuno ha pensato è la forma più pura di debito cognitivo: la mappa senza il viaggio, il sistema senza averci abitato.",
+      },
+      {
+        type: "p",
+        text: "Per questo la regola è semplice e un po' antipatica, perché richiede fatica: zoom in, zoom out. Prima pensi tu, con la tua testa, anche male. Poi chiami la macchina. Poi riscrivi con parole tue e ti sporchi le mani nel dettaglio. Infine ti chiedi dove si incastra quel pezzo con tutti gli altri. Il primo e l'ultimo passo sono quelli che nessuno può farti al posto tuo, e sono, guarda caso, quelli che il sistema ti invoglia a saltare.",
+      },
+      {
+        type: "p",
+        text: "La visione d'insieme senza profondità è chiacchiera; la profondità senza visione d'insieme è efficienza cieca. Il pensiero sistemico, in fondo, è l'unica disciplina che non si può delegare, perché il tutto, per definizione, non sta in nessun pezzo: nemmeno in quelli generati.",
+      },
+      {
+        type: "quote",
+        text: "Puoi farti dare tutti i pezzi che vuoi. Ma l'ora, per il momento, la devi segnare tu.",
+      },
+      {
+        type: "h2",
+        text: "Per approfondire",
+      },
+      {
+        type: "p",
+        text: "Donella Meadows, Pensare per sistemi e Leverage Points: Places to Intervene in a System; Peter Senge, La quinta disciplina; Russell Ackoff, Re-creating the Corporation; Ludwig von Bertalanffy, Teoria generale dei sistemi; Nataliya Kosmyna et al., Your Brain on ChatGPT (preprint, 2025).",
+      },
+    ],
+  },
+  {
     slug: "confidence-is-not-verification",
     date: "2025-09-01",
     title: "La confidenza non è verifica",
@@ -185,6 +341,162 @@ const essaysItBase: readonly Essay[] = [
 ];
 
 const essaysEnBase: readonly Essay[] = [
+  {
+    slug: "il-tutto-e-piu-della-somma-delle-parti",
+    date: "2026-11-11",
+    title: "The whole is more (and less) than the sum of its parts",
+    dek: "A reflection on specialization, the big picture, and everything lost when we take things apart.",
+    body: [
+      {
+        type: "p",
+        text: "I was eight years old when I took apart the household alarm clock to figure out how it worked. The result: forty-two pieces on the table, each perfectly understandable, and none of them telling the time. My father, understandably, was not amused.",
+      },
+      {
+        type: "p",
+        text: "Repeated over several centuries on a planetary scale, this scene is pretty much the history of modern thought. Then came AI, bearing good news and bad. The good news: it produces the pieces for you, polished, in four seconds. The bad news: still no one is telling the time. And in the meantime, you have forgotten how to put it back together.",
+      },
+      {
+        type: "h2",
+        text: "The contract we signed without reading",
+      },
+      {
+        type: "p",
+        text: "A few centuries ago, we struck a deal with ourselves: divide every problem into small enough pieces that we can understand them. Descartes turned it into a method, Adam Smith into a pin factory, Frederick Taylor into a stopwatch. And it worked spectacularly well. Medicine, microchips, airplanes, vaccines: almost everything that makes our lives comfortable comes from someone who spent twenty years on a tiny fraction of something.",
+      },
+      {
+        type: "p",
+        text: "Yet contracts always have fine print, and this one roughly read: you gain competence, and in return no one is responsible for the whole anymore. We didn't read it, because the early decades of payoffs were too great. Today the bill arrives, and with AI it arrives with interest.",
+      },
+      {
+        type: "h2",
+        text: "Where problems live",
+      },
+      {
+        type: "p",
+        text: "Systems thinking was born in the twentieth century among biologists, engineers, and mathematicians who rarely spoke to one another (von Bertalanffy, Wiener, Forrester, and later Donella Meadows), yet they all argued the same thing: serious problems do not live inside the parts; they live between the parts. In the interfaces, in handoffs, where department A ends, department B begins, and in between lies no-man's-land.",
+      },
+      {
+        type: "p",
+        text: "When a hospital malfunctions, it is rarely because cardiologists do not understand hearts: it is because cardiology, radiology, and administration each optimize their own metric, and the patient is the only one who has to cross it all. When a city chokes in traffic, every individual piece (a parking lot, a road, a shopping mall) makes sense and often works fine. The disaster emerges from the sum, without anyone having decided it.",
+      },
+      {
+        type: "quote",
+        text: "We all know the feeling: 'No one is at fault, yet it doesn’t work.' That, right there, is a system.",
+      },
+      {
+        type: "p",
+        text: "Russell Ackoff loved a thought experiment: take the best engine in the world, the best transmission, the best brakes, each from a different car, and assemble them. You don't get the best car; you get a very expensive pile of junk, because the parts were never designed to talk to each other. Improving each part separately can destroy the whole.",
+      },
+      {
+        type: "p",
+        text: "And the world is full of real-life versions of this game. In 1958 China, war was waged on sparrows, accused of eating seeds; but they also ate insects, locusts thrived, and the agricultural collapse contributed to a terrible famine (alongside many other decisions, because complex systems never have a single cause, which is precisely the point). At Wells Fargo, sales targets so aggressive they were divorced from reality drove employees to open millions of unauthorized accounts; the scandal erupted in 2016 and concluded in 2020 with a $3 billion settlement. Incentives are a way of speaking to a system, and systems reply literally and poorly.",
+      },
+      {
+        type: "p",
+        text: "None of these are stories of stupidity. They are stories of local, brilliant intelligence applied in the wrong place.",
+      },
+      {
+        type: "h2",
+        text: "The bill, 2025 edition",
+      },
+      {
+        type: "p",
+        text: "Now look at AI through these eyes: it is the finest specialist humanity has ever built. It knows everything about every single piece, and it has never seen the clock.",
+      },
+      {
+        type: "p",
+        text: "In 2025, the MIT Media Lab released a preprint with a telling title: Your Brain on ChatGPT: Accumulation of Cognitive Debt. Fifty-four participants wearing EEG caps, writing essays in three ways: with ChatGPT, with Google, and unassisted. Those using ChatGPT exhibited the weakest brain connectivity and struggled to recall what they had written only minutes before.",
+      },
+      {
+        type: "quote",
+        text: "'Cognitive debt': borrowing future thinking capacity in exchange for present convenience.",
+      },
+      {
+        type: "p",
+        text: "Before anyone panics, some hygiene: it is a preprint, it has not undergone peer review, the sample is small (only eighteen participants completed the final session), and no one can honestly claim that AI 'damages the brain.' Anyone writing that in a headline is in a rush, or has something to sell.",
+      },
+      {
+        type: "p",
+        text: "Yet inside the study lies a detail far more interesting than the alarm. Participants who began on their own and only then used AI regained robust brain activity. And in other studies, students who asked for ready-made answers fared worse once the tool was removed, while those who asked for hints performed on par with those who never used it. Same tool, opposite effects. The problem is the architecture of the relationship between the machine and the human using it.",
+      },
+      {
+        type: "p",
+        text: "In other words, once again, a system. Cognitive debt shares all of its features: a stock that accumulates, a delay (you feel nothing until you must manage without the tool), and a self-reinforcing loop, where less effort leads to less competence, which leads to greater dependence. It works like an adjustable-rate mortgage: everything is fine until you have to refinance.",
+      },
+      {
+        type: "p",
+        text: "Aviation has known this for decades. It is called automation complacency: pilots who rely too heavily on the autopilot lose manual dexterity and vigilance. The response was not to abolish automation, which would have been foolish: it was to design the human-machine system, with explicit rules on when to fly manually and when not to. No one blamed the autopilot. Nor the pilot.",
+      },
+      {
+        type: "h2",
+        text: "Three ideas that seem technical but are philosophy",
+      },
+      {
+        type: "p",
+        text: "The important things lie in between. No single water molecule is wet, no single neuron is conscious: the most interesting properties of the world emerge from relationships, not building blocks. And no generated paragraph is an idea: the idea lies in how the paragraphs hold together, and that is precisely the work we are unlearning how to do.",
+      },
+      {
+        type: "p",
+        text: "Looking for a culprit is laziness. Ordinary thought runs in straight lines: A causes B, therefore A is to blame. In systems, B feeds back onto A, C alters both, and the structure produces its behavior regardless of who occupies it. Put great people in a bad system and the system wins. It isn't the fault of AI, and it isn't yours either: it is that everything—from deadlines to metrics to urgency—pressures you to accept the first answer. Instead of hunting for the villain, you examine the design.",
+      },
+      {
+        type: "p",
+        text: "The observer is part of the scene. The boundaries of a system are not inscribed in nature: they are drawn by whoever is looking. Where does 'the task' end and 'the person who ought to learn something by doing it' begin? Every map is a choice, and every choice leaves something out. 'The map is not the territory,' Korzybski noted; and George Box, more wryly: all models are wrong, but some are useful.",
+      },
+      {
+        type: "p",
+        text: "These intuitions carry an ancient ring: we find them in Heraclitus, in Taoism, in all traditions that view the world as a web of relationships rather than a storehouse of objects. Perhaps the West, having chosen to take the clock apart, had to wait three centuries to notice what it had stopped looking at.",
+      },
+      {
+        type: "h2",
+        text: "Leverage points, and where we look for them",
+      },
+      {
+        type: "p",
+        text: "Donella Meadows, in a 1999 essay that became legendary, wrote that complex systems contain leverage points where a small shift can yield immense change, and that we almost always search for them in the wrong place. The weakest levers are numbers: budgets, quotas, tax rates. Stronger are information flows (who sees what) and the rules of the game. Higher still stand the goals the system pursues, and at the summit lies the paradigm—the story a society tells itself.",
+      },
+      {
+        type: "p",
+        text: "Apply this to our situation. Measuring 'hours saved' or 'output per person' is the weakest lever: the number. Deciding what to never delegate is a rule. Asking whether we want people who produce more documents or people who understand more is a goal. And the paradigm? The one claiming that thinking is a cost to eliminate, rather than the reason we exist.",
+      },
+      {
+        type: "p",
+        text: "A company that rewards only speed is paying its employees to accumulate debt, and then acts surprised when no one is left capable of discerning whether the machine's answer is wrong.",
+      },
+      {
+        type: "h2",
+        text: "The final irony",
+      },
+      {
+        type: "p",
+        text: "Systems thinking can easily become yet another insular specialty: a jargon (loops, stocks, leverage points) that divides initiates from outsiders, a way of chanting 'complexity' to avoid getting one's hands dirty with facts. There are consultants who draw gorgeous diagrams with arrows everywhere and have never repaired a thing.",
+      },
+      {
+        type: "p",
+        text: "And now AI generates those diagrams in four seconds. A causal loop diagram that no one actually thought through is the purest form of cognitive debt: the map without the journey, the system without ever having lived in it.",
+      },
+      {
+        type: "p",
+        text: "This is why the rule is straightforward and slightly unpleasant, because it demands effort: zoom in, zoom out. First, you think, with your own mind, even clumsily. Then you summon the machine. Then you rewrite in your own words, getting your hands dirty in the details. Finally, you ask where that piece fits into all the rest. The first and last steps are the ones no one can do for you, and they happen to be the very steps the system tempts you to skip.",
+      },
+      {
+        type: "p",
+        text: "The big picture without depth is idle chatter; depth without the big picture is blind efficiency. Systems thinking, at its core, is the only discipline that cannot be delegated, because the whole, by definition, resides in no single piece: not even the generated ones.",
+      },
+      {
+        type: "quote",
+        text: "You can have all the pieces you want. But telling the time, for now, is still up to you.",
+      },
+      {
+        type: "h2",
+        text: "Further reading",
+      },
+      {
+        type: "p",
+        text: "Donella Meadows, Thinking in Systems and Leverage Points: Places to Intervene in a System; Peter Senge, The Fifth Discipline; Russell Ackoff, Re-creating the Corporation; Ludwig von Bertalanffy, General System Theory; Nataliya Kosmyna et al., Your Brain on ChatGPT (preprint, 2025).",
+      },
+    ],
+  },
   {
     slug: "confidence-is-not-verification",
     date: "2025-09-01",
